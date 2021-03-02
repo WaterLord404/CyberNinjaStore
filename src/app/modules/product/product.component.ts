@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, OnInit } from '@angular/core';
 import { BreadCrumbsI } from './Interfaces/bread-crumbsI';
+import { BreadCrumbsService } from './services/bread-crumbs.service';
 
 @Component({
   selector: 'app-product',
@@ -8,10 +9,13 @@ import { BreadCrumbsI } from './Interfaces/bread-crumbsI';
 })
 export class ProductComponent implements OnInit {
 
-  location: Array<BreadCrumbsI>;
+  breadCrumbs: Array<BreadCrumbsI>;
   activeFilter = true;
 
-  constructor(private cd: ChangeDetectorRef) { }
+  constructor(
+    private cd: ChangeDetectorRef,
+    private breadCrumbsService: BreadCrumbsService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -22,22 +26,8 @@ export class ProductComponent implements OnInit {
    */
   updateLocation(event: EventEmitter<string>): void {
     event.subscribe(res => {
-      switch (res) {
-        case 'Products':
-          this.location = [
-            { location: 'Home/', src: '' },
-            { location: 'Products' },
-          ];
-          break;
-        default:
-          this.location = [
-            { location: 'Home/', src: '' },
-            { location: 'Products/', src: '/products' },
-            { location: res }
-          ];
-          this.activeFilter = false;
-          break;
-      }
+      this.breadCrumbs = this.breadCrumbsService.updateBreadCrumbs(res);
+      this.activeFilter = false;
     });
   }
 
