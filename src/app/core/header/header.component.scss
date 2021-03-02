@@ -12,8 +12,6 @@ header {
 
   z-index: 10;
 
-
-
   button,
   a {
     margin: $small-margin-horizontal;
@@ -38,16 +36,53 @@ header {
   position: fixed;
 }
 
-.menu {
-  position: fixed;
-  background-color: red;
-  height: 100%;
-  width: 100%;
-  z-index: 5;
-}
-
 #mat-badge-content-0 {
   top: 10px;
   left: 15px;
 }
 
+.menu {
+  position: fixed;
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  z-index: 5;
+}
+
+.menu-nav {
+  @include flex-column();
+  @include font-product();
+  margin: $header-height;
+  margin-left: 3%;
+  margin-right: 3%;
+  width: 100%;
+  font-size: x-large;
+  span {
+
+    font-size: larger;
+    color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.menu-section {
+  width: 100%;
+  li {
+    margin: 3%;
+  }
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+.menu-section:first-child {
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.menu-section-header {
+  display: flex;
+  justify-content: space-between;
+  margin: $small-margin-vertical;
+}
+
+.footer-menu {
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  position: absolute;
+  bottom: 0;
+}

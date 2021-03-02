@@ -2,6 +2,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { AuthInterceptorService } from '../services/auth-interceptor.service';
 import { CommunicationService } from '../services/communication.service';
@@ -38,7 +39,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private communicationService: CommunicationService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private router: Router
   ) {
     // Muestra o oculta la barra de loading
     this.loaderService.loading().subscribe(res => this.isLoading = res);
@@ -99,4 +101,8 @@ export class HeaderComponent implements OnInit {
     this.content = localStorage.getItem('productsBadge');
   }
 
+  navigateTo(url: string) {
+    this.menuState = false;
+    this.router.navigate([url]);
+  }
 }

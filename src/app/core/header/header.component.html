@@ -12,13 +12,60 @@
     <img class="shopping-cart" src="../../../assets/icons/shopping_cart.svg" alt="cart">
   </a>
 
-  <mat-progress-bar class="loading-bar"
-    [color]="color"
-    [mode]="mode"
-    *ngIf="isLoading">
+  <mat-progress-bar class="loading-bar" [color]="color" [mode]="mode" *ngIf="isLoading">
   </mat-progress-bar>
 </header>
 
 <div *ngIf="menuState" class="menu" [@inOutAnimation]>
-
+  <nav class="menu-nav">
+    <button (click)="navigateTo('/products')" class="menu-section">
+      <li>
+        <div class="footer-section-header">
+          <span>PRODUCTS</span>
+        </div>
+      </li>
+    </button>
+    <button (click)="navigateTo()" class="menu-section">
+      <li>
+        <div class="footer-section-header">
+          <span>NEW</span>
+        </div>
+      </li>
+    </button>
+    <button (click)="navigateTo()" class="menu-section">
+      <li>
+        <div class="footer-section-header">
+          <span>WOMEN</span>
+        </div>
+      </li>
+    </button>
+    <button (click)="navigateTo()" class="menu-section">
+      <li>
+        <div class="footer-section-header">
+          <span>PANTS</span>
+        </div>
+      </li>
+    </button>
+    <button (click)="navigateTo()" class="menu-section">
+      <li>
+        <div class="footer-section-header">
+          <span>BESTSELLER</span>
+        </div>
+      </li>
+    </button>
+    <button (click)="navigateTo()" class="menu-section">
+      <li>
+        <div class="footer-section-header">
+          <span>ACCESORIES</span>
+        </div>
+      </li>
+    </button>
+    <button (click)="navigateTo('/account/login')" class="footer-menu menu-section">
+      <li>
+        <div class="footer-section-header">
+          <span>LOGIN</span>
+        </div>
+      </li>
+    </button>
+  </nav>
 </div>
