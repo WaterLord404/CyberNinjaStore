@@ -84,19 +84,17 @@ export class ItemComponent implements OnInit {
     this.productService.deleteProduct(item).subscribe(
       () => {
         this.location.back();
-        this.msg = 'Successfully removed';
-        this.snackBarService.popup(this.msg);
+        this.snackBarService.popup(203);
       },
       err => {
-        switch (err.status.toString()) {
-          case '403':
-            this.msg = 'Access denied';
+        switch (err.status) {
+          case 403:
+            this.snackBarService.popup(403);
             break;
           default:
-            this.msg = 'Something went wrong';
+            this.snackBarService.popup(500);
             break;
         }
-        this.snackBarService.popup(this.msg);
       }
     );
   }

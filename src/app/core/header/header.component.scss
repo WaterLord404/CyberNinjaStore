@@ -12,10 +12,15 @@ header {
 
   z-index: 10;
 
+
+
   button,
   a {
     margin: $small-margin-horizontal;
     @include flex-row();
+    img {
+      height: 100%;
+    }
   }
 
   .logo {
@@ -45,3 +50,4 @@ header {
   top: 10px;
   left: 15px;
 }
+

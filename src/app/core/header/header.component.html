@@ -13,11 +13,12 @@
   </a>
 
   <mat-progress-bar class="loading-bar"
-  [color]="color" [mode]="mode"
-  *ngIf="isLoading">
+    [color]="color"
+    [mode]="mode"
+    *ngIf="isLoading">
   </mat-progress-bar>
 </header>
 
-<div *ngIf="state" class="menu" [@inOutAnimation]>
+<div *ngIf="menuState" class="menu" [@inOutAnimation]>
 
 </div>

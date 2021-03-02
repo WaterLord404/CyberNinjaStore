@@ -20,7 +20,7 @@ export class IsLogged implements CanActivate {
       res => {
         if (res === false) {
           this.router.navigate(['/account/login']);
-          this.snackBarService.popup('Access denied');
+          this.snackBarService.popup(403);
           return false;
         }
       });

@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
     // stop here if form is invalid
     if (this.form.invalid) {
       this.msg = 'The form contains errors';
-      this.snackBarService.popup(this.msg);
+      this.snackBarService.popup(300);
       return;
     }
 
@@ -57,15 +57,15 @@ export class RegisterComponent implements OnInit {
     this.userService.register(customer).subscribe(
       () => this.router.navigate(['/account/login']),
       err => {
-        switch (err.status.toString()) {
-          case '409':
-            this.msg = 'Username not available';
+        switch (err.status) {
+          case 409:
+            this.snackBarService.popup(302);
             break;
           default:
-            this.msg = 'something went wrong';
+            this.snackBarService.popup(500);
             break;
         }
-        this.snackBarService.popup(this.msg);
+
       }
     );
   }

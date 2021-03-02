@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
 
   user: UserI;
   submitted = false;
-  msg: string;
 
   constructor(
     private userService: UserService,
@@ -39,8 +38,7 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     // stop here if form is invalid
     if (form.invalid) {
-      this.msg = 'The form contains errors';
-      this.snackBarService.popup(this.msg);
+      this.snackBarService.popup(300);
       return;
     }
 
@@ -53,15 +51,14 @@ export class LoginComponent implements OnInit {
 
       // Lanza snackBar
       err => {
-        switch (err.status.toString()) {
-          case '403':
-            this.msg = 'The username and password you entered did not match our records';
+        switch (err.status) {
+          case 403:
+            this.snackBarService.popup(301);
             break;
           default:
-            this.msg = 'something went wrong';
+            this.snackBarService.popup(500);
             break;
         }
-        this.snackBarService.popup(this.msg);
       }
     );
   }

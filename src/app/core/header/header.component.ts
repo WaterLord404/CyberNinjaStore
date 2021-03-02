@@ -29,7 +29,7 @@ import { LoaderService } from '../services/loader.service';
 
 export class HeaderComponent implements OnInit {
 
-  state = false;
+  menuState = false;
 
   color: ThemePalette = 'warn';
   mode: ProgressBarMode = 'query';
@@ -65,7 +65,7 @@ export class HeaderComponent implements OnInit {
    * Abre y cierra el menu
    */
   openMenu(): void {
-    this.state = !this.state;
+    this.menuState = !this.menuState;
   }
 
   /**
