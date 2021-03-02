@@ -26,7 +26,7 @@ import { ProductService } from '../../services/product.service';
 export class ItemComponent implements OnInit {
 
   item: ProductI;
-  @Output() locationEvent = new EventEmitter<string>();
+  @Output() breadEvent = new EventEmitter<string>();
   msg: string;
 
   constructor(
@@ -52,12 +52,12 @@ export class ItemComponent implements OnInit {
         .subscribe(
           res => {
             this.item = res;
-            this.locationEvent.emit(this.item.name);
+            this.breadEvent.emit(this.item.name.toUpperCase());
           },
           () => this.router.navigate(['not-found'])
         );
     } else {
-      this.locationEvent.emit(this.item.name.toUpperCase());
+      this.breadEvent.emit(this.item.name.toUpperCase());
     }
   }
 

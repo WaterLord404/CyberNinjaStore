@@ -13,12 +13,15 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthInterceptorService } from './core/services/auth-interceptor.service';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { IsLogged } from './core/guards/is-logged.guard';
+import { IsLoggedGuard } from './core/guards/is-logged.guard';
+import { NewProductComponent } from './components/new-product/new-product.component';
+import { IsAdminGuard } from './core/guards/is-admin.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'new-product', component: NewProductComponent, canActivate: [IsAdminGuard] },
   { path: 'products', loadChildren: () => import('./modules/product/product.module').then(m => m.AppProductModule) },
-  { path: 'cart', component: CartComponent, canActivate: [IsLogged] },
+  { path: 'cart', component: CartComponent, canActivate: [IsLoggedGuard] },
   { path: 'account', loadChildren: () => import('./modules/account/account.module').then(m => m.AccountModule) },
   { path: '**', component: NotfoundComponent }
 ];
@@ -31,6 +34,7 @@ const routes: Routes = [
     HomeComponent,
     NotfoundComponent,
     CartComponent,
+    NewProductComponent,
   ],
   imports: [
     BrowserModule,

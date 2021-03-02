@@ -20,11 +20,18 @@ export class SnackBarService {
       verticalPosition: 'bottom'
     });
   }
+
   private getError(option: number): string {
     let error = '';
     switch (option) {
       case 203:
         error = 'Successfully removed';
+        break;
+      case 210:
+        error = 'Login successful';
+        break;
+      case 211:
+        error = 'Logout successful';
         break;
       case 300:
         error = 'The form contains errors';

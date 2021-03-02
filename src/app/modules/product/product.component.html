@@ -1,8 +1,8 @@
 <app-bread-crumbs
 [breadCrumbs]="location"
-[active]="activeFilter">
+[filterActive]="activeFilter">
 </app-bread-crumbs>
 
 <router-outlet name="aux"
-(activate)="updateLocation($event)">
+(activate)="updateLocation($event.breadEvent)">
 </router-outlet>

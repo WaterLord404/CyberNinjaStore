@@ -5,8 +5,10 @@ import { ProgressBarMode } from '@angular/material/progress-bar';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { AuthInterceptorService } from '../services/auth-interceptor.service';
+import { AuthService } from '../services/auth.service';
 import { CommunicationService } from '../services/communication.service';
 import { LoaderService } from '../services/loader.service';
+import { SnackBarService } from '../services/snack-bar.service';
 
 @Component({
   selector: 'app-header',
@@ -40,7 +42,9 @@ export class HeaderComponent implements OnInit {
   constructor(
     private communicationService: CommunicationService,
     private loaderService: LoaderService,
-    private router: Router
+    private router: Router,
+    protected authService: AuthService,
+    private snackBarService: SnackBarService
   ) {
     // Muestra o oculta la barra de loading
     this.loaderService.loading().subscribe(res => this.isLoading = res);
@@ -101,8 +105,30 @@ export class HeaderComponent implements OnInit {
     this.content = localStorage.getItem('productsBadge');
   }
 
-  navigateTo(url: string) {
+  navigateTo(url: string): void {
     this.menuState = false;
     this.router.navigate([url]);
+  }
+
+  /**
+   * Cierra la sesión
+   */
+  logout(): void {
+    this.authService.logout();
+    this.menuState = false;
+    this.router.navigate(['/']);
+    this.snackBarService.popup(211);
+  }
+
+  /**
+   * Comprueba si está logueado el usuario mostrando login | logout
+   */
+  isLoggedIn(): boolean {
+    let status = false;
+    this.authService.isLoggedIn().subscribe(
+      res => {
+        status = res;
+      });
+    return status;
   }
 }

@@ -1,5 +1,4 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Byte } from '@angular/compiler/src/util';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { DocumentService } from 'src/app/core/services/document.service';
@@ -22,7 +21,7 @@ import { ProductService } from '../../services/product.service';
 export class ProductsComponent implements OnInit {
 
   products: Array<ProductI>;
-  @Output() locationEvent = new EventEmitter<string>();
+  @Output() breadEvent = new EventEmitter<string>();
 
   constructor(
     private productService: ProductService,
@@ -37,7 +36,7 @@ export class ProductsComponent implements OnInit {
     this.productService.getProducts().subscribe(
       res => {
         this.products = res;
-        this.locationEvent.emit('Products');
+        this.breadEvent.emit('Products');
       },
       () => this.router.navigate(['not-found'])
     );

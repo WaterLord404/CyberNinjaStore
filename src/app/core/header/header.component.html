@@ -60,12 +60,32 @@
         </div>
       </li>
     </button>
-    <button (click)="navigateTo('/account/login')" class="footer-menu menu-section">
-      <li>
-        <div class="footer-section-header">
-          <span>LOGIN</span>
-        </div>
-      </li>
-    </button>
+
+    <div class="footer-menu">
+      <button (click)="navigateTo('/new-product')" class="menu-section"
+      *ngIf="authService.isAdmin()">
+        <li>
+          <div class=" footer-section-header">
+            <span>NEW PRODUCT</span>
+          </div>
+        </li>
+      </button>
+      <button (click)="navigateTo('/account/login')" class="menu-section"
+      *ngIf="!isLoggedIn()">
+        <li>
+          <div class=" footer-section-header">
+            <span>LOGIN</span>
+          </div>
+        </li>
+      </button>
+      <button (click)="logout()" class="menu-section"
+      *ngIf="isLoggedIn()">
+        <li>
+          <div class="footer-section-header">
+            <span>LOGOUT</span>
+          </div>
+        </li>
+      </button>
+    </div>
   </nav>
 </div>

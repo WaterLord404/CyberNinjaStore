@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit } from '@angular/core';
 import { BreadCrumbsI } from './Interfaces/bread-crumbsI';
 
 @Component({
@@ -18,10 +18,10 @@ export class ProductComponent implements OnInit {
 
   /**
    * Actualiza las migas de pan
-   * @param event
+   * @param EventEmitter<string>
    */
-  updateLocation(event: any): void {
-    event.locationEvent.subscribe(res => {
+  updateLocation(event: EventEmitter<string>): void {
+    event.subscribe(res => {
       switch (res) {
         case 'Products':
           this.location = [

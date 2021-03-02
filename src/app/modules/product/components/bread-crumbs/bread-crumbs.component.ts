@@ -9,7 +9,7 @@ import { BreadCrumbsI } from '../../Interfaces/bread-crumbsI';
 export class BreadCrumbsComponent implements OnInit {
 
   @Input() breadCrumbs: Array<BreadCrumbsI> = [];
-  @Input() active: boolean;
+  @Input() filterActive: boolean;
   constructor() {
   }
 

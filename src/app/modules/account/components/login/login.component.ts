@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
         // Guarda al usuario, el estado "logged" y el jwt
         this.authService.login(res.body, res.headers.get('Authorization'));
         this.router.navigate(['/']);
+        this.snackBarService.popup(210);
       },
 
       // Lanza snackBar

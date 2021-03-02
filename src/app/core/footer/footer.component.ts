@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { FooterNavI } from '../interfaces/FooterNavI';
+import { FooterNavI } from './interfaces/FooterNavI';
 
 @Component({
   selector: 'app-footer',
@@ -25,16 +25,17 @@ import { FooterNavI } from '../interfaces/FooterNavI';
 })
 export class FooterComponent implements OnInit {
 
-  footerNav: Array<FooterNavI> = [
-    { name: 'buyers', value: false },
-    { name: 'aboutUs', value: false },
-    { name: 'information', value: false },
-    { name: 'contacts', value: false }
-  ];
+  footerNav: Array<FooterNavI>;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.footerNav = [
+      { name: 'buyers', value: false },
+      { name: 'aboutUs', value: false },
+      { name: 'information', value: false },
+      { name: 'contacts', value: false }
+    ];
   }
 
   /**
