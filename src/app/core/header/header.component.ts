@@ -3,8 +3,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { AuthInterceptorService } from '../services/auth-interceptor.service';
 import { AuthService } from '../services/auth.service';
 import { CommunicationService } from '../services/communication.service';
 import { LoaderService } from '../services/loader.service';
@@ -32,7 +30,7 @@ import { SnackBarService } from '../services/snack-bar.service';
 
 export class HeaderComponent implements OnInit {
 
-  menuState = false;
+  isMenuActive = false;
 
   color: ThemePalette = 'warn';
   mode: ProgressBarMode = 'query';
@@ -42,7 +40,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private communicationService: CommunicationService,
     private loaderService: LoaderService,
-    private router: Router,
+    protected router: Router,
     protected authService: AuthService,
     private snackBarService: SnackBarService
   ) {
@@ -68,13 +66,6 @@ export class HeaderComponent implements OnInit {
   }
 
   /**
-   * Abre y cierra el menu
-   */
-  openMenu(): void {
-    this.menuState = !this.menuState;
-  }
-
-  /**
    * Añade 1 a la insignia de los productos
    */
   addOneProductsBadge(): void {
@@ -91,7 +82,7 @@ export class HeaderComponent implements OnInit {
 
   /**
    * Elimina 1 de la insignia de los productos, si esta llega a 0
-   * elimina de LocalStorage las insignias y el carrito
+   * elimina de LocalStorage las insignias
    */
   subtractOneProductsBadge(): void {
     const data: string = localStorage.getItem('productsBadge');
@@ -100,14 +91,8 @@ export class HeaderComponent implements OnInit {
 
     if (data === '1') {
       localStorage.removeItem('productsBadge');
-      localStorage.removeItem('cart');
     }
     this.content = localStorage.getItem('productsBadge');
-  }
-
-  navigateTo(url: string): void {
-    this.menuState = false;
-    this.router.navigate([url]);
   }
 
   /**
@@ -115,20 +100,9 @@ export class HeaderComponent implements OnInit {
    */
   logout(): void {
     this.authService.logout();
-    this.menuState = false;
+    this.isMenuActive = false;
     this.router.navigate(['/']);
     this.snackBarService.popup(211);
-  }
-
-  /**
-   * Comprueba si está logueado el usuario mostrando login | logout
-   */
-  isLoggedIn(): boolean {
-    let status = false;
-    this.authService.isLoggedIn().subscribe(
-      res => {
-        status = res;
-      });
-    return status;
+    window.scroll(0, 0);
   }
 }

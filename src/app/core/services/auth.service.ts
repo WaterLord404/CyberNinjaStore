@@ -22,18 +22,22 @@ export class AuthService {
 
   /**
    * Get logged customer
-   * @returns: {Observable<UserI>}
+   * @returns UserI
    */
-  getCustomer(): Observable<UserI> {
-    return this.customer.asObservable();
+  getCustomer(): UserI {
+    let status = null;
+    this.isLogin.asObservable().subscribe(res => status = res);
+    return status;
   }
 
   /**
    * Get login status
-   * @returns: {Observable<boolean>}
+   * @returns boolean
    */
-  isLoggedIn(): Observable<boolean> {
-    return this.isLogin.asObservable();
+  isLoggedIn(): boolean {
+    let status = false;
+    this.isLogin.asObservable().subscribe(res => status = res);
+    return status;
   }
 
   /**

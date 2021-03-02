@@ -27,7 +27,6 @@ export class ItemComponent implements OnInit {
 
   item: ProductI;
   @Output() breadEvent = new EventEmitter<string>();
-  msg: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,15 +47,14 @@ export class ItemComponent implements OnInit {
     this.item = history.state.item;
 
     if (this.item === undefined) {
-      this.productService.getProduct(this.route.snapshot.paramMap.get('id'))
-        .subscribe(
-          res => {
-            this.item = res;
-            this.breadEvent.emit(this.item.name.toUpperCase());
-          },
-          () => this.router.navigate(['not-found'])
-        );
+      this.productService.getProduct(this.route.snapshot.paramMap.get('id')).subscribe(
+        res => {
+          this.item = res;
+          this.breadEvent.emit(this.item.name.toUpperCase());
+        },
+        () => this.router.navigate(['not-found']));
     } else {
+      // Emite el nombre del producto para las migas de pan
       this.breadEvent.emit(this.item.name.toUpperCase());
     }
   }
@@ -80,22 +78,17 @@ export class ItemComponent implements OnInit {
     this.router.navigate(['/cart']);
   }
 
+  /**
+   * Borra un producto de BBDD
+   * @param ProductI
+   */
   deleteItem(item: ProductI): void {
     this.productService.deleteProduct(item).subscribe(
       () => {
         this.location.back();
         this.snackBarService.popup(203);
       },
-      err => {
-        switch (err.status) {
-          case 403:
-            this.snackBarService.popup(403);
-            break;
-          default:
-            this.snackBarService.popup(500);
-            break;
-        }
-      }
+      err => this.snackBarService.popup(err.status)
     );
   }
 

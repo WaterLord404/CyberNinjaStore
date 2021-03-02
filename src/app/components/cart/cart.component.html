@@ -1,7 +1,9 @@
 <div class="cart-container">
   <div class="item-container" *ngFor="let item of cartProducts" @fadeIn>
     <div class="img-container">
-      <img [src]="dataToImg(item.documents[0].picture, item.documents[0].fileType)" [alt]="item.id" (click)="goToProduct(item)">
+      <img [src]="documentService.dataToImg(item.documents[0].picture, item.documents[0].fileType)"
+      [alt]="item.id"
+      (click)="router.navigate(['/products/' + item.id])">
     </div>
     <div class="data-container">
       <div class="data">

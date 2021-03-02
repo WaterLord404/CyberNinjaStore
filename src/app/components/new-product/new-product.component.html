@@ -1,25 +1,5 @@
-<!-- <div class="container">
+<div class="container">
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="register-container">
-    <div class="form-group">
-      <span>Username</span>
-      <input type="text" formControlName="username">
-      <label *ngIf="f.username.errors && submitted == true">
-        Username is required
-      </label>
-    </div>
-
-    <div class="form-group">
-      <span>Password</span>
-      <input type="password" formControlName="password">
-      <div class="container-errors" *ngIf="f.password.errors">
-        <label *ngIf="f.password.errors.required && submitted == true">
-          Password is required
-        </label>
-        <label *ngIf="f.password.errors.minlength && submitted == true">
-          Password must be at least 6 characters
-        </label>
-      </div>
-    </div>
 
     <div class="form-group">
       <span>Name</span>
@@ -30,80 +10,71 @@
     </div>
 
     <div class="form-group">
-      <span>Surname</span>
-      <input type="text" formControlName="surname">
-      <label *ngIf="f.surname.errors && submitted == true">
-        Surname is required
+      <span>Description</span>
+      <input type="text" formControlName="description">
+      <label *ngIf="f.description.errors && submitted == true">
+        Description is required
       </label>
     </div>
 
     <div class="form-group">
-      <span>Email</span>
-      <input type="email" formControlName="email">
-      <div class="container-errors" *ngIf="f.email.errors">
-        <label *ngIf="f.email.errors.required && submitted == true">
-          Email is required
-        </label>
-        <label *ngIf="f.email.errors.email && submitted == true">
-          Email must be a valid email address
-        </label>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <span>Telephone</span>
-      <input type="text" formControlName="telephone">
-      <label *ngIf="f.telephone.errors && submitted == true">
-        Telephone is required
+      <span>Purchase price</span>
+      <input type="text" formControlName="purchasePrice">
+      <label *ngIf="f.purchasePrice.errors && submitted == true">
+        Purchase price is required
       </label>
     </div>
 
     <div class="form-group">
-      <span>Region</span>
-      <input type="text" formControlName="region">
-      <label *ngIf="f.region.errors && submitted == true">
-        Region is required
+      <span>Sale price</span>
+      <input type="text" formControlName="salePrice">
+      <label *ngIf="f.salePrice.errors && submitted == true">
+        Sale price is required
       </label>
     </div>
 
     <div class="form-group">
-      <span>Province</span>
-      <input type="text" formControlName="province">
-      <label *ngIf="f.province.errors && submitted == true">
-        Province is required
+      <span>Discount</span>
+      <input type="text" formControlName="discount">
+      <label *ngIf="f.discount.errors && submitted == true">
+        Discount is required
       </label>
     </div>
 
     <div class="form-group">
-      <span>Locality</span>
-      <input type="text" formControlName="locality">
-      <label *ngIf="f.locality.errors && submitted == true">
-        Locality is required
+      <span>Size</span>
+      <input type="text" formControlName="size">
+      <label *ngIf="f.size.errors && submitted == true">
+        Size is required
       </label>
     </div>
 
     <div class="form-group">
-      <span>Postal Code</span>
-      <input type="text" formControlName="postalCode">
-      <label *ngIf="f.postalCode.errors && submitted == true">
-        Postal Code is required
+      <span>Colour</span>
+      <input type="text" formControlName="colour">
+      <label *ngIf="f.colour.errors && submitted == true">
+        Colour is required
       </label>
     </div>
 
     <div class="form-group">
-      <span>Address</span>
-      <input type="text" formControlName="address">
-      <label *ngIf="f.address.errors && submitted == true">
-        Address is required
+      <span>Category</span>
+      <input type="text" formControlName="category">
+      <label *ngIf="f.category.errors && submitted == true">
+        Category is required
       </label>
     </div>
 
     <div class="form-group">
-      <button type="submit" class="button-custom">REGISTER</button>
+      <span>Documents</span>
+      <input type="file" multiple (change)="filesToUpload = $event.target.files" formControlName="documents">
+      <label *ngIf="f.documents.errors && submitted == true">
+        Documents is required
+      </label>
     </div>
 
-    <div class="new-customer">
-      <span>Already have an account? <a href="account/login">Login</a></span>
+    <div class="form-group">
+      <button type="submit" class="button-custom">ADD PRODUCT</button>
     </div>
   </form>
-</div> -->
+</div>

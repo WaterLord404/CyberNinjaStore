@@ -1,6 +1,6 @@
 <header>
 
-  <button (click)="openMenu()">
+  <button (click)="isMenuActive = !isMenuActive">
     <img class="hamburger" src="../../../assets/icons/hamburger.svg" alt="menu">
   </button>
 
@@ -16,44 +16,44 @@
   </mat-progress-bar>
 </header>
 
-<div *ngIf="menuState" class="menu" [@inOutAnimation]>
+<div *ngIf="isMenuActive" class="menu" [@inOutAnimation]>
   <nav class="menu-nav">
-    <button (click)="navigateTo('/products')" class="menu-section">
+    <button (click)="router.navigate(['/products']) && isMenuActive = false" class="menu-section">
       <li>
         <div class="footer-section-header">
           <span>PRODUCTS</span>
         </div>
       </li>
     </button>
-    <button (click)="navigateTo()" class="menu-section">
+    <button (click)="''" class="menu-section">
       <li>
         <div class="footer-section-header">
           <span>NEW</span>
         </div>
       </li>
     </button>
-    <button (click)="navigateTo()" class="menu-section">
+    <button (click)="''" class="menu-section">
       <li>
         <div class="footer-section-header">
           <span>WOMEN</span>
         </div>
       </li>
     </button>
-    <button (click)="navigateTo()" class="menu-section">
+    <button (click)="''" class="menu-section">
       <li>
         <div class="footer-section-header">
           <span>PANTS</span>
         </div>
       </li>
     </button>
-    <button (click)="navigateTo()" class="menu-section">
+    <button (click)="''" class="menu-section">
       <li>
         <div class="footer-section-header">
           <span>BESTSELLER</span>
         </div>
       </li>
     </button>
-    <button (click)="navigateTo()" class="menu-section">
+    <button (click)="''" class="menu-section">
       <li>
         <div class="footer-section-header">
           <span>ACCESORIES</span>
@@ -62,7 +62,7 @@
     </button>
 
     <div class="footer-menu">
-      <button (click)="navigateTo('/new-product')" class="menu-section"
+      <button (click)="router.navigate(['/new-product']) && isMenuActive = false" class="menu-section"
       *ngIf="authService.isAdmin()">
         <li>
           <div class=" footer-section-header">
@@ -70,16 +70,15 @@
           </div>
         </li>
       </button>
-      <button (click)="navigateTo('/account/login')" class="menu-section"
-      *ngIf="!isLoggedIn()">
+      <button (click)="router.navigate(['/account/login']) && isMenuActive = false" class="menu-section"
+      *ngIf="!authService.isLoggedIn()">
         <li>
           <div class=" footer-section-header">
             <span>LOGIN</span>
           </div>
         </li>
       </button>
-      <button (click)="logout()" class="menu-section"
-      *ngIf="isLoggedIn()">
+      <button (click)="logout()" class="menu-section" *ngIf="authService.isLoggedIn()">
         <li>
           <div class="footer-section-header">
             <span>LOGOUT</span>

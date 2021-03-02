@@ -10,7 +10,7 @@ import { BreadCrumbsService } from './services/bread-crumbs.service';
 export class ProductComponent implements OnInit {
 
   breadCrumbs: Array<BreadCrumbsI>;
-  activeFilter = true;
+  isSorterIconActive = true;
 
   constructor(
     private cd: ChangeDetectorRef,
@@ -27,8 +27,8 @@ export class ProductComponent implements OnInit {
   updateLocation(event: EventEmitter<string>): void {
     event.subscribe(res => {
       this.breadCrumbs = this.breadCrumbsService.updateBreadCrumbs(res);
-      this.activeFilter = false;
     });
+    this.isSorterIconActive = this.breadCrumbsService.getSorterState();
   }
 
   ngAfterViewInit(): void {

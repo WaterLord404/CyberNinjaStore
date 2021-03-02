@@ -14,7 +14,6 @@ export class RegisterComponent implements OnInit {
 
   form: FormGroup;
   submitted = false;
-  msg: string;
 
   constructor(
     private fb: FormBuilder,
@@ -47,7 +46,6 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
     // stop here if form is invalid
     if (this.form.invalid) {
-      this.msg = 'The form contains errors';
       this.snackBarService.popup(300);
       return;
     }
@@ -55,7 +53,10 @@ export class RegisterComponent implements OnInit {
     const customer: UserI = this.createCustomer();
 
     this.userService.register(customer).subscribe(
-      () => this.router.navigate(['/account/login']),
+      () => {
+        this.router.navigate(['/account/login']);
+        this.snackBarService.popup(212);
+      },
       err => {
         switch (err.status) {
           case 409:
@@ -65,7 +66,6 @@ export class RegisterComponent implements OnInit {
             this.snackBarService.popup(500);
             break;
         }
-
       }
     );
   }

@@ -1,12 +1,11 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Byte } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
 import { CommunicationService } from 'src/app/core/services/communication.service';
 import { DocumentService } from 'src/app/core/services/document.service';
 import { ProductI } from 'src/app/modules/product/Interfaces/productI';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -27,13 +26,13 @@ import { ProductI } from 'src/app/modules/product/Interfaces/productI';
 })
 export class CartComponent implements OnInit {
 
-  cartProducts: Array<ProductI> = [];
+  cartProducts: Array<ProductI>;
 
   constructor(
-    private router: Router,
-    private documentService: DocumentService,
+    protected router: Router,
+    protected documentService: DocumentService,
     private comunicationService: CommunicationService,
-    private authService: AuthService
+    private cartService: CartService
   ) { }
 
   // Obtiene los productos del carrito
@@ -47,33 +46,8 @@ export class CartComponent implements OnInit {
    * @param item: ProductI
    */
   deleteThisItem(item: ProductI): void {
-    this.cartProducts.forEach(element => {
-      if (element === item) {
-        const i = this.cartProducts.indexOf(element);
-        this.cartProducts.splice(i, 1);
-      }
-    });
-
-    localStorage.setItem('cart', JSON.stringify(this.cartProducts));
-
+    this.cartProducts = this.cartService.deleteThisItem(item, this.cartProducts);
     // Actualiza el productBadge
     this.comunicationService.callComponentMethod('-badge');
-  }
-
-  /**
-   * Transforma los Byte[] a blob
-   * @param data: Byte[]
-   * @param type: string
-   */
-  dataToImg(data: Byte[], type: string): string {
-    return this.documentService.dataToImg(data, type);
-  }
-
-  /**
-   * Navega a el producto
-   * @param item: ProductI
-   */
-  goToProduct(item: ProductI): void {
-    this.router.navigate(['/products/' + item.id]);
   }
 }

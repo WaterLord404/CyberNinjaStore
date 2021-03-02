@@ -15,7 +15,7 @@ export class SnackBarService {
   popup(option: number): void {
     const msg = this.getError(option);
     this.snackBar.open(msg, '', {
-      duration: 5000,
+      duration: 2222,
       horizontalPosition: 'center',
       verticalPosition: 'bottom'
     });
@@ -32,6 +32,9 @@ export class SnackBarService {
         break;
       case 211:
         error = 'Logout successful';
+        break;
+      case 212:
+        error = 'Register successful';
         break;
       case 300:
         error = 'The form contains errors';

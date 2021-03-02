@@ -16,10 +16,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { IsLoggedGuard } from './core/guards/is-logged.guard';
 import { NewProductComponent } from './components/new-product/new-product.component';
 import { IsAdminGuard } from './core/guards/is-admin.guard';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'new-product', component: NewProductComponent, canActivate: [IsAdminGuard] },
+  { path: 'new-product', component: NewProductComponent, canActivate: [IsAdminGuard, IsLoggedGuard] },
   { path: 'products', loadChildren: () => import('./modules/product/product.module').then(m => m.AppProductModule) },
   { path: 'cart', component: CartComponent, canActivate: [IsLoggedGuard] },
   { path: 'account', loadChildren: () => import('./modules/account/account.module').then(m => m.AccountModule) },
@@ -43,7 +44,9 @@ const routes: Routes = [
     MatBadgeModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

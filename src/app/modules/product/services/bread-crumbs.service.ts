@@ -7,6 +7,7 @@ import { BreadCrumbsI } from '../Interfaces/bread-crumbsI';
 export class BreadCrumbsService {
 
   breadCrumbs: Array<BreadCrumbsI>;
+  isSorterIconActive: boolean;
 
   constructor() { }
 
@@ -15,12 +16,14 @@ export class BreadCrumbsService {
    * @param string
    */
   updateBreadCrumbs(res: string): Array<BreadCrumbsI> {
+    this.isSorterIconActive = false;
     switch (res) {
       case 'Products':
         this.breadCrumbs = [
           { location: 'Home/', src: '' },
           { location: 'Products' },
         ];
+        this.isSorterIconActive = true;
         break;
       default:
         this.breadCrumbs = [
@@ -31,5 +34,9 @@ export class BreadCrumbsService {
         break;
     }
     return this.breadCrumbs;
+  }
+
+  getSorterState(): boolean {
+    return this.isSorterIconActive;
   }
 }

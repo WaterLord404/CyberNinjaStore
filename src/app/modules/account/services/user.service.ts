@@ -9,7 +9,7 @@ import { UserI } from '../interfaces/userI';
 })
 export class UserService {
 
-  url = 'user/';
+  url = 'user';
 
   constructor(
     private http: HttpClient
@@ -20,11 +20,11 @@ export class UserService {
    * @param user
    */
   login(user: UserI): Observable<any> {
-    return this.http.post(environment.domain + this.url + 'login', user, {observe: 'response'});
+    return this.http.post(environment.domain + this.url + '/login', user, {observe: 'response'});
   }
 
   register(user: UserI): Observable<any> {
-    return this.http.post(environment.domain + this.url + 'sign-up', user);
+    return this.http.post(environment.domain + this.url + '/sign-up', user);
   }
 
 }
