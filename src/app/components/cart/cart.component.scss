@@ -1,0 +1,50 @@
+@import "../../../assets/scss/grid";
+@import "../../../assets/scss/variables";
+
+.cart-container {
+  min-height: 90vh;
+}
+
+.item-container {
+  @include flex-row();
+  justify-content: left;
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  height: 93px;
+}
+
+.item-container:first-child {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.img-container {
+  width: 25%;
+  img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+  }
+}
+
+.data-container {
+  position: relative;
+  width: 100%;
+
+  .data {
+    @include font-product();
+    text-align: left;
+    font-size: smaller;
+    overflow: hidden;
+  }
+
+  img {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: $iconSize;
+    transform: translate(-50%, -50%);
+    opacity: 0.75;
+    cursor: pointer;
+  }
+}

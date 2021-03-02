@@ -1,0 +1,23 @@
+<header>
+
+  <button (click)="openMenu()">
+    <img class="hamburger" src="../../../assets/icons/hamburger.svg" alt="menu">
+  </button>
+
+  <a href="http://localhost:4200" class="logo">
+    <img src="../../../assets/icons/logo.png" alt="logo">
+  </a>
+
+  <a href="cart" [matBadge]="content" matBadgeSize="small" matBadgeColor="warn">
+    <img class="shopping-cart" src="../../../assets/icons/shopping_cart.svg" alt="cart">
+  </a>
+
+  <mat-progress-bar class="loading-bar"
+  [color]="color" [mode]="mode"
+  *ngIf="isLoading">
+  </mat-progress-bar>
+</header>
+
+<div *ngIf="state" class="menu" [@inOutAnimation]>
+
+</div>

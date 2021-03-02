@@ -1,1 +1,46 @@
-/* You can add global styles to this file, and also import other style files */
+@import "./assets/scss/grid";
+@import "./assets/scss/variables.scss";
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+ul,
+a,
+span,
+button {
+  all: unset;
+  color: $orange;
+  list-style-type: none;
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+main {
+  @include flex-column();
+  padding-top: 50px;
+}
+
+.button-custom {
+  background-color: $orange;
+  color: white;
+  border: 1px solid $orange;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 40px;
+  width: 140px;
+  letter-spacing: 2px;
+  font-size: small;
+  z-index: 1;
+  text-align: center;
+}

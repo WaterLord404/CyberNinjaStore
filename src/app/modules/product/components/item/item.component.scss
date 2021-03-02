@@ -1,0 +1,72 @@
+@import "../../../../../assets/scss/variables";
+@import "../../../../../assets/scss/grid";
+@import "../../../../../assets/scss/functions";
+
+.container-card,
+.product-container {
+  @include flex-column();
+}
+
+.product-container {
+  margin: 4% 0 0 0;
+}
+
+.product-tittle,
+.product-price {
+  @include font-product();
+  text-align: center;
+  font-size: small;
+}
+
+.product-description {
+  @include font-product();
+  text-align: center;
+  text-transform: none;
+  font-size: smaller;
+  margin-bottom: 3%;
+}
+
+.product-category-container,
+.product-color-container {
+  @include flex-column();
+  flex-flow: wrap;
+}
+
+.product-category,
+.product-color {
+  @include font-product();
+  margin: $smallest-margin;
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  min-width: 40px;
+  font-size: small;
+  text-align: center;
+  padding: 1.5%;
+  cursor: pointer;
+}
+
+.button-container {
+  @include flex-column();
+  margin: $small-margin;
+  margin-bottom: 0;
+}
+
+.button-custom {
+  top: unset;
+  left: unset;
+  transform: unset;
+  position: relative;
+  width: 100%;
+}
+
+.add-cart {
+  color: $orange;
+  background-color: unset;
+  margin-bottom: 3%;
+  cursor: pointer;
+}
+
+.delete {
+  margin-top: marginX4(3%);
+  border: 1px solid red;
+  background-color: red;
+}

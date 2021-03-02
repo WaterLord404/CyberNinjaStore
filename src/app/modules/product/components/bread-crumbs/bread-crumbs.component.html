@@ -1,0 +1,16 @@
+<div class="breads-container">
+  <div class="route">
+    <a *ngFor="let item of breadCrumbs" [routerLink]="item.src">
+      <span>{{item.location}}</span>
+    </a>
+  </div>
+
+  <button mat-button [matMenuTriggerFor]="beforeMenu" *ngIf="active"><img src="../../../../../assets/icons/sort.svg" alt="sort-icon"></button>
+  <mat-menu #beforeMenu="matMenu" xPosition="before" class="customize" >
+    <button mat-menu-item>By popularity</button>
+    <button mat-menu-item>By latest</button>
+    <button mat-menu-item>Prices: Ascending</button>
+    <button mat-menu-item>Prices: descending</button>
+  </mat-menu>
+</div>
+

@@ -1,0 +1,53 @@
+<div class="container-card" *ngIf="item" @fadeIn>
+
+  <mat-carousel class="carousel"
+  timings="250ms ease-in"
+  [autoplay]="true"
+  interval="6500"
+  color="accent"
+  maxWidth="auto"
+  proportion="137"
+  slides="item.documents"
+  [loop]="true"
+  [hideArrows]="false"
+  [hideIndicators]="true"
+  [useKeyboard]="true"
+  [useMouseWheel]="false"
+  orientation="ltr">
+    <mat-carousel-slide
+      #matCarouselSlide
+      *ngFor="let img of item.documents; let i = index"
+      [image]="documentService.dataToImg(img.picture, img.fileType)"
+      overlayColor=""
+      [hideOverlay]="true">
+    </mat-carousel-slide>
+  </mat-carousel>
+
+  <div class="product-container">
+    <h2 class="product-tittle">{{item.name}}</h2>
+
+    <p class="product-price">
+      <s *ngIf="item.discount">
+        {{item.priceWoutDiscount}}€</s>
+      {{item.totalPrice}}€
+    </p>
+
+    <p class="product-description">
+      {{item.description}}
+    </p>
+
+    <ul class="product-category-container">
+      <li class="product-category" *ngFor="let i of item.size">{{i}}</li>
+    </ul>
+
+    <ul class="product-color-container">
+      <li class="product-color" *ngFor="let i of item.colour">{{i}}</li>
+    </ul>
+
+    <div class="button-container">
+      <button class="button-custom add-cart" (click)="addToCart(item)">ADD TO CART</button>
+      <button class="button-custom" (click)="buyNow(item)">BUY NOW</button>
+      <button class="button-custom delete" (click)="deleteItem(item)" *ngIf="authService.isAdmin()">DELETE</button>
+    </div>
+  </div>
+</div>

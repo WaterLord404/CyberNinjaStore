@@ -1,0 +1,53 @@
+@import "../../../assets/scss/variables";
+@import "../../../assets/scss/grid";
+
+footer {
+  background-color: white;
+  width: 100%;
+  height: 50%;
+
+  .social {
+    @include flex-row();
+    padding: $big-margin-vertical;
+    height: 8%;
+
+    a {
+      margin: $small-margin-horizontal;
+    }
+
+    img {
+      opacity: 0.25;
+      width: $iconSize;
+    }
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .footer-nav {
+    margin: $small-margin-horizontal;
+    span {
+      color: rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  .footer-section {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  }
+  .footer-section:first-child {
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+  }
+
+  .footer-section-header {
+    display: flex;
+    justify-content: space-between;
+    margin: $small-margin-vertical;
+  }
+
+  .footer-section-content {
+    margin: $small-margin-horizontal;
+    margin-bottom: 3%;
+    font-size: small;
+  }
+}

@@ -1,0 +1,47 @@
+@import "../../../assets/scss/variables";
+@import "../../../assets/scss/grid";
+
+header {
+  background-color: white;
+  position: fixed;
+  width: 100%;
+  height: $header-height;
+
+  @include flex-row();
+  justify-content: space-between;
+
+  z-index: 10;
+
+  button,
+  a {
+    margin: $small-margin-horizontal;
+    @include flex-row();
+  }
+
+  .logo {
+    width: 0;
+  }
+
+  .shopping-cart,
+  .hamburger {
+    width: $iconSize;
+  }
+}
+
+.loading-bar {
+  top: $header-height;
+  position: fixed;
+}
+
+.menu {
+  position: fixed;
+  background-color: red;
+  height: 100%;
+  width: 100%;
+  z-index: 5;
+}
+
+#mat-badge-content-0 {
+  top: 10px;
+  left: 15px;
+}
