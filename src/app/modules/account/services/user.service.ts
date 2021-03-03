@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { UserI } from '../interfaces/userI';
 
 @Injectable({
@@ -20,11 +19,11 @@ export class UserService {
    * @param user
    */
   login(user: UserI): Observable<any> {
-    return this.http.post(environment.domain + this.url + '/login', user, {observe: 'response'});
+    return this.http.post(this.url + '/login', user, {observe: 'response'});
   }
 
   register(user: UserI): Observable<any> {
-    return this.http.post(environment.domain + this.url + '/sign-up', user);
+    return this.http.post(this.url + '/sign-up', user);
   }
 
 }

@@ -27,8 +27,8 @@ export class ProductComponent implements OnInit {
   updateLocation(event: EventEmitter<string>): void {
     event.subscribe(res => {
       this.breadCrumbs = this.breadCrumbsService.updateBreadCrumbs(res);
+      this.isSorterIconActive = this.breadCrumbsService.getSorterState();
     });
-    this.isSorterIconActive = this.breadCrumbsService.getSorterState();
   }
 
   ngAfterViewInit(): void {

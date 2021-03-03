@@ -19,7 +19,7 @@ export class ProductService {
    * Obtiene todos los productos
    */
   getProducts(): Observable<any> {
-    return this.http.get(environment.domain + this.url);
+    return this.http.get(this.url);
   }
 
   /**
@@ -27,7 +27,7 @@ export class ProductService {
    * @param id
    */
   getProduct(id: string): Observable<any> {
-    return this.http.get(environment.domain + this.url + '/' + id);
+    return this.http.get(this.url + '/' + id);
   }
 
   addProduct(item: ProductI, files: FileList): Observable<any> {
@@ -36,13 +36,13 @@ export class ProductService {
     formData.append('images', files[0]);
     formData.append('product', JSON.stringify(item));
 
-    return this.http.post(environment.domain + this.url, formData);
+    return this.http.post(this.url, formData);
   }
 
   /**
    * Borra un producto
    */
   deleteProduct(item: ProductI): Observable<any> {
-    return this.http.request('delete', environment.domain + this.url, { body: item });
+    return this.http.request('delete', this.url, { body: item });
   }
 }

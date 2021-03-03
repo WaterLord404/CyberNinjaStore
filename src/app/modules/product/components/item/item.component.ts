@@ -65,7 +65,7 @@ export class ItemComponent implements OnInit {
   addToCart(item: ProductI): void {
     // Llama al servicio para actualizar la insignia
     this.communicationService.callComponentMethod('+badge');
-    // Añade el producto al carrito
+    // Añade el producto al carrito local storage
     this.cartService.addProductToCart(item);
   }
 

@@ -1,4 +1,4 @@
-<div class="breads-container">
+<div class="breads-container" @fadeIn>
   <div class="route">
     <a *ngFor="let item of breadCrumbs" [routerLink]="item.src">
       <span>{{item.location}}</span>

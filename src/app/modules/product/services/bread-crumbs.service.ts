@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { BreadCrumbsI } from '../Interfaces/bread-crumbsI';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { BreadCrumbsI } from '../Interfaces/bread-crumbsI';
 export class BreadCrumbsService {
 
   breadCrumbs: Array<BreadCrumbsI>;
-  isSorterIconActive: boolean;
+  isSorterIconActive = new BehaviorSubject<boolean>(false);
 
   constructor() { }
 
@@ -16,14 +17,15 @@ export class BreadCrumbsService {
    * @param string
    */
   updateBreadCrumbs(res: string): Array<BreadCrumbsI> {
-    this.isSorterIconActive = false;
+    this.isSorterIconActive.next(false);
+
     switch (res) {
       case 'Products':
         this.breadCrumbs = [
           { location: 'Home/', src: '' },
           { location: 'Products' },
         ];
-        this.isSorterIconActive = true;
+        this.isSorterIconActive.next(true);
         break;
       default:
         this.breadCrumbs = [
@@ -36,7 +38,12 @@ export class BreadCrumbsService {
     return this.breadCrumbs;
   }
 
+  /**
+   * obtiene el estado del icono de ordenar por
+   */
   getSorterState(): boolean {
-    return this.isSorterIconActive;
+    let status = false;
+    this.isSorterIconActive.asObservable().subscribe(res => status = res);
+    return status;
   }
 }
