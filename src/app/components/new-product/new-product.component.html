@@ -19,7 +19,7 @@
 
     <div class="form-group">
       <span>Purchase price</span>
-      <input type="number" placeholder="€" formControlName="purchasePrice">
+      <input type="number" placeholder="0.00€" formControlName="purchasePrice">
       <label *ngIf="f.purchasePrice.errors && submitted == true">
         Purchase price is required
       </label>
@@ -27,7 +27,7 @@
 
     <div class="form-group">
       <span>Sale price</span>
-      <input type="number" placeholder="€" formControlName="salePrice">
+      <input type="number" placeholder="0.00€" formControlName="salePrice">
       <label *ngIf="f.salePrice.errors && submitted == true">
         Sale price is required
       </label>
@@ -35,22 +35,16 @@
 
     <div class="form-group">
       <span>Discount</span>
-      <mat-select formControlName="discount">
-        <mat-option value="0">0%</mat-option>
-        <mat-option value="15">15%</mat-option>
-        <mat-option value="30">30%</mat-option>
-        <mat-option value="50">50%</mat-option>
-        <mat-option value="70">70%</mat-option>
-      </mat-select>
+      <input type="number" placeholder="0%" formControlName="discount">
       <label *ngIf="f.discount.errors && submitted == true">
         Discount is required
       </label>
     </div>
 
-    <div class="form-group">
+    <div class="form-group imput-multiple">
       <span>Size</span>
       <mat-select formControlName="size" multiple>
-        <mat-option *ngFor="let size of sizes" [value]="sizes">{{size}}</mat-option>
+        <mat-option *ngFor="let size of sizes" [value]="size">{{size}}</mat-option>
       </mat-select>
       <label *ngIf="f.size.errors && submitted == true">
         Size is required
@@ -78,10 +72,12 @@
     </div>
 
     <div class="form-group">
-      <span>Documents</span>
-      <input type="file" multiple (change)="filesToUpload = $event.target.files" formControlName="documents">
+      <span>Images</span>
+      <div class="custom-input-file">
+        <input type="file" class="input-file" multiple (change)="filesToUpload = $event.target.files" formControlName="documents">
+      </div>
       <label *ngIf="f.documents.errors && submitted == true">
-        Documents is required
+        Images is required
       </label>
     </div>
 

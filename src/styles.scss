@@ -45,9 +45,31 @@ main {
   text-align: center;
 }
 
+// Custom multiple select
 .mat-select-trigger {
   height: 100%;
+  * {
+    vertical-align: middle;
+  }
 }
-.mat-select-trigger *{
- vertical-align: middle;
+.mat-select-panel-wrap {
+  flex-basis: 90% !important;
+  * {
+    color: rgba(0, 0, 0, 0.75) !important;
+  }
+  .mat-pseudo-checkbox-checked {
+    background: $orange !important;
+  }
 }
+.mat-select-min-line {
+  color: rgba(0, 0, 0, 0.5) !important;
+}
+
+// SorterProducts
+.cdk-overlay-connected-position-bounding-box {
+  right: 0 !important;
+  .mat-menu-panel {
+    overflow: hidden !important;
+  }
+}
+

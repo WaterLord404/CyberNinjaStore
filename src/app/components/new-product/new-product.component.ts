@@ -16,8 +16,8 @@ export class NewProductComponent implements OnInit {
   filesToUpload: FileList;
 
   sizes: Array<string> = ['S', 'M', 'L', 'X', 'XL'];
-  colours: Array<string> = [];
-  categories: Array<string> = [];
+  colours: Array<string> = ['BLACK', 'WHITE', 'GRAY', 'KHAKI', 'RED', 'OCRE'];
+  categories: Array<string> = ['NEW', 'WOMEN', 'SHIRTS', 'ACCESORIES', 'SWEATSHIRT', 'JACKETS', 'PANTS'];
 
   constructor(
     private fb: FormBuilder,
@@ -27,15 +27,15 @@ export class NewProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      name: [, [Validators.required]],
-      description: [, [Validators.required]],
-      purchasePrice: [, [Validators.required]],
-      salePrice: [, [Validators.required]],
-      discount: [, [Validators.required]],
-      size: [, [Validators.required]],
-      colour: [null, ],
-      category: [null, ],
-      documents: [, [Validators.required]]
+      name: [, Validators.required],
+      description: [, Validators.required],
+      purchasePrice: [, Validators.required],
+      salePrice: [, Validators.required],
+      discount: [, Validators.required],
+      size: [, Validators.required],
+      colour: [, Validators.required],
+      category: [, Validators.required],
+      documents: [, Validators.required]
     });
   }
 
@@ -44,7 +44,7 @@ export class NewProductComponent implements OnInit {
    */
   onSubmit() {
     this.submitted = true;
-    console.log(this.form.controls)
+
     // stop here if form is invalid
     if (this.form.invalid) {
       this.snackBarService.popup(300);
@@ -64,7 +64,7 @@ export class NewProductComponent implements OnInit {
       description: this.f.description.value,
       purchasePrice: this.f.purchasePrice.value,
       salePrice: this.f.salePrice.value,
-      discount: parseInt(this.f.discount.value, 10),
+      discount: this.f.discount.value,
       size: this.f.size.value,
       colour: this.f.colour.value,
       category: this.f.category.value,

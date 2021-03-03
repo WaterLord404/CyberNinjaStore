@@ -17,7 +17,7 @@ import { IsLoggedGuard } from './core/guards/is-logged.guard';
 import { NewProductComponent } from './components/new-product/new-product.component';
 import { IsAdminGuard } from './core/guards/is-admin.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -48,7 +48,7 @@ const routes: Routes = [
     MatProgressBarModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
