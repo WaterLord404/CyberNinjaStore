@@ -44,3 +44,10 @@ main {
   z-index: 1;
   text-align: center;
 }
+
+.mat-select-trigger {
+  height: 100%;
+}
+.mat-select-trigger *{
+ vertical-align: middle;
+}

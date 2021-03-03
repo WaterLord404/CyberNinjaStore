@@ -17,7 +17,7 @@
   justify-content: center;
   margin-bottom: 5%;
 
-  input {
+  input, mat-select{
     all: unset;
     height: 2.75rem;
     border: 0.0625rem solid #d7dcde;
@@ -27,6 +27,7 @@
     border-radius: 0;
     text-align: left;
   }
+
   label {
     @include font-product();
     margin: 0;

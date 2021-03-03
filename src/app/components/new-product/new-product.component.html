@@ -19,7 +19,7 @@
 
     <div class="form-group">
       <span>Purchase price</span>
-      <input type="text" formControlName="purchasePrice">
+      <input type="number" placeholder="€" formControlName="purchasePrice">
       <label *ngIf="f.purchasePrice.errors && submitted == true">
         Purchase price is required
       </label>
@@ -27,7 +27,7 @@
 
     <div class="form-group">
       <span>Sale price</span>
-      <input type="text" formControlName="salePrice">
+      <input type="number" placeholder="€" formControlName="salePrice">
       <label *ngIf="f.salePrice.errors && submitted == true">
         Sale price is required
       </label>
@@ -35,7 +35,13 @@
 
     <div class="form-group">
       <span>Discount</span>
-      <input type="text" formControlName="discount">
+      <mat-select formControlName="discount">
+        <mat-option value="0">0%</mat-option>
+        <mat-option value="15">15%</mat-option>
+        <mat-option value="30">30%</mat-option>
+        <mat-option value="50">50%</mat-option>
+        <mat-option value="70">70%</mat-option>
+      </mat-select>
       <label *ngIf="f.discount.errors && submitted == true">
         Discount is required
       </label>
@@ -43,7 +49,9 @@
 
     <div class="form-group">
       <span>Size</span>
-      <input type="text" formControlName="size">
+      <mat-select formControlName="size" multiple>
+        <mat-option *ngFor="let size of sizes" [value]="sizes">{{size}}</mat-option>
+      </mat-select>
       <label *ngIf="f.size.errors && submitted == true">
         Size is required
       </label>
@@ -51,7 +59,9 @@
 
     <div class="form-group">
       <span>Colour</span>
-      <input type="text" formControlName="colour">
+      <mat-select formControlName="colour" multiple>
+        <mat-option *ngFor="let colour of colours" [value]="colour">{{colour}}</mat-option>
+      </mat-select>
       <label *ngIf="f.colour.errors && submitted == true">
         Colour is required
       </label>
@@ -59,7 +69,9 @@
 
     <div class="form-group">
       <span>Category</span>
-      <input type="text" formControlName="category">
+      <mat-select formControlName="category" multiple>
+        <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
+      </mat-select>
       <label *ngIf="f.category.errors && submitted == true">
         Category is required
       </label>

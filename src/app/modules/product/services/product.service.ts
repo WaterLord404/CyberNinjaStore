@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { ProductI } from '../Interfaces/productI';
 
 @Injectable({
@@ -36,12 +35,24 @@ export class ProductService {
    * @param files
    */
   addProduct(item: ProductI, files: FileList): Observable<any> {
-    const formData: any = new FormData();
-    console.log(files[0])
-    formData.append('images', files);
+    let formData: any = new FormData();
+
+    formData = this.appendFilesToFormData(formData, files);
     formData.append('product', JSON.stringify(item));
 
     return this.http.post(this.url, formData);
+  }
+
+  /**
+   * Añade las imagenes a la peticion
+   * @param formData
+   */
+  private appendFilesToFormData(formData: FormData, files: FileList): FormData {
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < files.length; i++) {
+      formData.append('images', files[i]);
+    }
+    return formData;
   }
 
   /**

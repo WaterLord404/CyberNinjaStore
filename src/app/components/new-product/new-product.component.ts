@@ -15,6 +15,10 @@ export class NewProductComponent implements OnInit {
   submitted = false;
   filesToUpload: FileList;
 
+  sizes: Array<string> = ['S', 'M', 'L', 'X', 'XL'];
+  colours: Array<string> = [];
+  categories: Array<string> = [];
+
   constructor(
     private fb: FormBuilder,
     private snackBarService: SnackBarService,
@@ -23,15 +27,15 @@ export class NewProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      name: ['TEST', [Validators.required]],
-      description: ['ASDASDASDASD', [Validators.required]],
-      purchasePrice: [20, [Validators.required]],
-      salePrice: [30, [Validators.required]],
-      discount: [0, [Validators.required]],
-      size: [[], ],
-      colour: [[], ],
-      category: [[], ],
-      documents: [[], [Validators.required]]
+      name: [, [Validators.required]],
+      description: [, [Validators.required]],
+      purchasePrice: [, [Validators.required]],
+      salePrice: [, [Validators.required]],
+      discount: [, [Validators.required]],
+      size: [, [Validators.required]],
+      colour: [null, ],
+      category: [null, ],
+      documents: [, [Validators.required]]
     });
   }
 
@@ -40,6 +44,7 @@ export class NewProductComponent implements OnInit {
    */
   onSubmit() {
     this.submitted = true;
+    console.log(this.form.controls)
     // stop here if form is invalid
     if (this.form.invalid) {
       this.snackBarService.popup(300);
@@ -47,7 +52,7 @@ export class NewProductComponent implements OnInit {
     }
 
     const item: ProductI = this.generateProduct();
-
+    console.log(item)
     this.productService.addProduct(item, this.filesToUpload).subscribe(
       res => console.log(res)
     );
@@ -59,7 +64,7 @@ export class NewProductComponent implements OnInit {
       description: this.f.description.value,
       purchasePrice: this.f.purchasePrice.value,
       salePrice: this.f.salePrice.value,
-      discount: this.f.discount.value,
+      discount: parseInt(this.f.discount.value),
       size: this.f.size.value,
       colour: this.f.colour.value,
       category: this.f.category.value,
