@@ -64,7 +64,7 @@ export class NewProductComponent implements OnInit {
       description: this.f.description.value,
       purchasePrice: this.f.purchasePrice.value,
       salePrice: this.f.salePrice.value,
-      discount: parseInt(this.f.discount.value),
+      discount: parseInt(this.f.discount.value, 10),
       size: this.f.size.value,
       colour: this.f.colour.value,
       category: this.f.category.value,
