@@ -30,10 +30,15 @@ export class ProductService {
     return this.http.get(this.url + '/' + id);
   }
 
+  /**
+   * Crea un producto
+   * @param item
+   * @param files
+   */
   addProduct(item: ProductI, files: FileList): Observable<any> {
     const formData: any = new FormData();
-
-    formData.append('images', files[0]);
+    console.log(files[0])
+    formData.append('images', files);
     formData.append('product', JSON.stringify(item));
 
     return this.http.post(this.url, formData);

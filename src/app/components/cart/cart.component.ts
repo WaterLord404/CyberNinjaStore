@@ -1,10 +1,9 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Byte } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommunicationService } from 'src/app/core/services/communication.service';
 import { DocumentService } from 'src/app/core/services/document.service';
 import { ProductI } from 'src/app/modules/product/Interfaces/productI';
+import { CartBadgeService } from 'src/app/services/cart-badge.service';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -31,8 +30,8 @@ export class CartComponent implements OnInit {
   constructor(
     protected router: Router,
     protected documentService: DocumentService,
-    private comunicationService: CommunicationService,
-    private cartService: CartService
+    private cartService: CartService,
+    private cartBadgeService: CartBadgeService
   ) { }
 
   // Obtiene los productos del carrito
@@ -48,6 +47,7 @@ export class CartComponent implements OnInit {
   deleteThisItem(item: ProductI): void {
     this.cartProducts = this.cartService.deleteThisItem(item, this.cartProducts);
     // Actualiza el productBadge
-    this.comunicationService.callComponentMethod('-badge');
+    this.cartBadgeService.update();
   }
+
 }

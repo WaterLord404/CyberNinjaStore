@@ -22,7 +22,6 @@ export class NewProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.filesToUpload = null;
     this.form = this.fb.group({
       name: ['TEST', [Validators.required]],
       description: ['ASDASDASDASD', [Validators.required]],
@@ -36,6 +35,9 @@ export class NewProductComponent implements OnInit {
     });
   }
 
+  /**
+   * Envia el formulario
+   */
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
@@ -45,6 +47,7 @@ export class NewProductComponent implements OnInit {
     }
 
     const item: ProductI = this.generateProduct();
+
     this.productService.addProduct(item, this.filesToUpload).subscribe(
       res => console.log(res)
     );

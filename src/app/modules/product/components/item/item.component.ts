@@ -3,9 +3,9 @@ import { Location } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { CommunicationService } from 'src/app/core/services/communication.service';
 import { DocumentService } from 'src/app/core/services/document.service';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
+import { CartBadgeService } from 'src/app/services/cart-badge.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductI } from '../../Interfaces/productI';
 import { ProductService } from '../../services/product.service';
@@ -33,7 +33,7 @@ export class ItemComponent implements OnInit {
     private router: Router,
     private productService: ProductService,
     protected documentService: DocumentService,
-    private communicationService: CommunicationService,
+    private cartBadgeService: CartBadgeService,
     private cartService: CartService,
     private snackBarService: SnackBarService,
     private location: Location,
@@ -63,10 +63,10 @@ export class ItemComponent implements OnInit {
    * Añade el producto al carrito
    */
   addToCart(item: ProductI): void {
-    // Llama al servicio para actualizar la insignia
-    this.communicationService.callComponentMethod('+badge');
     // Añade el producto al carrito local storage
     this.cartService.addProductToCart(item);
+    // Llama al servicio para actualizar la insignia
+    this.cartBadgeService.update();
   }
 
   /**
@@ -91,5 +91,4 @@ export class ItemComponent implements OnInit {
       err => this.snackBarService.popup(err.status)
     );
   }
-
 }

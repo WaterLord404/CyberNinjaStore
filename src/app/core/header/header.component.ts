@@ -3,8 +3,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { Router } from '@angular/router';
+import { CartBadgeService } from 'src/app/services/cart-badge.service';
 import { AuthService } from '../services/auth.service';
-import { CommunicationService } from '../services/communication.service';
 import { LoaderService } from '../services/loader.service';
 import { SnackBarService } from '../services/snack-bar.service';
 
@@ -34,66 +34,22 @@ export class HeaderComponent implements OnInit {
 
   color: ThemePalette = 'warn';
   mode: ProgressBarMode = 'query';
-  @Input('matBadge') content: string | undefined;
+  @Input('matBadge') cartBadgeCount: string | undefined;
   isLoading: boolean;
 
   constructor(
-    private communicationService: CommunicationService,
     private loaderService: LoaderService,
     protected router: Router,
     protected authService: AuthService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private cartBadgeService: CartBadgeService
   ) {
     // Muestra o oculta la barra de loading
     this.loaderService.loading().subscribe(res => this.isLoading = res);
-
-    // Recibe la llamada desde el servicio y actualiza la insignia
-    this.communicationService.componentCalled.subscribe(
-      res => {
-        switch (res) {
-          case '+badge':
-            this.addOneProductsBadge();
-            break;
-          case '-badge':
-            this.subtractOneProductsBadge();
-            break;
-        }
-      });
+    this.cartBadgeService.getCartBadgeCount().subscribe(res => this.cartBadgeCount = res);
   }
 
-  ngOnInit(): void {
-    this.content = localStorage.getItem('productsBadge');
-  }
-
-  /**
-   * Añade 1 a la insignia de los productos
-   */
-  addOneProductsBadge(): void {
-    const data: string = localStorage.getItem('productsBadge');
-
-    if (data == null) {
-      localStorage.setItem('productsBadge', '1');
-    } else {
-      // tslint:disable-next-line: radix
-      localStorage.setItem('productsBadge', (parseInt(data) + 1).toString());
-    }
-    this.content = localStorage.getItem('productsBadge');
-  }
-
-  /**
-   * Elimina 1 de la insignia de los productos, si esta llega a 0
-   * elimina de LocalStorage las insignias
-   */
-  subtractOneProductsBadge(): void {
-    const data: string = localStorage.getItem('productsBadge');
-    // tslint:disable-next-line: radix
-    localStorage.setItem('productsBadge', (parseInt(data) - 1).toString());
-
-    if (data === '1') {
-      localStorage.removeItem('productsBadge');
-    }
-    this.content = localStorage.getItem('productsBadge');
-  }
+  ngOnInit(): void { }
 
   /**
    * Cierra la sesión
