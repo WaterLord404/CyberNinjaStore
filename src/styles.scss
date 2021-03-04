@@ -30,20 +30,7 @@ main {
 }
 
 .button-custom {
-  background-color: $orange;
-  color: white;
-  border: 1px solid $orange;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: 40px;
-  width: 140px;
-  letter-spacing: 2px;
-  font-size: small;
-  z-index: 1;
-  text-align: center;
-  overflow: hidden;
+  @include button-custom();
 }
 
 // Custom multiple select
@@ -74,3 +61,79 @@ main {
   }
 }
 
+// FORMS
+.container {
+  display: flex;
+  justify-content: center;
+  min-height: 90vh;
+
+  .form-container {
+    @include flex-column();
+    width: 90%;
+
+    .form-group {
+      @include flex-column();
+      justify-content: center;
+      margin-bottom: 5%;
+
+      input,
+      mat-select {
+        all: unset;
+        height: 2.75rem;
+        border: 0.0625rem solid #d7dcde;
+        padding-left: 0.9375rem;
+        font-size: 0.875rem;
+        line-height: 1.03125rem;
+        border-radius: 0;
+        text-align: left;
+      }
+      label {
+        @include font-product();
+        margin: 0;
+        color: red;
+      }
+
+      span {
+        @include font-product();
+        margin: 1.5% 0;
+      }
+
+      .button-custom {
+        position: relative;
+      }
+
+      .container-errors {
+        display: flex;
+        justify-content: left;
+      }
+    }
+
+    .form-footer {
+      span {
+        @include font-product();
+      }
+    }
+  }
+}
+
+//BUTTONS
+.tag-custom {
+  @include button-custom();
+  align-items: center;
+  min-width: 15%;
+  width: auto;
+  height: 6.5%;
+  top: 6%;
+  left: 12%;
+  font-size: x-small;
+  letter-spacing: unset;
+}
+
+.relative-big-button {
+  @include button-custom();
+  top: unset;
+  left: unset;
+  transform: unset;
+  position: relative;
+  width: 100%;
+}

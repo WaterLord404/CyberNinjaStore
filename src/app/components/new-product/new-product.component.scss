@@ -1,61 +1,7 @@
 @import "../../../assets/scss/variables";
 @import "../../../assets/scss/grid";
 
-.container {
-  display: flex;
-  justify-content: center;
-  min-height: 90vh;
-}
-
-.register-container {
-  @include flex-column();
-  width: 90%;
-}
-
-.form-group {
-  @include flex-column();
-  justify-content: center;
-  margin-bottom: 5%;
-
-  input, mat-select, .test{
-    all: unset;
-    height: 2.75rem;
-    border: 0.0625rem solid #d7dcde;
-    padding-left: 0.9375rem;
-    font-size: 0.875rem;
-    line-height: 1.03125rem;
-    border-radius: 0;
-    text-align: left;
-  }
-
-  label {
-    @include font-product();
-    margin: 0;
-    color: red;
-  }
-
-  span {
-    @include font-product();
-    margin: 1.5% 0;
-
-  }
-}
-.button-custom {
-  position: relative;
-}
-
-.new-customer {
-  span {
-    @include font-product();
-  }
-}
-
-.container-errors {
-  display: flex;
-  justify-content: left;
-}
-
-.form-group:last-child{
+.form-group:last-child {
   margin-bottom: 0;
 }
 
@@ -72,7 +18,8 @@
   border-radius: 0;
   text-align: left;
 
-  span, img {
+  span,
+  img {
     align-self: center;
     color: rgb(0, 0, 0, 0.5);
   }
@@ -84,14 +31,14 @@
 }
 
 .custom-input-file .input-file {
- border: 10000px solid transparent;
- cursor: pointer;
- font-size: 10000px;
- margin: 0;
- opacity: 0;
- outline: 0 none;
- padding: 0;
- position: absolute;
- right: -1000px;
- top: -1000px;
+  border: 10000px solid transparent;
+  cursor: pointer;
+  font-size: 10000px;
+  margin: 0;
+  opacity: 0;
+  outline: 0 none;
+  padding: 0;
+  position: absolute;
+  right: -1000px;
+  top: -1000px;
 }

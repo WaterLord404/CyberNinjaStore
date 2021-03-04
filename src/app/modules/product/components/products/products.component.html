@@ -1,7 +1,7 @@
 <div class="container-cards" *ngIf="products" @fadeIn>
   <div class="container-card" *ngFor="let item of products">
     <div class="container-img">
-      <span class="button-custom" *ngIf="item.discount">-{{item.discount}}%</span>
+      <span class="tag-custom" *ngIf="item.discount">-{{item.discount}}%</span>
       <img [src]="documentService.dataToImg(item.documents[0].picture, item.documents[0].fileType)" [alt]="item.id" (click)="navigateToProduct(item)">
     </div>
     <h2 class="product-tittle">{{item.name}}</h2>

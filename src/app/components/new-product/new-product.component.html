@@ -1,5 +1,5 @@
 <div class="container">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="register-container">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
 
     <div class="form-group">
       <span>Name</span>
@@ -56,7 +56,7 @@
         </label>
     </div>
 
-    <div class="form-group imput-multiple">
+    <div class="form-group">
       <span>Size</span>
       <mat-select formControlName="size" multiple>
         <mat-option *ngFor="let size of sizes" [value]="size">{{size}}</mat-option>

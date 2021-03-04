@@ -1,5 +1,5 @@
 <div class="container">
-  <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm" class="login-container">
+  <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm" class="form-container">
     <div class="form-group">
       <span>Username</span>
       <input type="text" required [(ngModel)]="user.username" name="username" #username="ngModel">
@@ -20,7 +20,7 @@
       <button type="submit" class="button-custom">LOGIN</button>
     </div>
 
-    <div class="new-customer">
+    <div class="form-footer">
       <span>New customer? <a [routerLink]="'/account/register'">Sign Up</a></span>
     </div>
   </form>

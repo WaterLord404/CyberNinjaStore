@@ -1,5 +1,5 @@
 <div class="container">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="register-container">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
     <div class="form-group">
       <span>Username</span>
       <input type="text" formControlName="username">
@@ -102,7 +102,7 @@
       <button type="submit" class="button-custom">REGISTER</button>
     </div>
 
-    <div class="new-customer">
+    <div class="form-footer">
       <span>Already have an account? <a [routerLink]="'/account/login'">Login</a></span>
     </div>
   </form>
