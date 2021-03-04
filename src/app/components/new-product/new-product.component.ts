@@ -29,9 +29,9 @@ export class NewProductComponent implements OnInit {
     this.form = this.fb.group({
       name: [, Validators.required],
       description: [, Validators.required],
-      purchasePrice: [, Validators.required],
-      salePrice: [, Validators.required],
-      discount: [, Validators.required],
+      purchasePrice: [, [Validators.required, Validators.min(0)]],
+      salePrice: [, [Validators.required, Validators.min(0)]],
+      discount: [, [Validators.required, Validators.min(0), Validators.max(100)]],
       size: [, Validators.required],
       colour: [, Validators.required],
       category: [, Validators.required],
@@ -52,9 +52,9 @@ export class NewProductComponent implements OnInit {
     }
 
     const item: ProductI = this.generateProduct();
-    console.log(item)
     this.productService.addProduct(item, this.filesToUpload).subscribe(
-      res => console.log(res)
+      () => this.snackBarService.popup(201),
+      () => this.snackBarService.popup(500)
     );
   }
 

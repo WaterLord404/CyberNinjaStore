@@ -32,8 +32,9 @@ img {
 .button-custom {
   @include flex-row();
   align-items: center;
-  width: 15%;
-  height: 6%;
+  min-width: 15%;
+  width: auto;
+  height: 6.5%;
   top: 6%;
   left: 12%;
   font-size: x-small;

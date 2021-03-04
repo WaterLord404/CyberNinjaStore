@@ -27,6 +27,9 @@ export class SnackBarService {
       case 203:
         error = 'Successfully removed';
         break;
+      case 201:
+        error = 'Created successful';
+        break;
       case 210:
         error = 'Login successful';
         break;
