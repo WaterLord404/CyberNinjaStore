@@ -119,14 +119,18 @@ main {
 //BUTTONS
 .tag-custom {
   @include button-custom();
+  @include flex-column();
   align-items: center;
   min-width: 15%;
   width: auto;
-  height: 6.5%;
-  top: 6%;
-  left: 12%;
+  height: auto;
+  top: 6.5%;
+  left: 11%;
   font-size: x-small;
   letter-spacing: unset;
+  span {
+    color: white;
+  }
 }
 
 .relative-big-button {
