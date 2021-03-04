@@ -79,6 +79,7 @@
   img {
     height: $icon-size;
     opacity: 0.5;
+    z-index: -1;
   }
 }
 

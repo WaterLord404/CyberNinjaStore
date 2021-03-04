@@ -11,7 +11,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { AuthInterceptorService } from './core/services/auth-interceptor.service';
+import { HttpInterceptorService } from './core/services/http-interceptor.service';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { IsLoggedGuard } from './core/guards/is-logged.guard';
 import { NewProductComponent } from './components/new-product/new-product.component';
@@ -52,7 +52,7 @@ const routes: Routes = [
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptorService,
+    useClass: HttpInterceptorService,
     multi: true
   }],
   bootstrap: [AppComponent]

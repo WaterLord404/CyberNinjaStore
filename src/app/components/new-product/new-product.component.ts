@@ -22,7 +22,7 @@ export class NewProductComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private snackBarService: SnackBarService,
-    private productService: ProductService
+    private productService: ProductService,
   ) { }
 
   ngOnInit(): void {
@@ -54,7 +54,12 @@ export class NewProductComponent implements OnInit {
     const item: ProductI = this.generateProduct();
     this.productService.addProduct(item, this.filesToUpload).subscribe(
       () => this.snackBarService.popup(201),
-      () => this.snackBarService.popup(500)
+      () => this.snackBarService.popup(500),
+      () => {
+        this.submitted = false;
+        this.ngOnInit();
+        window.scroll(0, 0);
+      }
     );
   }
 

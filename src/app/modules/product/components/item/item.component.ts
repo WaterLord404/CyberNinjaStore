@@ -40,6 +40,9 @@ export class ItemComponent implements OnInit {
     protected authService: AuthService
   ) { }
 
+  /**
+   * Carga el item
+   */
   ngOnInit(): void {
     window.scroll(0, 0);
     // Si se ha accedido a el item mediante la navegacion de la pagina
