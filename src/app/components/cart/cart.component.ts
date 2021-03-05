@@ -1,7 +1,9 @@
 import { animate, style, transition, trigger } from '@angular/animations';
+import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DocumentService } from 'src/app/core/services/document.service';
+import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import { ProductI } from 'src/app/modules/product/Interfaces/productI';
 import { ProductService } from 'src/app/modules/product/services/product.service';
 import { CartBadgeService } from 'src/app/services/cart-badge.service';
@@ -33,18 +35,43 @@ export class CartComponent implements OnInit {
     protected documentService: DocumentService,
     private cartService: CartService,
     private cartBadgeService: CartBadgeService,
-    private productService: ProductService
+    private productService: ProductService,
+    private snackBarService: SnackBarService
   ) { }
 
   // Obtiene los productos del carrito
   ngOnInit(): void {
     window.scroll(0, 0);
 
-    const products = JSON.parse(localStorage.getItem('cart'));
-    this.productService.getCartProduct(products)
+    const productsLocal = JSON.parse(localStorage.getItem('cart'));
+
+    this.productService.getCartProduct(productsLocal)
       .subscribe(
-        res => this.cartProducts = res
+        res => this.cartProducts = this.clearNullProducts(res, productsLocal),
+        () => this.snackBarService.popup(500)
       );
+  }
+
+  /**
+   * Elimina los productos nulos si se han borrado de la BD y el
+   * usuario lo mantiene en el localstorage
+   * @param res
+   */
+  private clearNullProducts(res: Array<ProductI>, productsLocal: Array<number>) {
+    const productsCleared: Array<ProductI> = [];
+
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < res.length; i++) {
+      // Si es nulo lo elimina
+      if (res[i] === null) {
+        productsLocal.splice(i, 1);
+      } else {
+        productsCleared.push(res[i]);
+      }
+    }
+    // Actualiza los productos del local storage
+    localStorage.setItem('cart', JSON.stringify(productsLocal));
+    return productsCleared;
   }
 
   /**

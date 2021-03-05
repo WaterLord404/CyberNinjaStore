@@ -33,8 +33,8 @@ export class ProductService {
    * Obtiene los productos del carrito
    * @param ProductI
    */
-  getCartProduct(products: ProductI): Observable<any> {
-    return this.http.post(this.url + '/cart', products);
+  getCartProduct(ids: Array<number>): Observable<any> {
+    return this.http.post(this.url + '/cart', ids);
   }
 
   /**

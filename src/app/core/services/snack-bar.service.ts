@@ -54,6 +54,9 @@ export class SnackBarService {
       case 500:
         error = 'something went wrong';
         break;
+      case 800:
+        error = 'One product in your cart now does not exist';
+        break;
       default:
         error = 'Unknown error';
         break;

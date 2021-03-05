@@ -45,8 +45,8 @@
     </ul>
 
     <div class="button-container">
-      <button class="relative-big-button add-cart" (click)="addToCart(item)">ADD TO CART</button>
-      <button class="relative-big-button" (click)="buyNow(item)">BUY NOW</button>
+      <button class="relative-big-button add-cart" (click)="addToCart(item.id)">ADD TO CART</button>
+      <button class="relative-big-button" (click)="buyNow(item.id)">BUY NOW</button>
       <button class="relative-big-button delete" (click)="deleteItem(item)" *ngIf="authService.isAdmin()">DELETE</button>
     </div>
   </div>
