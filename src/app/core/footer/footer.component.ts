@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { FooterNavI } from './interfaces/FooterNavI';
+import { FooterNavI } from '../../interfaces/footer-navI';
 
 @Component({
   selector: 'app-footer',

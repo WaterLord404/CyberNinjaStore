@@ -9,7 +9,7 @@ export class AuthService {
 
   constructor() { }
 
-  private isLogin = new BehaviorSubject<boolean>(this.hasToken());
+  private isLogged = new BehaviorSubject<boolean>(this.hasToken());
   private customer = new BehaviorSubject<UserI>(null);
 
   /**
@@ -26,7 +26,7 @@ export class AuthService {
    */
   getCustomer(): UserI {
     let status = null;
-    this.isLogin.asObservable().subscribe(res => status = res);
+    this.isLogged.asObservable().subscribe(res => status = res);
     return status;
   }
 
@@ -36,7 +36,7 @@ export class AuthService {
    */
   isLoggedIn(): boolean {
     let status = false;
-    this.isLogin.asObservable().subscribe(res => status = res);
+    this.isLogged.asObservable().subscribe(res => status = res);
     return status;
   }
 
@@ -46,7 +46,7 @@ export class AuthService {
   login(customer: UserI, jwt: string): void {
     localStorage.setItem('token', jwt);
     this.customer.next(customer);
-    this.isLogin.next(true);
+    this.isLogged.next(true);
   }
 
   /**
@@ -55,7 +55,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
     this.customer.next(null);
-    this.isLogin.next(false);
+    this.isLogged.next(false);
   }
 
   /**

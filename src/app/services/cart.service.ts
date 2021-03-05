@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ProductI } from '../modules/product/Interfaces/productI';
 
 @Injectable({
@@ -6,37 +8,34 @@ import { ProductI } from '../modules/product/Interfaces/productI';
 })
 export class CartService {
 
-  cartProductsLocal: Array<ProductI> = [];
+  cartProductsLocal: Array<ProductI>;
 
   constructor() { }
 
   /**
-   * Guarda en localStorage los productos del carrito
-   * @param item
+   * Guarda en localStorage los ids de los items
+   * @param itemId
    */
   addProductToCart(item: ProductI): void {
-    this.cartProductsLocal = [];
-    const savedProducts: Array<ProductI> = JSON.parse(localStorage.getItem('cart'));
+    const newProduct: ProductI = Object.assign({}, item);
+    newProduct.documents = null;
 
-    // Comprueba si existe un primer producto, si no recorre la lista y
-    // añade cada producto a la nueva lista
-    if (savedProducts == null) {
-      this.cartProductsLocal.push(item);
-    } else {
-      savedProducts.forEach(element => {
-        this.cartProductsLocal.push(element);
-      });
-      this.cartProductsLocal.push(item);
-    }
+    this.cartProductsLocal = JSON.parse(localStorage.getItem('cart'));
+
+    if (this.cartProductsLocal == null) { this.cartProductsLocal = []; }
+    this.cartProductsLocal.push(newProduct);
 
     localStorage.setItem('cart', JSON.stringify(this.cartProductsLocal));
   }
 
   /**
-   * Borra un producto del carrito y si no tiene productos se elimina de localstorage
+   * Borra un producto de la vista de carrito, del local storage y si no
+   * tiene productos se elimina de localstorage
    * @param item: ProductI
    */
   deleteThisItem(item: ProductI, cartProducts: Array<ProductI>): Array<ProductI> {
+    // Recorre los productos, si el id coincide con el seleccionado lo elimina
+
     cartProducts.forEach(element => {
       if (element === item) {
         const i = cartProducts.indexOf(element);
@@ -51,7 +50,4 @@ export class CartService {
 
     return cartProducts;
   }
-
-
-
 }

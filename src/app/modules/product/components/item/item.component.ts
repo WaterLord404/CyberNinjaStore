@@ -65,9 +65,9 @@ export class ItemComponent implements OnInit {
   /**
    * Añade el producto al carrito
    */
-  addToCart(item: ProductI): void {
+  addToCart(itemId: ProductI): void {
     // Añade el producto al carrito local storage
-    this.cartService.addProductToCart(item);
+    this.cartService.addProductToCart(itemId);
     // Llama al servicio para actualizar la insignia
     this.cartBadgeService.update();
   }
@@ -76,8 +76,8 @@ export class ItemComponent implements OnInit {
    * Añade el producto al carrito y redirige a el carrito
    * @param item: ProductI
    */
-  buyNow(item: ProductI): void {
-    this.addToCart(item);
+  buyNow(itemId: ProductI): void {
+    this.addToCart(itemId);
     this.router.navigate(['/cart']);
   }
 

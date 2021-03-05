@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DocumentService } from 'src/app/core/services/document.service';
 import { ProductI } from 'src/app/modules/product/Interfaces/productI';
+import { ProductService } from 'src/app/modules/product/services/product.service';
 import { CartBadgeService } from 'src/app/services/cart-badge.service';
 import { CartService } from 'src/app/services/cart.service';
 
@@ -31,13 +32,19 @@ export class CartComponent implements OnInit {
     protected router: Router,
     protected documentService: DocumentService,
     private cartService: CartService,
-    private cartBadgeService: CartBadgeService
+    private cartBadgeService: CartBadgeService,
+    private productService: ProductService
   ) { }
 
   // Obtiene los productos del carrito
   ngOnInit(): void {
     window.scroll(0, 0);
-    this.cartProducts = JSON.parse(localStorage.getItem('cart'));
+
+    const products = JSON.parse(localStorage.getItem('cart'));
+    this.productService.getCartProduct(products)
+      .subscribe(
+        res => this.cartProducts = res
+      );
   }
 
   /**
@@ -49,5 +56,4 @@ export class CartComponent implements OnInit {
     // Actualiza el productBadge
     this.cartBadgeService.update();
   }
-
 }
