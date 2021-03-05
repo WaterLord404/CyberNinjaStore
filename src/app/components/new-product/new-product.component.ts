@@ -26,6 +26,7 @@ export class NewProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    window.scroll(0, 0);
     this.form = this.fb.group({
       name: [, Validators.required],
       description: [, Validators.required],

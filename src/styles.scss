@@ -120,12 +120,10 @@ main {
 .tag-custom {
   @include button-custom();
   @include flex-column();
-  align-items: center;
-  min-width: 15%;
-  width: auto;
-  height: auto;
-  top: 6.5%;
-  left: 11%;
+  width: 40px;
+  height: 20px;
+  top: 16px;
+  left: 26px;
   font-size: x-small;
   letter-spacing: unset;
   span {
