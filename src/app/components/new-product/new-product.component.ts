@@ -14,6 +14,7 @@ export class NewProductComponent implements OnInit {
   form: FormGroup;
   submitted = false;
   filesToUpload: FileList;
+  item: ProductI;
 
   sizes: Array<string> = ['S', 'M', 'L', 'X', 'XL'];
   colours: Array<string> = ['BLACK', 'WHITE', 'GRAY', 'KHAKI', 'RED', 'OCRE'];
@@ -52,8 +53,9 @@ export class NewProductComponent implements OnInit {
       return;
     }
 
-    const item: ProductI = this.generateProduct();
-    this.productService.addProduct(item, this.filesToUpload).subscribe(
+    this.item = this.generateProduct();
+
+    this.productService.addProduct(this.item, this.filesToUpload).subscribe(
       () => this.snackBarService.popup(201),
       () => this.snackBarService.popup(500),
       () => {

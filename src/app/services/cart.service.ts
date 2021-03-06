@@ -45,10 +45,6 @@ export class CartService {
     // Guarda los ids de nuevo
     localStorage.setItem('cart', JSON.stringify(productsIds));
 
-    if (cartProducts.length === 0) {
-      localStorage.removeItem('cart');
-    }
-
     return cartProducts;
   }
 

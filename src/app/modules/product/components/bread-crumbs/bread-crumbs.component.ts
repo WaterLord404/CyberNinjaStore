@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { BreadCrumbsI } from '../../Interfaces/bread-crumbsI';
+import { BreadCrumbsService } from '../../services/bread-crumbs.service';
 
 @Component({
   selector: 'app-bread-crumbs',
@@ -17,13 +18,19 @@ import { BreadCrumbsI } from '../../Interfaces/bread-crumbsI';
 })
 export class BreadCrumbsComponent implements OnInit {
 
-  @Input() breadCrumbs: Array<BreadCrumbsI> = [];
-  @Input() isSorterIconActive: boolean;
+  @Input() breadCrumbsEvent: EventEmitter<string>;
+  breadCrumbs: Array<BreadCrumbsI> = [];
+  isSorterIconActive: boolean;
 
-  constructor() {
-  }
+  constructor(
+    private breadCrumbsService: BreadCrumbsService
+  ) { }
 
   ngOnInit(): void {
+    this.breadCrumbsEvent.subscribe(res => {
+      this.breadCrumbs = this.breadCrumbsService.updateBreadCrumbs(res);
+      this.isSorterIconActive = this.breadCrumbsService.getSorterState();
+    });
   }
 
 }

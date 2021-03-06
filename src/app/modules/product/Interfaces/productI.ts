@@ -13,4 +13,5 @@ export interface ProductI {
   colour: Array<string>;
   category: Array<string>;
   documents?: Array<DocumentI>;
+  active?: boolean;
 }

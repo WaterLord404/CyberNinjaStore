@@ -29,6 +29,7 @@ import { CartService } from 'src/app/services/cart.service';
 export class CartComponent implements OnInit {
 
   cartProducts: Array<ProductI>;
+  productsLocal: Array<number>;
 
   constructor(
     protected router: Router,
@@ -43,35 +44,49 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     window.scroll(0, 0);
 
-    const productsLocal = JSON.parse(localStorage.getItem('cart'));
+    this.productsLocal = JSON.parse(localStorage.getItem('cart'));
+    if (this.productsLocal == null) { return; }
 
-    this.productService.getCartProduct(productsLocal)
+    this.productService.getCartProduct(this.productsLocal)
       .subscribe(
-        res => this.cartProducts = this.clearNullProducts(res, productsLocal),
+        res => {
+          this.cartProducts = this.clearInactiveProducts(res);
+          this.cartBadgeService.update();
+        },
         () => this.snackBarService.popup(500)
       );
   }
 
   /**
-   * Elimina los productos nulos si se han borrado de la BD y el
+   * Elimina los productos que no estan activos-> si se han desactivado de la BD y el
    * usuario lo mantiene en el localstorage
    * @param res
    */
-  private clearNullProducts(res: Array<ProductI>, productsLocal: Array<number>) {
+  private clearInactiveProducts(res: Array<ProductI>) {
     const productsCleared: Array<ProductI> = [];
-
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < res.length; i++) {
-      // Si es nulo lo elimina
-      if (res[i] === null) {
-        productsLocal.splice(i, 1);
-      } else {
+      if (res[i].active) {
         productsCleared.push(res[i]);
       }
     }
+
+    const newProductsLocal = this.generateIds(productsCleared);
     // Actualiza los productos del local storage
-    localStorage.setItem('cart', JSON.stringify(productsLocal));
+    localStorage.setItem('cart', JSON.stringify(newProductsLocal));
     return productsCleared;
+  }
+
+  /**
+   * Genera la nueva lista de ids que se guardara en localstorage
+   * @param productsCleared
+   */
+  private generateIds(productsCleared: Array<ProductI>): Array<number> {
+    const newProductsLocal: Array<number> = [];
+    productsCleared.forEach(element => {
+      newProductsLocal.push(element.id);
+    });
+    return newProductsLocal;
   }
 
   /**

@@ -1,8 +1,7 @@
 <app-bread-crumbs
-[breadCrumbs]="breadCrumbs"
-[isSorterIconActive]="isSorterIconActive">
+[breadCrumbsEvent]="breadCrumbsEvent">
 </app-bread-crumbs>
 
 <router-outlet name="aux"
-(activate)="updateLocation($event.breadEvent)">
+(activate)="updateBreadCrumbs($event.breadEvent)">
 </router-outlet>

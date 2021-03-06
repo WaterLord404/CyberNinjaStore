@@ -16,7 +16,11 @@ export class CartBadgeService {
    * Setea cartBadgeCount cada vez que se llame al servicio
    */
   private getLocalData(): string {
-    if (localStorage.getItem('cart') == null) { return undefined; }
+    if (localStorage.getItem('cart') == null || localStorage.getItem('cart') === '[]') {
+      localStorage.removeItem('cart');
+      return undefined;
+    }
+
     return JSON.parse(localStorage.getItem('cart')).length.toString();
   }
 
@@ -24,12 +28,7 @@ export class CartBadgeService {
    * Obtiene el numero de productos y lo guarda como insignia
    */
   update(): void {
-    this.localData = JSON.parse(localStorage.getItem('cart'));
-    if (this.localData === null) {
-      this.cartBadgeCount.next(undefined);
-    } else {
-      this.cartBadgeCount.next(this.localData.length.toString());
-    }
+    this.cartBadgeCount.next(this.getLocalData());
   }
 
   /**

@@ -9,29 +9,19 @@ import { BreadCrumbsService } from './services/bread-crumbs.service';
 })
 export class ProductComponent implements OnInit {
 
-  breadCrumbs: Array<BreadCrumbsI>;
-  isSorterIconActive = true;
+  breadCrumbsEvent: EventEmitter<string>;
 
-  constructor(
-    private cd: ChangeDetectorRef,
-    private breadCrumbsService: BreadCrumbsService
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
   /**
-   * Actualiza las migas de pan
+   * Envia el evento a la clase bread crumbs
    * @param EventEmitter<string>
    */
-  updateLocation(event: EventEmitter<string>): void {
-    event.subscribe(res => {
-      this.breadCrumbs = this.breadCrumbsService.updateBreadCrumbs(res);
-      this.isSorterIconActive = this.breadCrumbsService.getSorterState();
-    });
+  updateBreadCrumbs(event: EventEmitter<string>): void {
+    this.breadCrumbsEvent = event;
   }
 
-  ngAfterViewInit(): void {
-    this.cd.detectChanges();
-  }
 }
