@@ -21,4 +21,8 @@ export class OrderDetailsService {
   getCartProduct(ordersDetails: Array<OrderDetailsI>): Observable<any> {
     return this.http.post(this.url + '/cart', ordersDetails);
   }
+
+  buyCart(ordersDetails: Array<OrderDetailsI>): Observable<any> {
+    return this.http.post(this.url + '/buy', ordersDetails);
+  }
 }

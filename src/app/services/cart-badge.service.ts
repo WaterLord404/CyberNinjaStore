@@ -19,7 +19,7 @@ export class CartBadgeService {
     let count = 0;
 
     if (localStorage.getItem('cart') == null || localStorage.getItem('cart') === '[]') {
-      localStorage.removeItem('cart');
+      this.clear();
       return undefined;
     }
 
@@ -35,6 +35,13 @@ export class CartBadgeService {
    */
   update(): void {
     this.cartBadgeCount.next(this.getLocalData());
+  }
+
+  /**
+   * Limpia el carrito
+   */
+  clear(): void {
+    localStorage.removeItem('cart');
   }
 
   /**

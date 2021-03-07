@@ -8,10 +8,17 @@
     <div class="data-container">
       <div class="data">
         <p>{{item.product.name}}</p>
-        <p>{{item.units}}</p>
-        <p>{{item.product.totalPrice}}€</p>
+        <div class="data-details">
+          <p>Units: {{item.units}}</p>
+          <p>Price: {{calculatePrice(item.product.totalPrice, item.units)}}€</p>
+        </div>
       </div>
       <img src="../../../assets/icons/delete.svg" alt="deleteIcon" (click)="deleteThisItem(item.product)">
     </div>
+  </div>
+
+  <div class="cart-details" *ngIf="ordersDetails[0]" @fadeIn>
+    <p>AMOUNT: {{calculateTotalPrice()}}€</p>
+    <button class="relative-big-button" (click)="checkout()">CHECKOUT</button>
   </div>
 </div>

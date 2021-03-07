@@ -28,16 +28,19 @@ export class SnackBarService {
         error = 'Successfully removed';
         break;
       case 201:
-        error = 'Created successful';
+        error = 'Successfully created';
         break;
       case 210:
-        error = 'Login successful';
+        error = 'Successfully login';
         break;
       case 211:
-        error = 'Logout successful';
+        error = 'Successfully logout';
         break;
       case 212:
-        error = 'Register successful';
+        error = 'Successfully registration';
+        break;
+      case 220:
+        error = 'Successfully purchase';
         break;
       case 300:
         error = 'The form contains errors';

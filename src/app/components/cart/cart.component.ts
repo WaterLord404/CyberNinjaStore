@@ -17,7 +17,7 @@ import { OrderDetailsService } from 'src/app/services/order-details.service';
     trigger('fadeIn', [
       transition(':enter', [
         style({ opacity: '0' }),
-        animate('30ms ease-in', style({ opacity: '1' })),
+        animate('300ms ease-in', style({ opacity: '1' })),
       ]),
       transition(':leave', [
         style({ opacity: '1' }),
@@ -29,6 +29,7 @@ import { OrderDetailsService } from 'src/app/services/order-details.service';
 export class CartComponent implements OnInit {
 
   ordersDetails: Array<OrderDetailsI> = [];
+  totalPrice = 0;
 
   constructor(
     protected router: Router,
@@ -49,7 +50,7 @@ export class CartComponent implements OnInit {
     this.orderDetailsService.getCartProduct(ordersDetailsLocal)
       .subscribe(
         res => {
-          this.ordersDetails = this.clearInactiveProducts(res, ordersDetailsLocal);
+          this.clearInactiveProducts(res, ordersDetailsLocal);
           localStorage.setItem('cart', JSON.stringify(this.ordersDetails));
           this.cartBadgeService.update();
         },
@@ -62,7 +63,7 @@ export class CartComponent implements OnInit {
    * usuario lo mantiene en el localstorage
    * @param res
    */
-  private clearInactiveProducts(res: Array<OrderDetailsI>, ordersDetailsLocal: Array<OrderDetailsI>): Array<OrderDetailsI> {
+  private clearInactiveProducts(res: Array<OrderDetailsI>, ordersDetailsLocal: Array<OrderDetailsI>): void {
     const ordersDetailsCleared: Array<OrderDetailsI> = [];
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < res.length; i++) {
@@ -73,7 +74,42 @@ export class CartComponent implements OnInit {
       }
     }
 
-    return ordersDetailsCleared;
+    this.ordersDetails = ordersDetailsCleared;
+  }
+
+  /**
+   * Calcula el precio total del carrito
+   */
+  calculateTotalPrice(): number {
+    let resul = 0;
+    this.ordersDetails.forEach(element => {
+      resul = resul + (element.product.totalPrice * element.units);
+    });
+    return (Math.round(resul * 100) / 100);
+  }
+
+  /**
+   * Calcula el precio total de cada producto
+   * @param price
+   * @param units
+   */
+  calculatePrice(price: number, units: number): number {
+    return Math.round((price * units) * 100) / 100;
+  }
+
+  /**
+   * Realiza la compra del carrito
+   */
+  checkout(): void {
+    this.orderDetailsService.buyCart(this.ordersDetails).subscribe(
+      () => {
+        this.snackBarService.popup(220);
+        this.cartBadgeService.clear();
+        this.cartBadgeService.update();
+        this.router.navigate(['/']);
+      },
+      () => this.snackBarService.popup(500)
+    );
   }
 
   /**
@@ -85,4 +121,5 @@ export class CartComponent implements OnInit {
     // Actualiza el productBadge
     this.cartBadgeService.update();
   }
+
 }

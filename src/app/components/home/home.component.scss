@@ -1,3 +1,5 @@
+@import "../../../assets/scss/grid";
+
 img {
   object-fit: cover;
   width: 100%;
@@ -24,4 +26,23 @@ img {
 .banner-small {
   height: 194.66px;
   margin-bottom: 2px;
+}
+
+@media (min-width: 768px) {
+  .banner-medium-container {
+    @include flex-row();
+    .banner-medium:first-child {
+      margin-right: 2px;
+    }
+  }
+
+  .banner-small-container {
+    @include flex-row();
+    .banner-small {
+      margin-right: 2px;
+    }
+    .banner-small:last-child {
+      margin: 0;
+    }
+  }
 }

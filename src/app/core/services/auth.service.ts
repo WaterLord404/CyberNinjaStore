@@ -63,6 +63,7 @@ export class AuthService {
    * @returns boolean
    */
   isAdmin(): boolean {
+    let isAdmin = false;
     const jwt: string = localStorage.getItem('token');
     if (jwt == null) { return; }
 
@@ -71,6 +72,11 @@ export class AuthService {
     const decodedJwtData = JSON.parse(decodedJwtJsonData);
     const role = decodedJwtData.role;
 
-    return role[0] === 'ADMIN';
+    role.forEach(element => {
+      if (element === 'ADMIN') {
+        isAdmin = true;
+      }
+    });
+    return isAdmin;
   }
 }

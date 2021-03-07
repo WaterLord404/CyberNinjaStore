@@ -1,5 +1,6 @@
 @import "../../../assets/scss/grid";
 @import "../../../assets/scss/variables";
+@import "../../../assets/scss/functions";
 
 .cart-container {
   min-height: 90vh;
@@ -30,12 +31,31 @@
 .data-container {
   position: relative;
   width: 100%;
-
+  overflow: hidden;
   .data {
     @include font-product();
+    margin: 0;
+    height: 100%;
     text-align: left;
     font-size: smaller;
-    overflow: hidden;
+    p {
+      overflow: hidden;
+      width: 80%;
+      margin: 2%;
+      height: 30%;
+    }
+  }
+
+  .data-details {
+    position: absolute;
+    @include flex-column();
+    text-align: left;
+    bottom: 0;
+    margin: 2%;
+    width: 100%;
+    p {
+      margin: 0%;
+    }
   }
 
   img {
@@ -46,5 +66,21 @@
     transform: translate(-50%, -50%);
     opacity: 0.75;
     cursor: pointer;
+  }
+}
+
+.cart-details {
+  @include flex-column();
+  margin: 3%;
+  margin-top: marginX4(3%);
+  overflow: hidden;
+
+  p {
+    @include font-product();
+    font-weight: 600;
+    margin: 0;
+  }
+  button {
+    margin-top: 1.5%;
   }
 }
