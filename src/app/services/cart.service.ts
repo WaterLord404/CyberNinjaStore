@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { OrderDetailsI } from '../interfaces/order-details';
 import { ProductI } from '../modules/product/Interfaces/productI';
 
 @Injectable({
@@ -9,51 +10,71 @@ import { ProductI } from '../modules/product/Interfaces/productI';
 export class CartService {
 
   // Almacena en localStore los ids
-  cartIdsProductsLocal: Array<number>;
+  ordersDetailsLocal: Array<OrderDetailsI>;
 
   constructor() { }
 
   /**
-   * Guarda en localStorage los ids de los items
+   * Guarda en localStorage orders details
    * @param itemId
    */
-  addProductToCart(itemId: number): void {
-    this.cartIdsProductsLocal = JSON.parse(localStorage.getItem('cart'));
+  addProductToCart(item: ProductI): void {
+    this.ordersDetailsLocal = JSON.parse(localStorage.getItem('cart'));
 
-    if (this.cartIdsProductsLocal == null) { this.cartIdsProductsLocal = []; }
-    this.cartIdsProductsLocal.push(itemId);
+    if (this.ordersDetailsLocal == null) { this.ordersDetailsLocal = []; }
 
-    localStorage.setItem('cart', JSON.stringify(this.cartIdsProductsLocal));
+    if (!this.checkAndAddIfExist(item)) {
+      // Clona el objeto sin img
+      const itemWithoutImg = Object.assign({}, item);
+      itemWithoutImg.documents = null;
+
+      this.ordersDetailsLocal.push({
+        units: 1,
+        color: 'test',
+        size: 'test',
+        product: itemWithoutImg
+      });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(this.ordersDetailsLocal));
   }
 
   /**
-   * Borra un producto de la vista de carrito, del local storage y si no
-   * tiene productos se elimina de localstorage
+   * Comprueba si existe el item en el local storage, si existe suma 1 a units
+   * @param item
+   * @returns boolean
+   */
+  private checkAndAddIfExist(item: ProductI): boolean {
+    let updated = false;
+    this.ordersDetailsLocal.forEach(element => {
+      if (element.product.id === item.id) {
+        element.units = element.units + 1;
+        updated = true;
+      }
+    });
+    return updated;
+  }
+
+  /**
+   * Borra un producto de la vista de carrito y del local storage
    * @param item: ProductI
    * @returns List<ProductI>
    */
-  deleteThisItem(item: ProductI, cartProducts: Array<ProductI>): Array<ProductI> {
+  deleteThisItem(item: ProductI, cartProducts: Array<OrderDetailsI>): Array<OrderDetailsI> {
+    this.ordersDetailsLocal = JSON.parse(localStorage.getItem('cart'));
+
     // Recorre los productos, si el id coincide con el seleccionado lo elimina
     cartProducts.forEach(element => {
-      if (element === item) {
+      if (element.product === item) {
         const i = cartProducts.indexOf(element);
         cartProducts.splice(i, 1);
+        this.ordersDetailsLocal.splice(i, 1);
       }
     });
 
-    const productsIds = this.generateProductsIds(cartProducts);
-    // Guarda los ids de nuevo
-    localStorage.setItem('cart', JSON.stringify(productsIds));
+    localStorage.setItem('cart', JSON.stringify(this.ordersDetailsLocal));
 
     return cartProducts;
   }
 
-  // Transforma la lista de producsto a una lista de ids
-  private generateProductsIds(cartProducts: Array<ProductI>): Array<number> {
-    const numbers: Array<number> = [];
-    cartProducts.forEach(element => {
-      numbers.push(element.id);
-    });
-    return numbers;
-  }
 }

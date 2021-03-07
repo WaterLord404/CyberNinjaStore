@@ -1,13 +1,13 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DocumentService } from 'src/app/core/services/document.service';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
+import { OrderDetailsI } from 'src/app/interfaces/order-details';
 import { ProductI } from 'src/app/modules/product/Interfaces/productI';
-import { ProductService } from 'src/app/modules/product/services/product.service';
 import { CartBadgeService } from 'src/app/services/cart-badge.service';
 import { CartService } from 'src/app/services/cart.service';
+import { OrderDetailsService } from 'src/app/services/order-details.service';
 
 @Component({
   selector: 'app-cart',
@@ -28,15 +28,14 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class CartComponent implements OnInit {
 
-  cartProducts: Array<ProductI>;
-  productsLocal: Array<number>;
+  ordersDetails: Array<OrderDetailsI> = [];
 
   constructor(
     protected router: Router,
     protected documentService: DocumentService,
     private cartService: CartService,
     private cartBadgeService: CartBadgeService,
-    private productService: ProductService,
+    private orderDetailsService: OrderDetailsService,
     private snackBarService: SnackBarService
   ) { }
 
@@ -44,13 +43,14 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     window.scroll(0, 0);
 
-    this.productsLocal = JSON.parse(localStorage.getItem('cart'));
-    if (this.productsLocal == null) { return; }
+    const ordersDetailsLocal: Array<OrderDetailsI> = JSON.parse(localStorage.getItem('cart'));
+    if (ordersDetailsLocal == null) { return; }
 
-    this.productService.getCartProduct(this.productsLocal)
+    this.orderDetailsService.getCartProduct(ordersDetailsLocal)
       .subscribe(
         res => {
-          this.cartProducts = this.clearInactiveProducts(res);
+          this.ordersDetails = this.clearInactiveProducts(res, ordersDetailsLocal);
+          localStorage.setItem('cart', JSON.stringify(this.ordersDetails));
           this.cartBadgeService.update();
         },
         () => this.snackBarService.popup(500)
@@ -62,31 +62,18 @@ export class CartComponent implements OnInit {
    * usuario lo mantiene en el localstorage
    * @param res
    */
-  private clearInactiveProducts(res: Array<ProductI>) {
-    const productsCleared: Array<ProductI> = [];
+  private clearInactiveProducts(res: Array<OrderDetailsI>, ordersDetailsLocal: Array<OrderDetailsI>): Array<OrderDetailsI> {
+    const ordersDetailsCleared: Array<OrderDetailsI> = [];
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < res.length; i++) {
-      if (res[i].active) {
-        productsCleared.push(res[i]);
+      if (res[i].product.active) {
+        ordersDetailsCleared.push(res[i]);
+      } else {
+        ordersDetailsLocal.splice(i, 1);
       }
     }
 
-    const newProductsLocal = this.generateIds(productsCleared);
-    // Actualiza los productos del local storage
-    localStorage.setItem('cart', JSON.stringify(newProductsLocal));
-    return productsCleared;
-  }
-
-  /**
-   * Genera la nueva lista de ids que se guardara en localstorage
-   * @param productsCleared
-   */
-  private generateIds(productsCleared: Array<ProductI>): Array<number> {
-    const newProductsLocal: Array<number> = [];
-    productsCleared.forEach(element => {
-      newProductsLocal.push(element.id);
-    });
-    return newProductsLocal;
+    return ordersDetailsCleared;
   }
 
   /**
@@ -94,7 +81,7 @@ export class CartComponent implements OnInit {
    * @param item: ProductI
    */
   deleteThisItem(item: ProductI): void {
-    this.cartProducts = this.cartService.deleteThisItem(item, this.cartProducts);
+    this.ordersDetails = this.cartService.deleteThisItem(item, this.ordersDetails);
     // Actualiza el productBadge
     this.cartBadgeService.update();
   }

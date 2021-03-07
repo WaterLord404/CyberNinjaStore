@@ -65,9 +65,9 @@ export class ItemComponent implements OnInit {
   /**
    * Añade el producto al carrito
    */
-  addToCart(itemId: number): void {
+  addToCart(item: ProductI): void {
     // Añade el producto al carrito local storage
-    this.cartService.addProductToCart(itemId);
+    this.cartService.addProductToCart(item);
     // Llama al servicio para actualizar la insignia
     this.cartBadgeService.update();
   }
@@ -76,8 +76,8 @@ export class ItemComponent implements OnInit {
    * Añade el producto al carrito y redirige a el carrito
    * @param item: ProductI
    */
-  buyNow(itemId: number): void {
-    this.addToCart(itemId);
+  buyNow(item: ProductI): void {
+    this.addToCart(item);
     this.router.navigate(['/cart']);
   }
 
@@ -91,7 +91,7 @@ export class ItemComponent implements OnInit {
         this.location.back();
         this.snackBarService.popup(203);
       },
-      err => this.snackBarService.popup(err.status)
+      () => this.snackBarService.popup(500)
     );
   }
 }

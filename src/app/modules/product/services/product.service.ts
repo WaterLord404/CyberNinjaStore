@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { OrderDetailsI } from 'src/app/interfaces/order-details';
 import { ProductI } from '../Interfaces/productI';
 
 @Injectable({
@@ -30,18 +31,10 @@ export class ProductService {
   }
 
   /**
-   * Obtiene los productos del carrito
-   * @param ProductI
-   */
-  getCartProduct(ids: Array<number>): Observable<any> {
-    return this.http.post(this.url + '/cart', ids);
-  }
-
-  /**
-   * Crea un producto
-   * @param item
-   * @param files
-   */
+  * Crea un producto
+  * @param item
+  * @param files
+  */
   addProduct(item: ProductI, files: FileList): Observable<any> {
     let formData: any = new FormData();
 

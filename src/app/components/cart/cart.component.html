@@ -1,16 +1,17 @@
 <div class="cart-container">
-  <div class="item-container" *ngFor="let item of cartProducts" @fadeIn>
+  <div class="item-container" *ngFor="let item of ordersDetails" @fadeIn>
     <div class="img-container">
-      <img [src]="documentService.dataToImg(item.documents[0].picture, item.documents[0].fileType)"
-      [alt]="item.id"
-      (click)="router.navigate(['/products/' + item.id])">
+      <img [src]="documentService.dataToImg(item.product.documents[0].picture, item.product.documents[0].fileType)"
+      [alt]="item.product.id"
+      (click)="router.navigate(['/products/' + item.product.id])">
     </div>
     <div class="data-container">
       <div class="data">
-        <p>{{item.name}}</p>
-        <p>{{item.totalPrice}}€</p>
+        <p>{{item.product.name}}</p>
+        <p>{{item.units}}</p>
+        <p>{{item.product.totalPrice}}€</p>
       </div>
-      <img src="../../../assets/icons/delete.svg" alt="deleteIcon" (click)="deleteThisItem(item)">
+      <img src="../../../assets/icons/delete.svg" alt="deleteIcon" (click)="deleteThisItem(item.product)">
     </div>
   </div>
 </div>

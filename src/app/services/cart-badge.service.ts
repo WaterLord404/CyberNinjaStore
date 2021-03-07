@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { OrderDetailsI } from '../interfaces/order-details';
 import { ProductI } from '../modules/product/Interfaces/productI';
 
 @Injectable({
@@ -8,7 +9,6 @@ import { ProductI } from '../modules/product/Interfaces/productI';
 export class CartBadgeService {
 
   private cartBadgeCount = new BehaviorSubject<string>(this.getLocalData());
-  private localData: string;
 
   constructor() { }
 
@@ -16,12 +16,18 @@ export class CartBadgeService {
    * Setea cartBadgeCount cada vez que se llame al servicio
    */
   private getLocalData(): string {
+    let count = 0;
+
     if (localStorage.getItem('cart') == null || localStorage.getItem('cart') === '[]') {
       localStorage.removeItem('cart');
       return undefined;
     }
 
-    return JSON.parse(localStorage.getItem('cart')).length.toString();
+    const ordersDetails: Array<OrderDetailsI> = JSON.parse(localStorage.getItem('cart'));
+    ordersDetails.forEach(element => {
+      count = count + element.units;
+    });
+    return count.toString();
   }
 
   /**

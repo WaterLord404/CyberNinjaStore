@@ -89,7 +89,7 @@
     <div class="form-group">
       <span>Images</span>
       <div class="custom-input-file">
-        <input type="file" class="input-file" multiple (change)="filesToUpload = $event.target.files" formControlName="documents">
+        <input type="file" class="input-file" tabindex="-1" multiple (change)="filesToUpload = $event.target.files" formControlName="documents">
         <span>Upload images...</span>
         <img *ngIf="!filesToUpload" src="../../../assets/icons/upload.svg" alt="upload-icon">
         <img *ngIf="filesToUpload" src="../../../assets/icons/file_upload_done.svg" alt="upload-icon-done">
