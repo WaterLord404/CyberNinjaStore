@@ -8,5 +8,5 @@ Clone > npm install > ng serve
 
 **Importante no olvidar tener la BD y el [BACK](https://github.com/WaterLord404/CyberNinjaStore-BE) en funcionamiento**
 
-¿A qué esperas?
+¿A qué esperas? :wink:
 
