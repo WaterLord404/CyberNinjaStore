@@ -57,6 +57,7 @@ export class HeaderComponent implements OnInit {
   logout(): void {
     this.authService.logout();
     this.isMenuActive = false;
+    this.cartBadgeService.clear();
     this.router.navigate(['/']);
     this.snackBarService.popup(211);
     window.scroll(0, 0);
