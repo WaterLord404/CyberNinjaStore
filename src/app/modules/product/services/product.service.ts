@@ -60,6 +60,6 @@ export class ProductService {
    * Borra un producto
    */
   deleteProduct(item: ProductI): Observable<any> {
-    return this.http.request('delete', this.url, { body: item });
+    return this.http.put(this.url, { body: item });
   }
 }
