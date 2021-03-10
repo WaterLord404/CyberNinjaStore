@@ -19,7 +19,7 @@ export class OrderDetailsService {
   * @param ProductI
   */
   getCartProduct(ordersDetails: Array<OrderDetailsI>): Observable<any> {
-    return this.http.post(this.url + '/cart', ordersDetails);
+    return this.http.post(this.url, ordersDetails);
   }
 
   buyCart(ordersDetails: Array<OrderDetailsI>): Observable<any> {
