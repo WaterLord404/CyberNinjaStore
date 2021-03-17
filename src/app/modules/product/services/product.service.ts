@@ -59,6 +59,28 @@ export class ProductService {
    * Borra un producto
    */
   deleteProduct(item: ProductI): Observable<any> {
-    return this.http.put(this.url, { body: item });
+    return this.http.request('delete', this.url, { body: item });
+  }
+
+  /**
+   * Obtiene los colores
+   */
+  getColours(): Observable<any> {
+    return this.http.get(this.url + '/color');
+  }
+
+
+  /**
+   * Obtiene los tamaños
+   */
+  getSizes(): Observable<any> {
+    return this.http.get(this.url + '/size');
+  }
+
+  /**
+   * Obtiene las categorias
+   */
+  getCategories(): Observable<any> {
+    return this.http.get(this.url + '/category');
   }
 }

@@ -43,17 +43,16 @@
 
     <div class="form-group">
       <span>Discount</span>
-      <input type="number" placeholder="0.00%" formControlName="discount">
-      <label *ngIf="f.discount.errors">
-        <label *ngIf="f.discount.errors.required && submitted == true">
-          Discount is required
-        </label>
-        <label *ngIf="f.discount.errors.min && submitted == true">
-          Discount price cannot be < 0% </label>
-            <label *ngIf="f.discount.errors.max && submitted == true">
-              Discount price cannot be > 100%
-            </label>
-        </label>
+      <mat-select formControlName="discount">
+        <mat-option [value]="'NONE'">NONE</mat-option>
+        <mat-option *ngFor="let discount of discounts" [value]="discount.id">
+          <span *ngIf="discount.type === 'PERCENTAGE'">-{{discount.value}}%</span>
+          <span *ngIf="discount.type === 'FIXED'">-{{discount.value}}€</span>
+        </mat-option>
+      </mat-select>
+      <label *ngIf="f.discount.errors && submitted == true">
+        Discount is required
+      </label>
     </div>
 
     <div class="form-group">

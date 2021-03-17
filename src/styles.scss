@@ -40,8 +40,11 @@ main {
     vertical-align: middle;
   }
 }
+.mat-select-panel {
+  min-width: 100% !important;
+}
+
 .mat-select-panel-wrap {
-  flex-basis: 90% !important;
   * {
     color: rgba(0, 0, 0, 0.75) !important;
   }

@@ -1,4 +1,5 @@
 export interface DiscountI {
-  'value': number;
-  'type': string;
+  id?: number;
+  value?: number;
+  type?: string;
 }

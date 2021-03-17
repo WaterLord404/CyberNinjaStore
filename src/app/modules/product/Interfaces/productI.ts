@@ -9,7 +9,7 @@ export interface ProductI {
   salePrice: number;
   priceWoutDiscount?: number;
   totalPrice?: number;
-  discount: DiscountI;
+  discount?: DiscountI;
   size: Array<string>;
   colour: Array<string>;
   category: Array<string>;
