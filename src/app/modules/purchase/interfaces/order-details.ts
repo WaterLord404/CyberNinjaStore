@@ -1,4 +1,4 @@
-import { ProductI } from "../modules/product/Interfaces/productI";
+import { ProductI } from "../../product/Interfaces/productI";
 
 export interface OrderDetailsI {
   units: number;

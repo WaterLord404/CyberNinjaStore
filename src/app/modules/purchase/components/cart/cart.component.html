@@ -18,7 +18,13 @@
   </div>
 
   <div class="cart-details" *ngIf="ordersDetails[0]" @fadeIn>
-    <p>AMOUNT: {{calculateTotalPrice()}}€</p>
+    <div class="cart-details-header">
+      <p><b>AMOUNT: {{calculateTotalPrice()}}€</b></p>
+      <button (click)="couponComponent = !couponComponent"><p><u>COUPON</u></p></button>
+    </div>
     <button class="relative-big-button" (click)="checkout()">CHECKOUT</button>
   </div>
 </div>
+
+<app-coupon *ngIf="couponComponent"></app-coupon>
+

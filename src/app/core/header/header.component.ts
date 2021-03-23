@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { Router } from '@angular/router';
-import { CartBadgeService } from 'src/app/services/cart-badge.service';
+import { CartBadgeService } from 'src/app/core/services/cart-badge.service';
 import { AuthService } from '../services/auth.service';
 import { LoaderService } from '../services/loader.service';
 import { SnackBarService } from '../services/snack-bar.service';

@@ -5,8 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { DocumentService } from 'src/app/core/services/document.service';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
-import { CartBadgeService } from 'src/app/services/cart-badge.service';
-import { CartService } from 'src/app/services/cart.service';
+import { CartBadgeService } from 'src/app/core/services/cart-badge.service';
+import { CartService } from 'src/app/modules/purchase/services/cart.service';
 import { ProductI } from '../../Interfaces/productI';
 import { ProductService } from '../../services/product.service';
 

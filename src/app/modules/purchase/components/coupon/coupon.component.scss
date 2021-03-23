@@ -1,0 +1,30 @@
+@import "../../../../../assets/scss/functions";
+
+.popup {
+  position: fixed;
+  top: 70%;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(0, 0, 0, 0.75);
+  z-index: 2;
+}
+
+.form-group {
+  padding: 5%;
+  span {
+    text-align: center;
+    color: white;
+  }
+  input {
+    padding: 0%;
+    text-align: center;
+    margin-top: 3%;
+    color: white;
+    text-transform: uppercase;
+  }
+
+  button {
+    margin-top: marginX4(3%);
+    border: unset;
+  }
+}

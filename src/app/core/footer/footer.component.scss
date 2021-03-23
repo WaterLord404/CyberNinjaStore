@@ -16,8 +16,10 @@ footer {
     }
 
     img {
+      position: relative;
       opacity: 0.25;
       width: $icon-size;
+      z-index: 0;
     }
   }
 

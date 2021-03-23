@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DocumentService } from 'src/app/core/services/document.service';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
-import { OrderDetailsI } from 'src/app/interfaces/order-details';
+import { OrderDetailsI } from 'src/app/modules/purchase/interfaces/order-details';
 import { ProductI } from 'src/app/modules/product/Interfaces/productI';
-import { CartBadgeService } from 'src/app/services/cart-badge.service';
-import { CartService } from 'src/app/services/cart.service';
-import { OrderDetailsService } from 'src/app/services/order-details.service';
+import { CartBadgeService } from 'src/app/core/services/cart-badge.service';
+import { CartService } from 'src/app/modules/purchase/services/cart.service';
+import { OrderDetailsService } from '../../services/order-details.service';
 
 @Component({
   selector: 'app-cart',
@@ -30,6 +30,7 @@ export class CartComponent implements OnInit {
 
   ordersDetails: Array<OrderDetailsI> = [];
   totalPrice = 0;
+  couponComponent = false;
 
   constructor(
     protected router: Router,

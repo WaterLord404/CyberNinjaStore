@@ -1,6 +1,6 @@
-@import "../../../assets/scss/grid";
-@import "../../../assets/scss/variables";
-@import "../../../assets/scss/functions";
+@import "../../../../../assets/scss/grid";
+@import "../../../../../assets/scss/variables";
+@import "../../../../../assets/scss/functions";
 
 .cart-container {
   min-height: 90vh;
@@ -75,12 +75,17 @@
   margin-top: marginX4(3%);
   overflow: hidden;
 
+  .cart-details-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
   p {
     @include font-product();
-    font-weight: 600;
+
     margin: 0;
   }
   button {
-    margin-top: 1.5%;
+    margin-top: 3%;
   }
 }

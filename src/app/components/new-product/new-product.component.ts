@@ -4,7 +4,7 @@ import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import { DiscountI } from 'src/app/modules/product/Interfaces/discount';
 import { ProductI } from 'src/app/modules/product/Interfaces/productI';
 import { ProductService } from 'src/app/modules/product/services/product.service';
-import { DiscountService } from 'src/app/services/discount.service';
+import { DiscountService } from 'src/app/modules/purchase/services/discount.service';
 
 @Component({
   selector: 'app-new-product',

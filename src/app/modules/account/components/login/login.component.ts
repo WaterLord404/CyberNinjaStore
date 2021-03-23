@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
       // Lanza snackBar
       err => {
         switch (err.status) {
-          case 403:
+          case 401:
             this.snackBarService.popup(301);
             break;
           default:

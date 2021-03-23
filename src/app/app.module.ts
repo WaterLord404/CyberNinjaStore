@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotfoundComponent } from './core/notfound/notfound.component';
 import { HomeComponent } from './components/home/home.component';
 import { MatBadgeModule } from '@angular/material/badge';
-import { CartComponent } from './components/cart/cart.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -21,10 +20,13 @@ import { MatSelectModule } from '@angular/material/select';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'new-product', component: NewProductComponent, canActivate: [IsAdminGuard, IsLoggedGuard] },
+  { path: '', loadChildren: () => import('./modules/purchase/purchase.module').then(m => m.PurchaseModule), canActivate: [IsLoggedGuard] },
+
   { path: 'products', loadChildren: () => import('./modules/product/product.module').then(m => m.AppProductModule) },
-  { path: 'cart', component: CartComponent, canActivate: [IsLoggedGuard] },
   { path: 'account', loadChildren: () => import('./modules/account/account.module').then(m => m.AccountModule) },
+
+  { path: 'new-product', component: NewProductComponent, canActivate: [IsAdminGuard, IsLoggedGuard] },
+
   { path: '**', component: NotfoundComponent }
 ];
 
@@ -35,8 +37,7 @@ const routes: Routes = [
     FooterComponent,
     HomeComponent,
     NotfoundComponent,
-    CartComponent,
-    NewProductComponent,
+    NewProductComponent
   ],
   imports: [
     BrowserModule,
