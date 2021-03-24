@@ -79,6 +79,10 @@ main {
   justify-content: center;
   margin-bottom: 5%;
 
+  .button-custom {
+    position: relative;
+  }
+
   input,
   mat-select {
     all: unset;
@@ -129,6 +133,16 @@ main {
 }
 
 .relative-big-button {
+  @include button-custom();
+  top: unset;
+  left: unset;
+  transform: unset;
+  position: relative;
+  width: 100%;
+}
+
+.relative-big-button:disabled {
+  opacity: 0.4;
   @include button-custom();
   top: unset;
   left: unset;

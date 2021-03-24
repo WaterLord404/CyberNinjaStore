@@ -60,6 +60,9 @@ export class SnackBarService {
       case 800:
         error = 'One product in your cart now does not exist';
         break;
+      case 801:
+        error = 'Invalid coupon';
+        break;
       default:
         error = 'Unknown error';
         break;

@@ -8,6 +8,7 @@ import { ProductI } from 'src/app/modules/product/Interfaces/productI';
 import { CartBadgeService } from 'src/app/core/services/cart-badge.service';
 import { CartService } from 'src/app/modules/purchase/services/cart.service';
 import { OrderDetailsService } from '../../services/order-details.service';
+import { CouponI } from '../../interfaces/coupon';
 
 @Component({
   selector: 'app-cart',
@@ -29,8 +30,9 @@ import { OrderDetailsService } from '../../services/order-details.service';
 export class CartComponent implements OnInit {
 
   ordersDetails: Array<OrderDetailsI> = [];
-  totalPrice = 0;
+  coupon: CouponI;
   couponComponent = false;
+  totalPrice: number;
 
   constructor(
     protected router: Router,
@@ -79,18 +81,42 @@ export class CartComponent implements OnInit {
   }
 
   /**
-   * Calcula el precio total del carrito
+   * Calcula el precio total del carrito redondeando 2 decimales
    */
   calculateTotalPrice(): number {
     let resul = 0;
     this.ordersDetails.forEach(element => {
       resul = resul + (element.product.totalPrice * element.units);
     });
+    this.totalPrice = resul;
     return (Math.round(resul * 100) / 100);
   }
 
   /**
-   * Calcula el precio total de cada producto
+   * Calcula el precio total con descuento
+   */
+  calculateTotalPriceWithCoupon(): number {
+    if (this.coupon.discount.type === 'FIXED') {
+      this.totalPrice = this.totalPrice - this.coupon.discount.value;
+    } else if (this.coupon.discount.type === 'PERCENTAGE') {
+      this.totalPrice = this.calculateDiscountPercentage(this.totalPrice, this.coupon.discount.value);
+    }
+
+    if (this.totalPrice <= 0) { this.totalPrice = 0; }
+    return (Math.round(this.totalPrice * 100) / 100);
+  }
+
+  /**
+   * Calcula el porcentage a un precio
+   * @param price
+   * @param discount
+   */
+  calculateDiscountPercentage(price: number, discount: number): number {
+    return price - (price * (discount / 100));
+  }
+
+  /**
+   * Calcula el precio total de cada producto redondeando 2 decimales
    * @param price
    * @param units
    */
@@ -102,14 +128,18 @@ export class CartComponent implements OnInit {
    * Realiza la compra del carrito
    */
   checkout(): void {
-    this.orderDetailsService.buyCart(this.ordersDetails).subscribe(
+    this.orderDetailsService.buyCart(this.ordersDetails, this.coupon).subscribe(
       () => {
         this.snackBarService.popup(220);
         this.cartBadgeService.clear();
         this.cartBadgeService.update();
         this.router.navigate(['/']);
       },
-      () => this.snackBarService.popup(500)
+      () => {
+        this.totalPrice = 0;
+        this.coupon = null;
+        this.snackBarService.popup(500);
+      }
     );
   }
 
@@ -121,6 +151,14 @@ export class CartComponent implements OnInit {
     this.ordersDetails = this.cartService.deleteThisItem(item, this.ordersDetails);
     // Actualiza el productBadge
     this.cartBadgeService.update();
+  }
+
+  /**
+   * Guarda el cupon
+   * @param coupon
+   */
+  saveCoupon(coupon: CouponI): void {
+    this.coupon = coupon;
   }
 
 }

@@ -1,7 +1,12 @@
-<div class="popup">
-  <div class="form-group">
-    <span>PROMO CODE</span>
-    <input spellcheck="false" type="text" formControlName="code">
-    <button class="relative-big-button">APPLY COUPON</button>
+<div class="popup-container" @inOutAnimation>
+  <div class="leave-popup" (click)="closePopUp()"></div>
+  <div class="popup">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group" >
+        <span>PROMO CODE</span>
+        <input spellcheck="false" type="text" formControlName="code">
+        <button type="submit" [disabled]="form.invalid" class="relative-big-button">APPLY COUPON</button>
+      </div>
+    </form>
   </div>
 </div>

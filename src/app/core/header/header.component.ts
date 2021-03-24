@@ -12,17 +12,15 @@ import { SnackBarService } from '../services/snack-bar.service';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-
-  // Animacion para el menu desplegable
   animations: [
     trigger(
       'inOutAnimation', [
       transition(':enter', [
         style({ transform: 'translateY(-100%)' }),
-        animate('200ms ease-in', style({ transform: 'translateY(0%)' }))
+        animate('250ms ease-in', style({ transform: 'translateY(0%)' }))
       ]),
       transition(':leave', [
-        animate('200ms ease-in', style({ transform: 'translateY(-100%)' }))
+        animate('250ms ease-out', style({ transform: 'translateY(-100%)' }))
       ])]
     )
   ]
