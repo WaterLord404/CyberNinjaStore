@@ -30,6 +30,9 @@ export class SnackBarService {
       case 201:
         error = 'Successfully created';
         break;
+      case 205:
+        error = 'Successfully updated';
+        break;
       case 210:
         error = 'Successfully login';
         break;

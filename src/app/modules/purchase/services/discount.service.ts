@@ -16,4 +16,10 @@ export class DiscountService {
   getDiscounts(): Observable<any> {
     return this.http.get(this.url);
   }
+
+  setDiscount(itemId: number, discountId: number): Observable<any> {
+    console.log(itemId)
+    console.log(discountId)
+    return this.http.put(this.url + '/' + itemId + '/' + discountId, null);
+  }
 }

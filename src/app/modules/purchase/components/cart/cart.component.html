@@ -20,7 +20,7 @@
   <div class="cart-details" *ngIf="ordersDetails[0]" @fadeIn>
     <div *ngIf="coupon" class="cart-offer-details" @fadeIn>
       <img src="../../../../../assets/icons/offer-icon.svg" alt="offer-icon">
-      <span *ngIf="coupon.discount.type === 'PERCENTAGE'">-{{coupon.discount.value}}%</span>
+      <span *ngIf="coupon.discount.type === 'PERCENTAGE'">{{coupon.discount.value}}%</span>
       <span *ngIf="coupon.discount.type === 'FIXED'">-{{coupon.discount.value}}€</span>
       <img (click)="coupon = null" class="clear-icon" src="../../../../../assets/icons/clear-icon.svg" alt="clear-icon">
     </div>

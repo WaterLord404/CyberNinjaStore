@@ -8,6 +8,8 @@ import { ProductComponent } from './product.component';
 import { BreadCrumbsComponent } from './components/bread-crumbs/bread-crumbs.component';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -34,7 +36,9 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MatCardModule,
     MatCarouselModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSelectModule,
+    ReactiveFormsModule
   ]
 })
 export class AppProductModule { }

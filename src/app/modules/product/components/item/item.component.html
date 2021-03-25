@@ -1,36 +1,25 @@
 <div class="container-card" *ngIf="item" @fadeIn>
 
-  <mat-carousel class="carousel"
-  timings="250ms ease-in"
-  [autoplay]="true"
-  interval="6500"
-  color="accent"
-  maxWidth="auto"
-  proportion="137"
-  slides="item.documents"
-  [loop]="true"
-  [hideArrows]="false"
-  [hideIndicators]="true"
-  [useKeyboard]="true"
-  [useMouseWheel]="false"
-  orientation="ltr">
-    <mat-carousel-slide
-      #matCarouselSlide
-      *ngFor="let img of item.documents; let i = index"
-      [image]="documentService.dataToImg(img.picture, img.fileType)"
-      overlayColor=""
-      [hideOverlay]="true">
+  <mat-carousel class="carousel" timings="250ms ease-in" [autoplay]="true" interval="6500" color="accent" maxWidth="auto" proportion="137" slides="item.documents" [loop]="true" [hideArrows]="false" [hideIndicators]="true" [useKeyboard]="true" [useMouseWheel]="false" orientation="ltr">
+    <mat-carousel-slide #matCarouselSlide *ngFor="let img of item.documents; let i = index" [image]="documentService.dataToImg(img.picture, img.fileType)" overlayColor="" [hideOverlay]="true">
     </mat-carousel-slide>
   </mat-carousel>
 
   <div class="product-container">
     <h2 class="product-tittle">{{item.name}}</h2>
 
-    <p class="product-price">
-      <s *ngIf="item.discount">
-        {{item.priceWoutDiscount}}€</s>
-      {{item.totalPrice}}€
-    </p>
+    <div class="product-price">
+      <s *ngIf="item.discount">{{item.priceWoutDiscount}}€</s>
+      <p> {{item.totalPrice}}€</p>
+      <img *ngIf="authService.isAdmin()" (click)="loadDiscounts(); openDiscount = !openDiscount" src="../../../../../assets/icons/offer-icon.svg" alt="offer-icon">
+    </div>
+
+    <form *ngIf="openDiscount" class="discountForm" @fadeIn>
+      <mat-option *ngFor="let discount of discounts" [value]="discount.id" (click)="submitDiscountForm(discount.id)">
+        <span *ngIf="discount.type === 'PERCENTAGE'">{{discount.value}}%</span>
+        <span *ngIf="discount.type === 'FIXED'">-{{discount.value}}€</span>
+      </mat-option>
+    </form>
 
     <p class="product-description">
       {{item.description}}

@@ -9,6 +9,9 @@ import { CartBadgeService } from 'src/app/core/services/cart-badge.service';
 import { CartService } from 'src/app/modules/purchase/services/cart.service';
 import { ProductI } from '../../Interfaces/productI';
 import { ProductService } from '../../services/product.service';
+import { FormGroup } from '@angular/forms';
+import { DiscountI } from '../../Interfaces/discount';
+import { DiscountService } from 'src/app/modules/purchase/services/discount.service';
 
 @Component({
   selector: 'app-product',
@@ -27,6 +30,9 @@ export class ItemComponent implements OnInit {
 
   item: ProductI;
   @Output() breadEvent = new EventEmitter<string>();
+  discountForm: FormGroup;
+  discounts: Array<DiscountI>;
+  openDiscount = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,7 +43,8 @@ export class ItemComponent implements OnInit {
     private cartService: CartService,
     private snackBarService: SnackBarService,
     private location: Location,
-    protected authService: AuthService
+    protected authService: AuthService,
+    private discountService: DiscountService
   ) { }
 
   /**
@@ -45,6 +52,8 @@ export class ItemComponent implements OnInit {
    */
   ngOnInit(): void {
     window.scroll(0, 0);
+    this.openDiscount = false;
+
     // Si se ha accedido a el item mediante la navegacion de la pagina
     // obtiene el objeto, sin tener que hacer una peticion al back
     this.item = history.state.item;
@@ -92,6 +101,29 @@ export class ItemComponent implements OnInit {
         this.snackBarService.popup(203);
       },
       () => this.snackBarService.popup(500)
+    );
+  }
+
+  /**
+   * Carga los descuentos solo al clickar en la etiqueta de descuentos
+   */
+  loadDiscounts(): void {
+    if (this.openDiscount === false) {
+      this.discountService.getDiscounts().subscribe(res => this.discounts = res);
+    }
+  }
+
+  /**
+   * Aplica el descuento
+   */
+  submitDiscountForm(discountId: number): void {
+    this.discountService.setDiscount(this.item.id, discountId).subscribe(
+      () => this.snackBarService.popup(205),
+      () => this.snackBarService.popup(500),
+      () => {
+        history.state.item = undefined;
+        this.ngOnInit();
+      }
     );
   }
 }

@@ -2,7 +2,7 @@
   <div class="container-card" *ngFor="let item of products">
     <div class="container-img">
       <div *ngIf="item.discount" class="tag-custom">
-        <span *ngIf="item.discount.type === 'PERCENTAGE'">-{{item.discount.value}}%</span>
+        <span *ngIf="item.discount.type === 'PERCENTAGE'">{{item.discount.value}}%</span>
         <span *ngIf="item.discount.type === 'FIXED'">-{{item.discount.value}}€</span>
       </div>
       <img [src]="documentService.dataToImg(item.documents[0].picture, item.documents[0].fileType)" [alt]="item.id" (click)="navigateToProduct(item)">

@@ -46,7 +46,7 @@
       <mat-select formControlName="discount">
         <mat-option [value]="'NONE'">NONE</mat-option>
         <mat-option *ngFor="let discount of discounts" [value]="discount.id">
-          <span *ngIf="discount.type === 'PERCENTAGE'">-{{discount.value}}%</span>
+          <span *ngIf="discount.type === 'PERCENTAGE'">{{discount.value}}%</span>
           <span *ngIf="discount.type === 'FIXED'">-{{discount.value}}€</span>
         </mat-option>
       </mat-select>

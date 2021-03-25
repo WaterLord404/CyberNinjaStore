@@ -13,9 +13,20 @@
 
 .product-tittle,
 .product-price {
+  @include flex-row();
   @include font-product();
   text-align: center;
   font-size: small;
+  align-items: center;
+  img {
+    width: $icon-size / 1.5;
+    margin-left: 2%;
+  }
+  s,
+  p {
+    margin: 0%;
+    margin-left: 2%;
+  }
 }
 
 .product-description {
@@ -61,4 +72,17 @@
   margin-top: marginX4(3%);
   border: 1px solid red;
   background-color: red;
+}
+
+.discountForm {
+  @include flex-column();
+  width: 100%;
+  justify-content: center;
+  mat-option {
+    @include flex-column();
+    background-color: rgba(0, 0, 0, 0.75);
+    margin: 0 15% ;
+    overflow: hidden;
+    border: none;
+  }
 }
