@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { UserI } from 'src/app/modules/account/interfaces/userI';
 
 @Injectable({
@@ -10,7 +10,7 @@ export class AuthService {
   constructor() { }
 
   private isLogged = new BehaviorSubject<boolean>(this.hasToken());
-  private customer = new BehaviorSubject<UserI>(null);
+  user: UserI;
 
   /**
    * if we have token the user is loggedIn
@@ -21,13 +21,21 @@ export class AuthService {
   }
 
   /**
-   * Get logged customer
+   * get logged customer
    * @returns UserI
    */
-  getCustomer(): UserI {
-    let status = null;
-    this.isLogged.asObservable().subscribe(res => status = res);
-    return status;
+  getUser(): UserI {
+    let user: UserI = null;
+
+    const jwt: string = localStorage.getItem('token');
+    if (jwt == null) { return; }
+
+    const jwtData = jwt.split('.')[1];
+    const decodedJwtJsonData = window.atob(jwtData);
+    const decodedJwtData = JSON.parse(decodedJwtJsonData);
+    user = decodedJwtData.user;
+
+    return user;
   }
 
   /**
@@ -43,9 +51,8 @@ export class AuthService {
   /**
    * Login the user then tell all the subscribers about the new status
    */
-  login(customer: UserI, jwt: string): void {
+  login(jwt: string): void {
     localStorage.setItem('token', jwt);
-    this.customer.next(customer);
     this.isLogged.next(true);
   }
 
@@ -54,7 +61,6 @@ export class AuthService {
    */
   logout(): void {
     localStorage.removeItem('token');
-    this.customer.next(null);
     this.isLogged.next(false);
   }
 
@@ -64,6 +70,7 @@ export class AuthService {
    */
   isAdmin(): boolean {
     let isAdmin = false;
+
     const jwt: string = localStorage.getItem('token');
     if (jwt == null) { return; }
 
@@ -77,6 +84,7 @@ export class AuthService {
         isAdmin = true;
       }
     });
+
     return isAdmin;
   }
 }

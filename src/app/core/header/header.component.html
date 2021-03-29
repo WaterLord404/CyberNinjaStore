@@ -62,7 +62,7 @@
     </button>
 
     <div class="footer-menu">
-      <button (click)="router.navigate(['/new-product']) && isMenuActive = false" class="menu-section"
+      <button (click)="router.navigate(['/new-product']); isMenuActive = false" class="menu-section"
       *ngIf="authService.isAdmin()">
         <li>
           <div class=" footer-section-header">
@@ -70,11 +70,18 @@
           </div>
         </li>
       </button>
-      <button (click)="router.navigate(['/account/login']) && isMenuActive = false" class="menu-section"
+      <button (click)="router.navigate(['/account/login']); isMenuActive = false" class="menu-section"
       *ngIf="!authService.isLoggedIn()">
         <li>
           <div class=" footer-section-header">
             <span>LOGIN</span>
+          </div>
+        </li>
+      </button>
+      <button (click)="router.navigate(['/account']); isMenuActive = false" class="menu-section" *ngIf="authService.isLoggedIn()">
+        <li>
+          <div class="footer-section-header">
+            <span>ACCOUNT</span>
           </div>
         </li>
       </button>

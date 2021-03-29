@@ -1,0 +1,9 @@
+<div class="user-details-container" *ngIf="user">
+  <h3>WELLCOME {{user.username.toUpperCase()}}</h3>
+  <p>Name: {{user.customer.name}} {{user.customer.surname}}</p>
+  <p>Email: {{user.customer.email}}</p>
+  <p>Telephone: {{user.customer.telephone}}</p>
+  <p>Region: {{user.customer.region}}</p>
+  <p>Province: {{user.customer.province}}</p>
+  <p>Locality: {{user.customer.locality}}</p>
+</div>
