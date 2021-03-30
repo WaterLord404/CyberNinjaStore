@@ -81,8 +81,13 @@
   mat-option {
     @include flex-column();
     background-color: rgba(0, 0, 0, 0.75);
-    margin: 0 15% ;
+    margin: 0 15%;
     overflow: hidden;
     border: none;
   }
+}
+
+.selected {
+  border: $orange 1px solid;
+  color: $orange;
 }

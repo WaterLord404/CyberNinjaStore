@@ -9,9 +9,10 @@ import { CartBadgeService } from 'src/app/core/services/cart-badge.service';
 import { CartService } from 'src/app/modules/purchase/services/cart.service';
 import { ProductI } from '../../Interfaces/productI';
 import { ProductService } from '../../services/product.service';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DiscountI } from '../../Interfaces/discount';
 import { DiscountService } from 'src/app/modules/purchase/services/discount.service';
+import { OrderDetailsI } from 'src/app/modules/purchase/interfaces/order-details';
 
 @Component({
   selector: 'app-product',
@@ -34,6 +35,9 @@ export class ItemComponent implements OnInit {
   discounts: Array<DiscountI>;
   openDiscount = false;
 
+  size: string;
+  colour: string;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -44,7 +48,8 @@ export class ItemComponent implements OnInit {
     private snackBarService: SnackBarService,
     private location: Location,
     protected authService: AuthService,
-    private discountService: DiscountService
+    private discountService: DiscountService,
+    private fb: FormBuilder
   ) { }
 
   /**
@@ -74,19 +79,47 @@ export class ItemComponent implements OnInit {
   /**
    * Añade el producto al carrito
    */
-  addToCart(item: ProductI): void {
-    // Añade el producto al carrito local storage
-    this.cartService.addProductToCart(item);
+  addToCart(): void {
+    if (this.colour == null || this.size == null) {
+      this.snackBarService.popup(802);
+      return;
+    }
+
+    const orderDetails = this.generateOrderDetails();
+
+    // Añade el orderDetail al carrito local storage
+    this.cartService.addProductToCart(orderDetails);
     // Llama al servicio para actualizar la insignia
     this.cartBadgeService.update();
+  }
+
+  /**
+   * Crea un orderDetails (el producto del orde details no tendra imagen para no sobrecargar localstorage)
+   */
+  private generateOrderDetails(): OrderDetailsI {
+    // Clona el objeto sin img
+    const itemWithoutImg = Object.assign({}, this.item);
+    itemWithoutImg.documents = null;
+
+    return {
+      units: 1,
+      colour: this.colour,
+      size: this.size,
+      product: itemWithoutImg
+    };
   }
 
   /**
    * Añade el producto al carrito y redirige a el carrito
    * @param item: ProductI
    */
-  buyNow(item: ProductI): void {
-    this.addToCart(item);
+  buyNow(): void {
+    if (this.colour == null || this.size == null) {
+      this.snackBarService.popup(802);
+      return;
+    }
+
+    this.addToCart();
     this.router.navigate(['/cart']);
   }
 
@@ -94,8 +127,8 @@ export class ItemComponent implements OnInit {
    * Borra un producto de BBDD
    * @param ProductI
    */
-  deleteItem(item: ProductI): void {
-    this.productService.deleteProduct(item).subscribe(
+  deleteItem(): void {
+    this.productService.deleteProduct(this.item).subscribe(
       () => {
         this.location.back();
         this.snackBarService.popup(203);
@@ -126,4 +159,5 @@ export class ItemComponent implements OnInit {
       }
     );
   }
+
 }

@@ -16,36 +16,30 @@ export class CartService {
    * Guarda en localStorage orders details
    * @param itemId
    */
-  addProductToCart(item: ProductI): void {
+  addProductToCart(orderDetails: OrderDetailsI): void {
     this.ordersDetailsLocal = JSON.parse(localStorage.getItem('cart'));
 
     if (this.ordersDetailsLocal == null) { this.ordersDetailsLocal = []; }
 
-    if (!this.checkAndAddIfExist(item)) {
-      // Clona el objeto sin img
-      const itemWithoutImg = Object.assign({}, item);
-      itemWithoutImg.documents = null;
-
-      this.ordersDetailsLocal.push({
-        units: 1,
-        color: 'test',
-        size: 'test',
-        product: itemWithoutImg
-      });
+    // Si no existe crea un order details nuevo
+    if (!this.checkAndAddIfExist(orderDetails)) {
+      this.ordersDetailsLocal.push(orderDetails);
     }
 
     localStorage.setItem('cart', JSON.stringify(this.ordersDetailsLocal));
   }
 
   /**
-   * Comprueba si existe el item en el local storage, si existe suma 1 a units
+   * Comprueba si existe el order detail en el local storage, si existe suma 1 a units
    * @param item
    * @returns boolean
    */
-  private checkAndAddIfExist(item: ProductI): boolean {
+  private checkAndAddIfExist(orderDetails: OrderDetailsI): boolean {
     let updated = false;
     this.ordersDetailsLocal.forEach(element => {
-      if (element.product.id === item.id) {
+      if (element.colour === orderDetails.colour &&
+        element.size === orderDetails.size) {
+
         element.units = element.units + 1;
         updated = true;
       }

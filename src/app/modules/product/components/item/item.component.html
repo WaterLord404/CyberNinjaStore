@@ -1,7 +1,17 @@
 <div class="container-card" *ngIf="item" @fadeIn>
 
-  <mat-carousel class="carousel" timings="250ms ease-in" [autoplay]="true" interval="6500" color="accent" maxWidth="auto" proportion="137" slides="item.documents" [loop]="true" [hideArrows]="false" [hideIndicators]="true" [useKeyboard]="true" [useMouseWheel]="false" orientation="ltr">
-    <mat-carousel-slide #matCarouselSlide *ngFor="let img of item.documents; let i = index" [image]="documentService.dataToImg(img.picture, img.fileType)" overlayColor="" [hideOverlay]="true">
+  <mat-carousel class="carousel"
+  timings="250ms ease-in" [autoplay]="true"
+  interval="6500" color="accent"
+  maxWidth="auto" proportion="137"
+  slides="item.documents" [loop]="true"
+  [hideArrows]="false"
+  [hideIndicators]="true"
+  [useKeyboard]="true"
+  [useMouseWheel]="false"
+  orientation="ltr">
+    <mat-carousel-slide #matCarouselSlide *ngFor="let img of item.documents; let i = index"
+    [image]="documentService.dataToImg(img.picture, img.fileType)" overlayColor="" [hideOverlay]="true">
     </mat-carousel-slide>
   </mat-carousel>
 
@@ -26,17 +36,21 @@
     </p>
 
     <ul class="product-category-container">
-      <li class="product-category" *ngFor="let i of item.size">{{i}}</li>
+      <li class="product-category" *ngFor="let i of item.size"
+      (click)="size = i"
+      [ngClass]="{'selected': size == i}">{{i}}</li>
     </ul>
 
     <ul class="product-color-container">
-      <li class="product-color" *ngFor="let i of item.colour">{{i}}</li>
+      <li class="product-color" *ngFor="let i of item.colour"
+      (click)="colour = i"
+      [ngClass]="{'selected': colour == i}">{{i}}</li>
     </ul>
 
     <div class="button-container">
       <button class="relative-big-button add-cart" (click)="addToCart(item)">ADD TO CART</button>
-      <button class="relative-big-button" (click)="buyNow(item)">BUY NOW</button>
-      <button class="relative-big-button delete" (click)="deleteItem(item)" *ngIf="authService.isAdmin()">DELETE</button>
+      <button class="relative-big-button" (click)="buyNow()">BUY NOW</button>
+      <button class="relative-big-button delete" (click)="deleteItem()" *ngIf="authService.isAdmin()">DELETE</button>
     </div>
   </div>
 </div>

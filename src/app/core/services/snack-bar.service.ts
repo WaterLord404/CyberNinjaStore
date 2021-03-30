@@ -66,6 +66,9 @@ export class SnackBarService {
       case 801:
         error = 'Invalid coupon';
         break;
+      case 802:
+        error = 'Please select product details';
+        break;
       default:
         error = 'Unknown error';
         break;

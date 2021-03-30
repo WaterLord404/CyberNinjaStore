@@ -48,6 +48,7 @@ export class CartComponent implements OnInit {
     window.scroll(0, 0);
 
     const ordersDetailsLocal: Array<OrderDetailsI> = JSON.parse(localStorage.getItem('cart'));
+
     if (ordersDetailsLocal == null) { return; }
 
     this.orderDetailsService.getCartProduct(ordersDetailsLocal)
