@@ -9,6 +9,7 @@ import { CartBadgeService } from 'src/app/core/services/cart-badge.service';
 import { CartService } from 'src/app/modules/purchase/services/cart.service';
 import { OrderDetailsService } from '../../services/order-details.service';
 import { CouponI } from '../../interfaces/coupon';
+import { CheckoutService } from '../../services/checkout.service';
 
 @Component({
   selector: 'app-cart',
@@ -30,8 +31,8 @@ import { CouponI } from '../../interfaces/coupon';
 export class CartComponent implements OnInit {
 
   ordersDetails: Array<OrderDetailsI> = [];
-  coupon: CouponI;
   couponComponent = false;
+  coupon: CouponI;
   totalPrice: number;
 
   constructor(
@@ -40,13 +41,15 @@ export class CartComponent implements OnInit {
     private cartService: CartService,
     private cartBadgeService: CartBadgeService,
     private orderDetailsService: OrderDetailsService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private checkoutService: CheckoutService
   ) { }
 
   // Obtiene los productos del carrito
   ngOnInit(): void {
     window.scroll(0, 0);
-
+    this.totalPrice = 0;
+    this.coupon = null;
     const ordersDetailsLocal: Array<OrderDetailsI> = JSON.parse(localStorage.getItem('cart'));
 
     if (ordersDetailsLocal == null) { return; }
@@ -129,19 +132,12 @@ export class CartComponent implements OnInit {
    * Realiza la compra del carrito
    */
   checkout(): void {
-    this.orderDetailsService.buyCart(this.ordersDetails, this.coupon).subscribe(
-      () => {
-        this.snackBarService.popup(220);
-        this.cartBadgeService.clear();
-        this.cartBadgeService.update();
-        this.router.navigate(['/']);
-      },
-      () => {
-        this.totalPrice = 0;
-        this.coupon = null;
-        this.snackBarService.popup(500);
-      }
-    );
+    this.checkoutService.saveCoupon(this.coupon);
+    this.checkoutService.saveTotalPrice(this.totalPrice);
+    this.checkoutService.saveOrdersDetails(this.ordersDetails);
+    this.checkoutService.setStatus(true);
+
+    this.router.navigate(['/checkout']);
   }
 
   /**

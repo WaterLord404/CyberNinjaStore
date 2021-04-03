@@ -49,7 +49,7 @@ const routes: Routes = [
     MatProgressBarModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule,
+    MatSelectModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

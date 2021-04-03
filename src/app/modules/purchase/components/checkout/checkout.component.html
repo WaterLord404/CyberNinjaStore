@@ -1,1 +1,61 @@
-<p>checkout works!</p>
+<div class="checkout-container">
+  <div class="customer-details">
+    <h4>YOUR ADDRESS</h4>
+    <div class="details-container">
+      <p>POSTAL CODE</p>
+      <p>{{user.customer.postalCode}}</p>
+    </div>
+    <div class="details-container">
+      <p>REGION</p>
+      <p>{{user.customer.region}}</p>
+    </div>
+    <div class="details-container">
+      <p>PROVINCE</p>
+      <p>{{user.customer.province}}</p>
+    </div>
+    <div class="details-container">
+      <p>LOCALITY</p>
+      <p>{{user.customer.locality}}</p>
+    </div>
+    <div class="details-container">
+      <p>FULL ADDRESS</p>
+      <p>{{user.customer.address}}</p>
+    </div>
+  </div>
+
+  <div class="order-details" *ngIf="ordersDetails[0]">
+    <h4>YOUR ORDER</h4>
+
+    <div class="products">
+      <div class="details-container-products" *ngFor="let item of ordersDetails">
+        <div>
+          <p>{{item.product.name}}</p>
+          <p class="soft">{{item.size}}, {{item.colour}}, {{item.units}} PIECE</p>
+        </div>
+        <div>
+          <p>{{item.product.totalPrice}}€</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="details-container">
+      <p>AMOUNT</p>
+      <p>{{totalPrice}}€</p>
+    </div>
+
+    <div class="details-container">
+      <p>SHIPPING</p>
+      <p>{{shipping}}€</p>
+    </div>
+
+    <div class="details-container" *ngIf="coupon">
+      <p>COUPON</p>
+      <p>{{coupon.code}}</p>
+    </div>
+
+    <div class="details-container">
+      <p>TOTAL</p>
+      <p>{{calculateFinalPrice()}}€</p>
+    </div>
+  </div>
+</div>

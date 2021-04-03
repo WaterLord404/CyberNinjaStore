@@ -5,10 +5,11 @@ import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CouponComponent } from './components/coupon/coupon.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ClickedCheckoutGuard } from 'src/app/core/guards/clicked-checkout.guard';
 
 const routes: Routes = [
   { path: 'cart', component: CartComponent },
-  { path: 'checkout', component: CheckoutComponent }
+  { path: 'checkout', component: CheckoutComponent, canActivate: [ClickedCheckoutGuard]}
 ];
 
 @NgModule({
