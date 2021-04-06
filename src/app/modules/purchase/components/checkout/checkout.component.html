@@ -43,19 +43,32 @@
       <p>{{totalPrice}}€</p>
     </div>
 
+    <div class="details-container" *ngIf="coupon">
+      <p>COUPON</p>
+      <p *ngIf="coupon.discount.type === 'PERCENTAGE'">{{coupon.code}} {{coupon.discount.value}}%</p>
+      <p *ngIf="coupon.discount.type === 'FIXED'">{{coupon.code}} -{{coupon.discount.value}}€</p>
+    </div>
+
     <div class="details-container">
       <p>SHIPPING</p>
       <p>{{shipping}}€</p>
     </div>
 
-    <div class="details-container" *ngIf="coupon">
-      <p>COUPON</p>
-      <p>{{coupon.code}}</p>
-    </div>
-
     <div class="details-container">
       <p>TOTAL</p>
-      <p>{{calculateFinalPrice()}}€</p>
+      <p><b>{{finalPrice}}€</b></p>
     </div>
   </div>
+
+  <div class="paypal-container"></div>
+
+  <app-paypal
+  [finalPrice]="finalPrice"
+  [totalPrice]="totalPrice"
+  [ordersDetails]="ordersDetails"
+  [shipping]="shipping"
+  [discount]="discount"
+  (successful)="payment()">
+  </app-paypal>
+
 </div>

@@ -34,6 +34,7 @@ export class CartComponent implements OnInit {
   couponComponent = false;
   coupon: CouponI;
   totalPrice: number;
+  discount: number;
 
   constructor(
     protected router: Router,
@@ -50,6 +51,8 @@ export class CartComponent implements OnInit {
     window.scroll(0, 0);
     this.totalPrice = 0;
     this.coupon = null;
+    this.discount = 0;
+
     const ordersDetailsLocal: Array<OrderDetailsI> = JSON.parse(localStorage.getItem('cart'));
 
     if (ordersDetailsLocal == null) { return; }
@@ -102,8 +105,11 @@ export class CartComponent implements OnInit {
   calculateTotalPriceWithCoupon(): number {
     if (this.coupon.discount.type === 'FIXED') {
       this.totalPrice = this.totalPrice - this.coupon.discount.value;
+      this.discount = this.coupon.discount.value;
+
     } else if (this.coupon.discount.type === 'PERCENTAGE') {
-      this.totalPrice = this.calculateDiscountPercentage(this.totalPrice, this.coupon.discount.value);
+      this.discount = this.calculateDiscountPercentage(this.totalPrice, this.coupon.discount.value);
+      this.totalPrice = this.totalPrice - this.discount;
     }
 
     if (this.totalPrice <= 0) { this.totalPrice = 0; }
@@ -111,12 +117,12 @@ export class CartComponent implements OnInit {
   }
 
   /**
-   * Calcula el porcentage a un precio
+   * Calcula el porcentage en € redondeando
    * @param price
    * @param discount
    */
   calculateDiscountPercentage(price: number, discount: number): number {
-    return price - (price * (discount / 100));
+    return Math.round((price * (discount / 100)) * 100) / 100;
   }
 
   /**
@@ -135,6 +141,7 @@ export class CartComponent implements OnInit {
     this.checkoutService.saveCoupon(this.coupon);
     this.checkoutService.saveTotalPrice(this.totalPrice);
     this.checkoutService.saveOrdersDetails(this.ordersDetails);
+    this.checkoutService.saveDiscount(this.discount);
     this.checkoutService.setStatus(true);
 
     this.router.navigate(['/checkout']);

@@ -6,6 +6,8 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CouponComponent } from './components/coupon/coupon.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClickedCheckoutGuard } from 'src/app/core/guards/clicked-checkout.guard';
+import { NgxPayPalModule } from 'ngx-paypal';
+import { PaypalComponent } from './components/paypal/paypal.component';
 
 const routes: Routes = [
   { path: 'cart', component: CartComponent },
@@ -16,12 +18,14 @@ const routes: Routes = [
   declarations: [
     CartComponent,
     CheckoutComponent,
-    CouponComponent
+    CouponComponent,
+    PaypalComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPayPalModule
   ]
 })
 export class PurchaseModule { }

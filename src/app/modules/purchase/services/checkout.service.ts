@@ -12,6 +12,7 @@ export class CheckoutService {
   private coupon = new BehaviorSubject<CouponI>(null);
   private ordersDetails = new BehaviorSubject<Array<OrderDetailsI>>(null);
   private status = new BehaviorSubject<boolean>(null);
+  private discount = new BehaviorSubject<number>(null);
 
   constructor() { }
 
@@ -31,6 +32,10 @@ export class CheckoutService {
     this.ordersDetails.next(ordersDetails);
   }
 
+  saveDiscount(discount: number): void {
+    this.discount.next(discount);
+  }
+
   getCoupon(): Observable<CouponI> {
     return this.coupon.asObservable();
   }
@@ -41,6 +46,10 @@ export class CheckoutService {
 
   getOrdersDetails(): Observable<Array<OrderDetailsI>> {
     return this.ordersDetails.asObservable();
+  }
+
+  getDiscount(): Observable<number> {
+    return this.discount.asObservable();
   }
 
   getStatus(): boolean {
