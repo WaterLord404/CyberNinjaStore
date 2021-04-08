@@ -60,15 +60,14 @@
     </div>
   </div>
 
-  <div class="paypal-container"></div>
-
-  <app-paypal
-  [finalPrice]="finalPrice"
-  [totalPrice]="totalPrice"
-  [ordersDetails]="ordersDetails"
-  [shipping]="shipping"
-  [discount]="discount"
-  (successful)="payment()">
-  </app-paypal>
-
+  <div class="paypal-container">
+    <app-paypal
+    [finalPrice]="finalPrice"
+    [totalPrice]="totalPrice"
+    [ordersDetails]="ordersDetails"
+    [shipping]="shipping"
+    [discount]="discount"
+    (successful)="payment()">
+    </app-paypal>
+  </div>
 </div>

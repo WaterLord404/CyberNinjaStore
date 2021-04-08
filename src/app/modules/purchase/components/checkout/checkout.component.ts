@@ -55,6 +55,7 @@ export class CheckoutComponent implements OnInit {
         this.snackBarService.popup(220);
         this.cartBadgeService.clear();
         this.cartBadgeService.update();
+        localStorage.removeItem('__paypal_storage__');
         this.router.navigate(['/']);
       },
       () => {
