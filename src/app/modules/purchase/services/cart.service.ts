@@ -3,6 +3,7 @@ import { OrderDetailsI } from '../interfaces/order-details';
 import { ProductI } from '../../product/Interfaces/productI';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { CartBadgeService } from 'src/app/core/services/cart-badge.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +15,35 @@ export class CartService {
   ordersDetailsLocal: Array<OrderDetailsI>;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private cartBadgeService: CartBadgeService
   ) { }
 
   /*
-  * Obtiene los productos del carrito (order details)
+  * Obtiene los productos con las imagenes que se encuentran en localstorage
   * @param ProductI
   */
   getCartProduct(ordersDetails: Array<OrderDetailsI>): Observable<any> {
-    return this.http.post(this.url, ordersDetails);
+    return this.http.put(this.url, ordersDetails);
+  }
+
+  /**
+   * Obtiene el carrito del usuario y lo guarda en localstorage sin las imagenes
+   */
+  getCart(): void {
+    this.http.get(this.url).subscribe(
+      (res: Array<OrderDetailsI>) => {
+        // Suma al localstorage el carrito del usuario
+        const items: Array<OrderDetailsI> = JSON.parse(localStorage.getItem('cart'));
+        this.clearOrderDetailsDocuments(res).forEach(element => {
+          items.push(element);
+        });
+
+        localStorage.setItem('cart', JSON.stringify(items));
+        this.cartBadgeService.update();
+      },
+      () => {}
+    );
   }
 
   /**
@@ -82,4 +103,14 @@ export class CartService {
     return cartProducts;
   }
 
+  /**
+   * Elimina las imagenes de ordersdetails para no saturar localstorage
+   */
+  clearOrderDetailsDocuments(ordersDetails: Array<OrderDetailsI>): Array<OrderDetailsI> {
+    const ordersDetailsWithoutImg: Array<OrderDetailsI> = JSON.parse(JSON.stringify(ordersDetails));
+    ordersDetailsWithoutImg.forEach(element => {
+      element.product.documents = null;
+    });
+    return ordersDetailsWithoutImg;
+  }
 }

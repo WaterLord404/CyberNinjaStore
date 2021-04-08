@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { CartBadgeService } from 'src/app/core/services/cart-badge.service';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
+import { CartService } from 'src/app/modules/purchase/services/cart.service';
 import { UserI } from '../../interfaces/userI';
 import { UserService } from '../../services/user.service';
 
@@ -21,6 +23,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private snackBarService: SnackBarService,
     private authService: AuthService,
+    private cartService: CartService
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +49,8 @@ export class LoginComponent implements OnInit {
       res => {
         // Guarda el jwt
         this.authService.login(res.headers.get('Authorization'));
+        // Obtiene el carrito
+        this.cartService.getCart();
         this.router.navigate(['/']);
         this.snackBarService.popup(210);
       },

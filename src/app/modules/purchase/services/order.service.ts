@@ -7,7 +7,7 @@ import { OrderDetailsI } from '../interfaces/order-details';
 @Injectable({
   providedIn: 'root'
 })
-export class OrderDetailsService {
+export class OrderService {
 
   url = 'order';
 

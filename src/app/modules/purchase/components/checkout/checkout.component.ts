@@ -7,7 +7,7 @@ import { UserI } from 'src/app/modules/account/interfaces/userI';
 import { CouponI } from '../../interfaces/coupon';
 import { OrderDetailsI } from '../../interfaces/order-details';
 import { CheckoutService } from '../../services/checkout.service';
-import { OrderDetailsService } from '../../services/order-details.service';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'app-checkout',
@@ -26,7 +26,7 @@ export class CheckoutComponent implements OnInit {
 
   constructor(
     private cartBadgeService: CartBadgeService,
-    private orderDetailsService: OrderDetailsService,
+    private orderService: OrderService,
     private snackBarService: SnackBarService,
     private authService: AuthService,
     private checkoutService: CheckoutService,
@@ -50,7 +50,7 @@ export class CheckoutComponent implements OnInit {
    * Realiza la compra
    */
   payment(): void {
-    this.orderDetailsService.buyCart(this.ordersDetails, this.coupon).subscribe(
+    this.orderService.buyCart(this.ordersDetails, this.coupon).subscribe(
       () => {
         this.snackBarService.popup(220);
         this.cartBadgeService.clear();
