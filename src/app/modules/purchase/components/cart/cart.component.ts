@@ -7,7 +7,6 @@ import { OrderDetailsI } from 'src/app/modules/purchase/interfaces/order-details
 import { ProductI } from 'src/app/modules/product/Interfaces/productI';
 import { CartBadgeService } from 'src/app/core/services/cart-badge.service';
 import { CartService } from 'src/app/modules/purchase/services/cart.service';
-import { OrderDetailsService } from '../../services/order-details.service';
 import { CouponI } from '../../interfaces/coupon';
 import { CheckoutService } from '../../services/checkout.service';
 
@@ -41,7 +40,6 @@ export class CartComponent implements OnInit {
     protected documentService: DocumentService,
     private cartService: CartService,
     private cartBadgeService: CartBadgeService,
-    private orderDetailsService: OrderDetailsService,
     private snackBarService: SnackBarService,
     private checkoutService: CheckoutService
   ) { }
@@ -57,7 +55,7 @@ export class CartComponent implements OnInit {
 
     if (ordersDetailsLocal == null) { return; }
 
-    this.orderDetailsService.getCartProduct(ordersDetailsLocal)
+    this.cartService.getCartProduct(ordersDetailsLocal)
       .subscribe(
         res => {
           this.clearInactiveProducts(res, ordersDetailsLocal);

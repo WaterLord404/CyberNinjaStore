@@ -15,14 +15,11 @@ export class OrderDetailsService {
     private http: HttpClient
   ) { }
 
-  /*
-  * Obtiene los productos del carrito (order details)
-  * @param ProductI
-  */
-  getCartProduct(ordersDetails: Array<OrderDetailsI>): Observable<any> {
-    return this.http.post(this.url, ordersDetails);
-  }
-
+  /**
+   * Realiza la compra
+   * @param ordersDetails
+   * @param coupon
+   */
   buyCart(ordersDetails: Array<OrderDetailsI>, coupon: CouponI): Observable<any> {
     let couponCode = '';
 
@@ -30,6 +27,6 @@ export class OrderDetailsService {
       couponCode = '?coupon=' + coupon.code;
     }
 
-    return this.http.post(this.url + '/buy' + couponCode, ordersDetails);
+    return this.http.post(this.url + couponCode, ordersDetails);
   }
 }

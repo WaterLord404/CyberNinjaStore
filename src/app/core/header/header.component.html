@@ -18,7 +18,7 @@
 
 <div *ngIf="isMenuActive" class="menu" [@inOutAnimation]>
   <nav class="menu-nav">
-    <button (click)="router.navigate(['/products']) && isMenuActive = false" class="menu-section">
+    <button (click)="router.navigate(['/products']); isMenuActive = false" class="menu-section">
       <li>
         <div class="footer-section-header">
           <span>PRODUCTS</span>

@@ -1,16 +1,29 @@
 import { Injectable } from '@angular/core';
 import { OrderDetailsI } from '../interfaces/order-details';
 import { ProductI } from '../../product/Interfaces/productI';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
+  url = 'cart';
   // Almacena en localStore los ids
   ordersDetailsLocal: Array<OrderDetailsI>;
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
+
+  /*
+  * Obtiene los productos del carrito (order details)
+  * @param ProductI
+  */
+  getCartProduct(ordersDetails: Array<OrderDetailsI>): Observable<any> {
+    return this.http.post(this.url, ordersDetails);
+  }
 
   /**
    * Guarda en localStorage orders details
