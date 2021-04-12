@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DiscountI } from '../../Interfaces/discount';
 import { DiscountService } from 'src/app/modules/purchase/services/discount.service';
 import { OrderDetailsI } from 'src/app/modules/purchase/interfaces/order-details';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product',
@@ -150,13 +151,14 @@ export class ItemComponent implements OnInit {
    * Aplica el descuento
    */
   submitDiscountForm(discountId: number): void {
-    this.discountService.setDiscount(this.item.id, discountId).subscribe(
-      () => this.snackBarService.popup(205),
-      () => this.snackBarService.popup(500),
+    this.discountService.setDiscount(this.item.id, discountId).pipe(finalize(
       () => {
         history.state.item = undefined;
         this.ngOnInit();
       }
+    )).subscribe(
+      () => this.snackBarService.popup(205),
+      () => this.snackBarService.popup(500)
     );
   }
 

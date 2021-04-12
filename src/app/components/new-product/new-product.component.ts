@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import { DiscountI } from 'src/app/modules/product/Interfaces/discount';
 import { ProductI } from 'src/app/modules/product/Interfaces/productI';
@@ -64,14 +65,15 @@ export class NewProductComponent implements OnInit {
 
     this.item = this.generateProduct();
 
-    this.productService.addProduct(this.item, this.filesToUpload).subscribe(
-      () => this.snackBarService.popup(201),
-      () => this.snackBarService.popup(500),
+    this.productService.addProduct(this.item, this.filesToUpload).pipe(finalize(
       () => {
         this.submitted = false;
         this.ngOnInit();
         window.scroll(0, 0);
       }
+    )).subscribe(
+      () => this.snackBarService.popup(201),
+      () => this.snackBarService.popup(500),
     );
   }
 

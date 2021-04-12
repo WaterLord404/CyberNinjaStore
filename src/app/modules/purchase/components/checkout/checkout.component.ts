@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CartBadgeService } from 'src/app/core/services/cart-badge.service';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
@@ -50,17 +51,19 @@ export class CheckoutComponent implements OnInit {
    * Realiza la compra
    */
   payment(): void {
-    this.orderService.buyCart(this.ordersDetails, this.coupon).subscribe(
+    this.orderService.buyCart(this.ordersDetails, this.coupon).pipe(finalize(
+      () => {
+        localStorage.removeItem('__paypal_storage__');
+        this.router.navigate(['/']);
+      }
+    )).subscribe(
       () => {
         this.snackBarService.popup(220);
         this.cartBadgeService.clear();
         this.cartBadgeService.update();
-        localStorage.removeItem('__paypal_storage__');
-        this.router.navigate(['/']);
       },
       () => {
         this.snackBarService.popup(500);
-        this.router.navigate(['/']);
       }
     );
   }

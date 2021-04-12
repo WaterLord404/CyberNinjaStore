@@ -29,7 +29,7 @@ export class ProductService {
     return this.http.get(this.url + '/' + id);
   }
 
-  /**
+ /**
   * Crea un producto
   * @param item
   * @param files

@@ -4,9 +4,9 @@ import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { Router } from '@angular/router';
 import { CartBadgeService } from 'src/app/core/services/cart-badge.service';
+import { CartService } from 'src/app/modules/purchase/services/cart.service';
 import { AuthService } from '../services/auth.service';
 import { LoaderService } from '../services/loader.service';
-import { SnackBarService } from '../services/snack-bar.service';
 
 @Component({
   selector: 'app-header',
@@ -39,8 +39,8 @@ export class HeaderComponent implements OnInit {
     private loaderService: LoaderService,
     protected router: Router,
     protected authService: AuthService,
-    private snackBarService: SnackBarService,
-    private cartBadgeService: CartBadgeService
+    private cartBadgeService: CartBadgeService,
+    private cartService: CartService
   ) {
     // Muestra o oculta la barra de loading
     this.loaderService.loading().subscribe(res => this.isLoading = res);
@@ -50,15 +50,12 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void { }
 
   /**
-   * Cierra la sesión
+   * Guarda el carrito y cierra la sesión
    */
   logout(): void {
-    this.authService.logout();
     this.isMenuActive = false;
-    this.cartBadgeService.clear();
-    this.cartBadgeService.update();
+    this.cartService.saveCart();
     this.router.navigate(['/']);
-    this.snackBarService.popup(211);
     window.scroll(0, 0);
   }
 }

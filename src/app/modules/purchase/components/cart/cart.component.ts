@@ -62,7 +62,11 @@ export class CartComponent implements OnInit {
           localStorage.setItem('cart', JSON.stringify(this.cartService.clearOrderDetailsDocuments(this.ordersDetails)));
           this.cartBadgeService.update();
         },
-        () => this.snackBarService.popup(500)
+        () => {
+          localStorage.removeItem('cart');
+          this.cartBadgeService.update();
+          this.snackBarService.popup(500);
+        }
       );
   }
 

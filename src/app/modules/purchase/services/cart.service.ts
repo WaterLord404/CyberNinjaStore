@@ -4,6 +4,9 @@ import { ProductI } from '../../product/Interfaces/productI';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CartBadgeService } from 'src/app/core/services/cart-badge.service';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { SnackBarService } from 'src/app/core/services/snack-bar.service';
+import { finalize } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +19,9 @@ export class CartService {
 
   constructor(
     private http: HttpClient,
-    private cartBadgeService: CartBadgeService
+    private cartBadgeService: CartBadgeService,
+    private authService: AuthService,
+    private snackBarService: SnackBarService
   ) { }
 
   /*
@@ -34,20 +39,51 @@ export class CartService {
     this.http.get(this.url).subscribe(
       (res: Array<OrderDetailsI>) => {
         // Suma al localstorage el carrito del usuario
-        const items: Array<OrderDetailsI> = JSON.parse(localStorage.getItem('cart'));
+        this.ordersDetailsLocal = JSON.parse(localStorage.getItem('cart'));
+
+        if (this.ordersDetailsLocal === null) {
+          this.ordersDetailsLocal = [];
+        }
+
         this.clearOrderDetailsDocuments(res).forEach(element => {
-          items.push(element);
+          if (!this.checkAndAddIfExist(element)) {
+            this.ordersDetailsLocal.push(element);
+          }
         });
 
-        localStorage.setItem('cart', JSON.stringify(items));
+        localStorage.setItem('cart', JSON.stringify(this.ordersDetailsLocal));
         this.cartBadgeService.update();
       },
-      () => {}
+      () => { }
     );
   }
 
   /**
-   * Guarda en localStorage orders details
+   * Guarda el carrito en BD
+   */
+  saveCart(): void {
+    this.ordersDetailsLocal = JSON.parse(localStorage.getItem('cart'));
+
+    if (this.ordersDetailsLocal === null) {
+      this.ordersDetailsLocal = [];
+    }
+
+    this.http.post(this.url, this.ordersDetailsLocal).pipe(finalize(
+      () => {
+        this.authService.logout();
+      }
+    )).subscribe(
+      () => {
+        this.cartBadgeService.clear();
+        this.cartBadgeService.update();
+        this.snackBarService.popup(211);
+      },
+      () => { }
+    );
+  }
+
+  /**
+   * Guarda en localStorage el producto seleccionado
    * @param itemId
    */
   addProductToCart(orderDetails: OrderDetailsI): void {
@@ -71,7 +107,8 @@ export class CartService {
   private checkAndAddIfExist(orderDetails: OrderDetailsI): boolean {
     let updated = false;
     this.ordersDetailsLocal.forEach(element => {
-      if (element.colour === orderDetails.colour &&
+      if (element.product.id === orderDetails.product.id &&
+        element.colour === orderDetails.colour &&
         element.size === orderDetails.size) {
 
         element.units = element.units + 1;
