@@ -11,10 +11,10 @@ import { OrderDetailsI } from '../../interfaces/order-details';
 export class PaypalComponent implements OnInit {
 
   @Input() ordersDetails: Array<OrderDetailsI>;
-  @Input() finalPrice: number;
-  @Input() shipping: number;
-  @Input() discount: number;
-  @Input() totalPrice: number;
+  @Input() finalPrice = 0;
+  @Input() shipping = 0;
+  @Input() discount = 0;
+  @Input() totalPrice = 0;                                                                                                   ;
   payPalConfig: any;
 
   @Output() successful = new EventEmitter<any>();
