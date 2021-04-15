@@ -7,8 +7,10 @@ import { BreadCrumbsI } from '../Interfaces/bread-crumbsI';
 })
 export class BreadCrumbsService {
 
-  breadCrumbs: Array<BreadCrumbsI>;
+  breadCrumbs: Array<BreadCrumbsI> = [];
   isSorterIconActive = new BehaviorSubject<boolean>(false);
+  categoryLocation = false;
+  activeCategory: string;
 
   constructor() { }
 
@@ -19,23 +21,41 @@ export class BreadCrumbsService {
   updateBreadCrumbs(res: string): Array<BreadCrumbsI> {
     this.isSorterIconActive.next(false);
 
-    switch (res) {
-      case 'Products':
-        this.breadCrumbs = [
-          { location: 'Home/', src: '' },
-          { location: 'Products' },
-        ];
-        this.isSorterIconActive.next(true);
-        break;
-      default:
-        this.breadCrumbs = [
-          { location: 'Home/', src: '' },
-          { location: 'Products/', src: '/products' },
-          { location: res }
-        ];
-        break;
+    this.breadCrumbs = [];
+    this.breadCrumbs.push({ location: 'Home/', src: '' });
+
+    if (res === 'products') {
+      this.generateBreadProducts();
+
+    } else if (res === 'new' || res === 'women' || res === 'pants' || res === 'jackets' || res === 'accessories') {
+      this.activeCategory = res[0].toUpperCase() + res.substr(1);
+      this.generateBreadCategory(res);
+
+    } else {
+      if (this.categoryLocation) {
+        this.generateBreadCategory(res);
+        this.breadCrumbs.push({ location: '/' + res });
+      }
+      else {
+        this.generateBreadProducts();
+        this.breadCrumbs.push({ location: '/' + res });
+      }
     }
+
     return this.breadCrumbs;
+  }
+
+  private generateBreadCategory(res: string): void {
+    this.breadCrumbs.push(
+      { location: 'Products/', src: '/products' },
+      { location: this.activeCategory, src: '/products/' + this.activeCategory.toLocaleLowerCase() });
+    this.isSorterIconActive.next(true);
+    this.categoryLocation = true;
+  }
+
+  private generateBreadProducts(): void {
+    this.breadCrumbs.push({ location: 'Products', src: '/products' });
+    this.isSorterIconActive.next(true);
   }
 
   /**

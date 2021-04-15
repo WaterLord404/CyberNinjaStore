@@ -17,8 +17,15 @@ export class ProductService {
   /**
    * Obtiene todos los productos
    */
-  getProducts(): Observable<any> {
-    return this.http.get(this.url);
+  getProducts(category: string): Observable<any> {
+
+    if (category === null) {
+      category = '';
+    } else {
+      category = '?category=' + category;
+    }
+
+    return this.http.get(this.url + category);
   }
 
   /**

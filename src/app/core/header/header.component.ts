@@ -47,7 +47,9 @@ export class HeaderComponent implements OnInit {
     this.cartBadgeService.getCartBadgeCount().subscribe(res => this.cartBadgeCount = res);
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
 
   /**
    * Guarda el carrito y cierra la sesión

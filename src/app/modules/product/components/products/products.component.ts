@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DocumentService } from 'src/app/core/services/document.service';
 import { ProductI } from '../../Interfaces/productI';
 import { ProductService } from '../../services/product.service';
@@ -26,19 +26,26 @@ export class ProductsComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private router: Router,
-    protected documentService: DocumentService
+    protected documentService: DocumentService,
+    private route: ActivatedRoute
   ) { }
 
   /**
-   * Carga todos los productos
+   * Carga todos los productos con la categoria
    */
   ngOnInit(): void {
-    this.productService.getProducts().subscribe(
+    const category = this.route.snapshot.paramMap.get('category');
+
+    this.productService.getProducts(category).subscribe(
       res => {
         this.products = res;
-        this.breadEvent.emit('Products');
+        if (category === null) {
+          this.breadEvent.emit('products');
+        } else {
+          this.breadEvent.emit(category);
+        }
       },
-      () => this.router.navigate(['not-found'])
+      () => { }
     );
   }
 
@@ -47,6 +54,6 @@ export class ProductsComponent implements OnInit {
    * @param product
    */
   navigateToProduct(item: ProductI): void {
-    this.router.navigate(['products/' + item.id], { state: { item } });
+    this.router.navigate(['products/p/' + item.id], { state: { item } });
   }
 }
