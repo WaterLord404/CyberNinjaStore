@@ -1,6 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit } from '@angular/core';
-import { BreadCrumbsI } from './Interfaces/bread-crumbsI';
-import { BreadCrumbsService } from './services/bread-crumbs.service';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-product',

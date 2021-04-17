@@ -1,5 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DocumentService } from 'src/app/core/services/document.service';
 import { ProductI } from '../../Interfaces/productI';
@@ -20,29 +20,32 @@ import { ProductService } from '../../services/product.service';
 })
 export class ProductsComponent implements OnInit {
 
-  products: Array<ProductI>;
+  @Input() products: Array<ProductI>;
   @Output() breadEvent = new EventEmitter<string>();
+  category: string;
 
   constructor(
     private productService: ProductService,
     private router: Router,
     protected documentService: DocumentService,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.productService.getProductsFiltered().subscribe(res => this.products = res);
+  }
 
   /**
    * Carga todos los productos con la categoria
    */
   ngOnInit(): void {
-    const category = this.route.snapshot.paramMap.get('category');
+    this.category = this.route.snapshot.paramMap.get('category');
 
-    this.productService.getProducts(category).subscribe(
+    this.productService.getProducts(this.category, null).subscribe(
       res => {
         this.products = res;
-        if (category === null) {
+        if (this.category === null) {
           this.breadEvent.emit('products');
         } else {
-          this.breadEvent.emit(category);
+          this.breadEvent.emit(this.category);
         }
       },
       () => { }

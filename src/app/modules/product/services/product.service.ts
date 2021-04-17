@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ProductI } from '../Interfaces/productI';
 
 @Injectable({
@@ -9,6 +9,7 @@ import { ProductI } from '../Interfaces/productI';
 export class ProductService {
 
   url = 'product';
+  private products = new BehaviorSubject<Array<ProductI>>(null);
 
   constructor(
     private http: HttpClient,
@@ -17,15 +18,21 @@ export class ProductService {
   /**
    * Obtiene todos los productos
    */
-  getProducts(category: string): Observable<any> {
+  getProducts(category: string, filter: string): Observable<any> {
 
-    if (category === null) {
-      category = '';
-    } else {
-      category = '?category=' + category;
+    let params = '';
+
+    if (category !== null && filter !== null) {
+      params = '?category=' + category + '&filter=' + filter;
+
+    } else if (category !== null) {
+      params = '?category=' + category;
+
+    } else if (filter !== null) {
+      params = '?filter=' + filter;
     }
 
-    return this.http.get(this.url + category);
+    return this.http.get(this.url + params);
   }
 
   /**
@@ -36,11 +43,11 @@ export class ProductService {
     return this.http.get(this.url + '/' + id);
   }
 
- /**
-  * Crea un producto
-  * @param item
-  * @param files
-  */
+  /**
+   * Crea un producto
+   * @param item
+   * @param files
+   */
   addProduct(item: ProductI, files: FileList): Observable<any> {
     let formData: any = new FormData();
 
@@ -89,5 +96,13 @@ export class ProductService {
    */
   getCategories(): Observable<any> {
     return this.http.get(this.url + '/category');
+  }
+
+  setProducts(products: Array<ProductI>): void {
+    this.products.next(products);
+  }
+
+  getProductsFiltered(): Observable<any> {
+    return this.products.asObservable();
   }
 }

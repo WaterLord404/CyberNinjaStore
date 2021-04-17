@@ -10,7 +10,7 @@ export class BreadCrumbsService {
   breadCrumbs: Array<BreadCrumbsI> = [];
   isSorterIconActive = new BehaviorSubject<boolean>(false);
   categoryLocation = false;
-  activeCategory: string;
+  activeCategory: string = undefined;
 
   constructor() { }
 
@@ -19,33 +19,43 @@ export class BreadCrumbsService {
    * @param string
    */
   updateBreadCrumbs(res: string): Array<BreadCrumbsI> {
-    this.isSorterIconActive.next(false);
 
     this.breadCrumbs = [];
     this.breadCrumbs.push({ location: 'Home/', src: '' });
 
+    // TODOS LOS PRODUCTOS
     if (res === 'products') {
+      this.activeCategory = undefined;
       this.generateBreadProducts();
 
-    } else if (res === 'new' || res === 'women' || res === 'pants' || res === 'jackets' || res === 'accessories') {
+    }
+    // POR CATEGORIA
+    else if (res === 'new' || res === 'women' || res === 'pants' || res === 'jackets' || res === 'accessories') {
       this.activeCategory = res[0].toUpperCase() + res.substr(1);
-      this.generateBreadCategory(res);
+      this.generateBreadCategory();
 
-    } else {
-      if (this.categoryLocation) {
-        this.generateBreadCategory(res);
+    }
+    // PRODUCTO INDIVIDUAL
+    else {
+      // Con categoria
+      if (this.activeCategory !== undefined) {
+        this.generateBreadCategory();
         this.breadCrumbs.push({ location: '/' + res });
       }
+      // Sin categoria
       else {
         this.generateBreadProducts();
         this.breadCrumbs.push({ location: '/' + res });
       }
+
+      // Icono sorter desactivado
+      this.isSorterIconActive.next(false);
     }
 
     return this.breadCrumbs;
   }
 
-  private generateBreadCategory(res: string): void {
+  private generateBreadCategory(): void {
     this.breadCrumbs.push(
       { location: 'Products/', src: '/products' },
       { location: this.activeCategory, src: '/products/' + this.activeCategory.toLocaleLowerCase() });
@@ -66,4 +76,5 @@ export class BreadCrumbsService {
     this.isSorterIconActive.asObservable().subscribe(res => status = res);
     return status;
   }
+
 }

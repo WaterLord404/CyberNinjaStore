@@ -1,7 +1,10 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BreadCrumbsI } from '../../Interfaces/bread-crumbsI';
+import { ProductI } from '../../Interfaces/productI';
 import { BreadCrumbsService } from '../../services/bread-crumbs.service';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-bread-crumbs',
@@ -23,7 +26,9 @@ export class BreadCrumbsComponent implements OnInit {
   isSorterIconActive: boolean;
 
   constructor(
-    private breadCrumbsService: BreadCrumbsService
+    private breadCrumbsService: BreadCrumbsService,
+    private productService: ProductService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -33,4 +38,11 @@ export class BreadCrumbsComponent implements OnInit {
     });
   }
 
+  filterProducts(filter: string): void {
+    const category = this.route.snapshot.paramMap.get('category');
+
+    this.productService.getProducts(category, filter).subscribe(
+      res => this.productService.setProducts(res)
+    );
+  }
 }

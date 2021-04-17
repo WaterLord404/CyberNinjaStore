@@ -6,11 +6,10 @@
   </div>
 
   <button mat-button [matMenuTriggerFor]="beforeMenu" *ngIf="isSorterIconActive"><img src="../../../../../assets/icons/sort.svg" alt="sort-icon"></button>
-  <mat-menu #beforeMenu="matMenu" xPosition="before" class="customize" >
-    <button mat-menu-item>By popularity</button>
-    <button mat-menu-item>By latest</button>
-    <button mat-menu-item>Prices: Ascending</button>
-    <button mat-menu-item>Prices: descending</button>
+  <mat-menu #beforeMenu="matMenu" xPosition="before" class="customize">
+    <button mat-menu-item (click)="filterProducts('popularity')">By popularity</button>
+    <button mat-menu-item (click)="filterProducts( null )">By latest</button>
+    <button mat-menu-item (click)="filterProducts('priceAsc')">Prices: Ascending</button>
+    <button mat-menu-item (click)="filterProducts('priceDesc')">Prices: descending</button>
   </mat-menu>
 </div>
-
