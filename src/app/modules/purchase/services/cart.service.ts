@@ -70,12 +70,12 @@ export class CartService {
 
     this.http.post(this.url, this.ordersDetailsLocal).pipe(finalize(
       () => {
+        this.cartBadgeService.clear();
+        this.cartBadgeService.update();
         this.authService.logout();
       }
     )).subscribe(
       () => {
-        this.cartBadgeService.clear();
-        this.cartBadgeService.update();
         this.snackBarService.popup(211);
       },
       () => { }
@@ -111,7 +111,7 @@ export class CartService {
         element.colour === orderDetails.colour &&
         element.size === orderDetails.size) {
 
-        element.units = element.units + 1;
+        element.units = element.units + orderDetails.units;
         updated = true;
       }
     });

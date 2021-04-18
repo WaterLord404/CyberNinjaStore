@@ -38,6 +38,10 @@ export class BreadCrumbsComponent implements OnInit {
     });
   }
 
+  /**
+   * Filtra los productos
+   * @param filter
+   */
   filterProducts(filter: string): void {
     const category = this.route.snapshot.paramMap.get('category');
 

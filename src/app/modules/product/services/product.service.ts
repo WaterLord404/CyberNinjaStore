@@ -16,7 +16,7 @@ export class ProductService {
   ) { }
 
   /**
-   * Obtiene todos los productos
+   * Obtiene todos los productos dependiendo de la categoria y filtro
    */
   getProducts(category: string, filter: string): Observable<any> {
 
