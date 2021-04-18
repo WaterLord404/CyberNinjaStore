@@ -3,7 +3,7 @@
     <div class="img-container">
       <img [src]="documentService.dataToImg(item.product.documents[0].picture, item.product.documents[0].fileType)"
       [alt]="item.product.id"
-      (click)="router.navigate(['/products/' + item.product.id])">
+      (click)="router.navigate(['/products/p/' + item.product.id])">
     </div>
     <div class="data-container">
       <div class="data">
