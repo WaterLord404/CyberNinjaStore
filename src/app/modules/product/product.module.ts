@@ -10,6 +10,8 @@ import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { ItemReviewComponent } from './components/item-review/item-review.component';
 
 const routes: Routes = [
   {
@@ -34,7 +36,8 @@ const routes: Routes = [
     ProductsComponent,
     ProductComponent,
     BreadCrumbsComponent,
-    ItemComponent
+    ItemComponent,
+    ItemReviewComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +46,8 @@ const routes: Routes = [
     MatCarouselModule,
     MatMenuModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbRatingModule
   ]
 })
 export class AppProductModule { }

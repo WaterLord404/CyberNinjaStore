@@ -1,0 +1,7 @@
+<div class="review-container" *ngFor="let review of reviews">
+  <div class="review-header">
+    <span>{{review.creationDate}}</span>
+    <ngb-rating [max]="5" [(rate)]="review.value" [readonly]="true"></ngb-rating>
+  </div>
+  <p>{{review.details}}</p>
+</div>

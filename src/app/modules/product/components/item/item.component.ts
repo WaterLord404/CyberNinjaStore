@@ -9,8 +9,8 @@ import { CartBadgeService } from 'src/app/core/services/cart-badge.service';
 import { CartService } from 'src/app/modules/purchase/services/cart.service';
 import { ProductI } from '../../Interfaces/productI';
 import { ProductService } from '../../services/product.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DiscountI } from '../../Interfaces/discount';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { DiscountI } from '../../Interfaces/discountI';
 import { DiscountService } from 'src/app/modules/purchase/services/discount.service';
 import { OrderDetailsI } from 'src/app/modules/purchase/interfaces/order-details';
 import { finalize } from 'rxjs/operators';
@@ -50,7 +50,6 @@ export class ItemComponent implements OnInit {
     private location: Location,
     protected authService: AuthService,
     private discountService: DiscountService,
-    private fb: FormBuilder
   ) { }
 
   /**
@@ -160,6 +159,10 @@ export class ItemComponent implements OnInit {
       () => this.snackBarService.popup(205),
       () => this.snackBarService.popup(500)
     );
+  }
+
+  roundStars(): number {
+    return Math.round(this.item.stars * 100) / 100;
   }
 
 }

@@ -1,0 +1,28 @@
+@import '../../../../../assets/scss/grid';
+@import '../../../../../assets/scss/variables';
+
+.review-container {
+  @include flex-column();
+  @include font-product();
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  .review-header {
+    @include flex-row();
+    justify-content: space-between;
+    ngb-rating {
+      font-size: 18px;
+    }
+    span {
+      align-self: center;
+      color: rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  p {
+    margin: $small-margin-vertical;
+  }
+}
+
+.review-container:first-child {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}

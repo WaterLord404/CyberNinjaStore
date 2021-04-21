@@ -19,11 +19,18 @@ export class UserService {
    * @param user
    */
   login(user: UserI): Observable<any> {
-    return this.http.post(this.url + '/login', user, {observe: 'response'});
+    return this.http.post(this.url + '/login', user, { observe: 'response' });
   }
 
   register(user: UserI): Observable<any> {
     return this.http.post(this.url + '/sign-up', user);
+  }
+
+  /**
+   * Confirma la cuenta del usuario
+   */
+  confirmAccount(token: string): Observable<any> {
+    return this.http.put(this.url + '/confirm-account?token=' + token, {});
   }
 
 }

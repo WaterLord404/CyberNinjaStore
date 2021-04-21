@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
-import { DiscountI } from 'src/app/modules/product/Interfaces/discount';
+import { DiscountI } from 'src/app/modules/product/Interfaces/discountI';
 import { ProductI } from 'src/app/modules/product/Interfaces/productI';
 import { ProductService } from 'src/app/modules/product/services/product.service';
 import { DiscountService } from 'src/app/modules/purchase/services/discount.service';

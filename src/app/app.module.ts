@@ -17,6 +17,7 @@ import { NewProductComponent } from './components/new-product/new-product.compon
 import { IsAdminGuard } from './core/guards/is-admin.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -49,7 +50,8 @@ const routes: Routes = [
     MatProgressBarModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    NgbModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

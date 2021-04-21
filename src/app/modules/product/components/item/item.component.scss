@@ -8,86 +8,108 @@
 }
 
 .product-container {
-  margin: 4% 0 0 0;
-}
+  @include flex-column();
+  margin: 4% 4% 0% 4%;
 
-.product-tittle,
-.product-price {
-  @include flex-row();
-  @include font-product();
-  text-align: center;
-  font-size: small;
-  align-items: center;
-  img {
-    width: $icon-size / 1.5;
-    margin-left: 2%;
+  .product-tittle,
+  .product-price {
+    @include flex-row();
+    @include font-product();
+    text-align: center;
+    font-size: small;
+    align-items: center;
+    img {
+      width: $icon-size / 1.5;
+      margin-left: 2%;
+    }
+    s,
+    p {
+      margin: 0%;
+      margin-left: 2%;
+    }
   }
-  s,
-  p {
-    margin: 0%;
-    margin-left: 2%;
+
+  .product-description {
+    @include font-product();
+    text-align: center;
+    text-transform: none;
+    font-size: smaller;
+    margin: $small-margin-vertical;
+    align-self: center;
   }
-}
 
-.product-description {
-  @include font-product();
-  text-align: center;
-  text-transform: none;
-  font-size: smaller;
-  margin-bottom: 3%;
-}
-
-.product-category-container,
-.product-color-container {
-  @include flex-column();
-  flex-flow: wrap;
-}
-
-.product-category,
-.product-color {
-  @include font-product();
-  margin: $smallest-margin;
-  border: 1px solid rgba(0, 0, 0, 0.75);
-  min-width: 40px;
-  font-size: small;
-  text-align: center;
-  padding: 1.5%;
-  cursor: pointer;
-}
-
-.button-container {
-  @include flex-column();
-  margin: $small-margin;
-  margin-bottom: 0;
-}
-
-.add-cart {
-  color: $orange;
-  background-color: unset;
-  margin-bottom: 3%;
-  cursor: pointer;
-}
-
-.delete {
-  margin-top: marginX4(3%);
-  border: 1px solid red;
-  background-color: red;
-}
-
-.discountForm {
-  @include flex-column();
-  width: 100%;
-  justify-content: center;
-  mat-option {
+  .product-category-container,
+  .product-color-container {
     @include flex-column();
-    background-color: rgba(0, 0, 0, 0.75);
-    margin: 0 15%;
-    overflow: hidden;
-    border: none;
+    flex-flow: wrap;
+    margin-bottom: 1.5%;
   }
-}
 
-.selected {
-  border: $orange 1px solid;
-  color: $orange;
+  .product-category,
+  .product-color {
+    @include font-product();
+    margin: $smallest-margin;
+    border: 1px solid rgba(0, 0, 0, 0.75);
+    min-width: 40px;
+    font-size: small;
+    text-align: center;
+    padding: 1.5%;
+    cursor: pointer;
+  }
+
+  .button-container {
+    @include flex-column();
+    margin: $small-margin-vertical;
+  }
+
+  .add-cart {
+    color: $orange;
+    background-color: unset;
+    margin-bottom: 3%;
+    cursor: pointer;
+  }
+
+  .delete {
+    margin-top: marginX4(3%);
+    border: 1px solid red;
+    background-color: red;
+  }
+
+  .discountForm {
+    @include flex-column();
+    width: 100%;
+    justify-content: center;
+    mat-option {
+      @include flex-column();
+      background-color: rgba(0, 0, 0, 0.75);
+      margin: 0 15%;
+      overflow: hidden;
+      border: none;
+    }
+  }
+
+  .selected {
+    border: $orange 1px solid;
+    color: $orange;
+  }
+
+  .reviews-container {
+    @include font-product();
+    margin: 0%;
+    margin-top: 1.5%;
+    h3 {
+      margin: 0%;
+      opacity: 0.5;
+    }
+
+    .reviews-header-container {
+      @include flex-column();
+      text-align: left;
+      span {
+        opacity: 0.5;
+        align-self: center;
+      }
+      margin-bottom: 3%;
+    }
+  }
 }

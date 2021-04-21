@@ -1,4 +1,4 @@
-import { DiscountI } from "../../product/Interfaces/discount";
+import { DiscountI } from "../../product/Interfaces/discountI";
 
 export interface CouponI {
   code: string;

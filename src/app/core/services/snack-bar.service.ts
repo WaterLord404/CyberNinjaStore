@@ -39,6 +39,9 @@ export class SnackBarService {
       case 211:
         error = 'Successfully logout';
         break;
+      case 215:
+        error = 'Account successfully confirmed';
+        break;
       case 212:
         error = 'Successfully registration';
         break;

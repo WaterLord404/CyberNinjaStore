@@ -150,3 +150,11 @@ main {
   position: relative;
   width: 100%;
 }
+
+ngb-rating {
+  font-size: 25px;
+  outline: none;
+}
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

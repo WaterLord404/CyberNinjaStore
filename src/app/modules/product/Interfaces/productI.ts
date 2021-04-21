@@ -1,4 +1,4 @@
-import { DiscountI } from './discount';
+import { DiscountI } from './discountI';
 import { DocumentI } from './documentI';
 
 export interface ProductI {
