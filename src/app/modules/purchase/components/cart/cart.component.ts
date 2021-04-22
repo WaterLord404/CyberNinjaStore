@@ -97,8 +97,8 @@ export class CartComponent implements OnInit {
     this.ordersDetails.forEach(element => {
       resul = resul + (element.product.totalPrice * element.units);
     });
-    this.totalPrice = resul;
-    return (Math.round(resul * 100) / 100);
+    this.totalPrice = (Math.round(resul * 100) / 100);
+    return this.totalPrice;
   }
 
   /**
@@ -115,7 +115,9 @@ export class CartComponent implements OnInit {
     }
 
     if (this.totalPrice <= 0) { this.totalPrice = 0; }
-    return (Math.round(this.totalPrice * 100) / 100);
+
+    this.totalPrice = (Math.round(this.totalPrice * 100) / 100);
+    return this.totalPrice;
   }
 
   /**

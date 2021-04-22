@@ -75,4 +75,5 @@ export class CheckoutComponent implements OnInit {
     this.finalPrice = (Math.round((this.totalPrice + this.shipping) * 100) / 100);
     return this.finalPrice;
   }
+
 }

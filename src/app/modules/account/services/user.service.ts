@@ -30,7 +30,7 @@ export class UserService {
    * Confirma la cuenta del usuario
    */
   confirmAccount(token: string): Observable<any> {
-    return this.http.put(this.url + '/confirm-account?token=' + token, {});
+    return this.http.put(this.url + '/confirm-account?token=' + token, null);
   }
 
 }

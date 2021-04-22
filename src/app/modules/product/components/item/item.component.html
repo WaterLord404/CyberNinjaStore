@@ -14,12 +14,15 @@
       <img *ngIf="authService.isAdmin()" (click)="loadDiscounts(); openDiscount = !openDiscount" src="../../../../../assets/icons/offer-icon.svg" alt="offer-icon">
     </div>
 
-    <form *ngIf="openDiscount" class="discountForm" @fadeIn>
+    <div *ngIf="openDiscount" class="discountForm" @fadeIn>
+      <mat-option (click)="submitDiscountForm(0)">
+        <span>NONE</span>
+      </mat-option>
       <mat-option *ngFor="let discount of discounts" [value]="discount.id" (click)="submitDiscountForm(discount.id)">
         <span *ngIf="discount.type === 'PERCENTAGE'">{{discount.value}}%</span>
         <span *ngIf="discount.type === 'FIXED'">-{{discount.value}}€</span>
       </mat-option>
-    </form>
+    </div>
 
     <p class="product-description">
       {{item.description}}

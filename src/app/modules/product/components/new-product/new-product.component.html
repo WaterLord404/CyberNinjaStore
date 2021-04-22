@@ -42,20 +42,6 @@
     </div>
 
     <div class="form-group">
-      <span>Discount</span>
-      <mat-select formControlName="discount">
-        <mat-option [value]="'NONE'">NONE</mat-option>
-        <mat-option *ngFor="let discount of discounts" [value]="discount.id">
-          <span *ngIf="discount.type === 'PERCENTAGE'">{{discount.value}}%</span>
-          <span *ngIf="discount.type === 'FIXED'">-{{discount.value}}€</span>
-        </mat-option>
-      </mat-select>
-      <label *ngIf="f.discount.errors && submitted == true">
-        Discount is required
-      </label>
-    </div>
-
-    <div class="form-group">
       <span>Size</span>
       <mat-select formControlName="size" multiple>
         <mat-option *ngFor="let size of sizes" [value]="size">{{size}}</mat-option>

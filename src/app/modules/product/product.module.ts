@@ -8,10 +8,13 @@ import { ProductComponent } from './product.component';
 import { BreadCrumbsComponent } from './components/bread-crumbs/bread-crumbs.component';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { ItemReviewComponent } from './components/item-review/item-review.component';
+import { NewProductComponent } from './components/new-product/new-product.component';
+import { IsAdminGuard } from 'src/app/core/guards/is-admin.guard';
+import { IsLoggedGuard } from 'src/app/core/guards/is-logged.guard';
+import { MatSelectModule } from '@angular/material/select';
 
 const routes: Routes = [
   {
@@ -19,6 +22,9 @@ const routes: Routes = [
       { path: '', outlet: 'aux', component: ProductsComponent },
     ]
   },
+
+  { path: 'new-product', component: NewProductComponent, canActivate: [IsAdminGuard, IsLoggedGuard] },
+
   {
     path: ':category', component: ProductComponent, children: [
       { path: '', outlet: 'aux', component: ProductsComponent },
@@ -37,7 +43,8 @@ const routes: Routes = [
     ProductComponent,
     BreadCrumbsComponent,
     ItemComponent,
-    ItemReviewComponent
+    ItemReviewComponent,
+    NewProductComponent
   ],
   imports: [
     CommonModule,
@@ -45,9 +52,9 @@ const routes: Routes = [
     MatCardModule,
     MatCarouselModule,
     MatMenuModule,
-    MatSelectModule,
     ReactiveFormsModule,
-    NgbRatingModule
+    NgbRatingModule,
+    MatSelectModule
   ]
 })
 export class AppProductModule { }
