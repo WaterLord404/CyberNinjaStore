@@ -15,7 +15,7 @@ export class SnackBarService {
   popup(option: number): void {
     const msg = this.getError(option);
     this.snackBar.open(msg, '', {
-      duration: 2222,
+      duration: 3500,
       horizontalPosition: 'center',
       verticalPosition: 'bottom'
     });
@@ -39,11 +39,11 @@ export class SnackBarService {
       case 211:
         error = 'Successfully logout';
         break;
-      case 215:
-        error = 'Account successfully confirmed';
-        break;
       case 212:
         error = 'Successfully registration';
+        break;
+      case 213:
+        error = 'Check your email to confirm your account';
         break;
       case 220:
         error = 'Successfully purchase';

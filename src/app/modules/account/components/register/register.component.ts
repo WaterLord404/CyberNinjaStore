@@ -55,7 +55,7 @@ export class RegisterComponent implements OnInit {
     this.userService.register(customer).subscribe(
       () => {
         this.router.navigate(['/account/login']);
-        this.snackBarService.popup(212);
+        this.snackBarService.popup(213);
       },
       err => {
         switch (err.status) {
