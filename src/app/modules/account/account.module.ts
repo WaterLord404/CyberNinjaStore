@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './components/user/user.component';
 import { IsLoggedGuard } from 'src/app/core/guards/is-logged.guard';
 import { ConfirmAccountComponent } from './components/confirm-account/confirm-account.component';
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 
 const routes: Routes = [
   { path: '', component: UserComponent, canActivate: [IsLoggedGuard] },
@@ -28,7 +29,22 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MatFormFieldModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SocialLoginModule
+  ],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('899814992698-rfm638ehb7fb39t7t52c6j44du35fg8h.apps.googleusercontent.com'),
+          }
+        ],
+      } as SocialAuthServiceConfig,
+    }
   ]
 })
 export class AccountModule { }

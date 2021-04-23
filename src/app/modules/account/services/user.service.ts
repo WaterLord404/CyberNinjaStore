@@ -26,6 +26,10 @@ export class UserService {
     return this.http.post(this.url + '/sign-up', user);
   }
 
+  loginGoogle(token: string): Observable<any> {
+    return this.http.post(this.url + '/login/google', token, { observe: 'response' });
+  }
+
   /**
    * Confirma la cuenta del usuario
    */

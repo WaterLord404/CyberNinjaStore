@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CartBadgeService } from 'src/app/core/services/cart-badge.service';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private snackBarService: SnackBarService,
     private authService: AuthService,
-    private cartService: CartService
+    private cartService: CartService,
+    private socialAuthService: SocialAuthService
   ) { }
 
   ngOnInit(): void {
@@ -46,26 +48,44 @@ export class LoginComponent implements OnInit {
     }
 
     this.userService.login(this.user).subscribe(
-      res => {
-        // Guarda el jwt
-        this.authService.login(res.headers.get('Authorization'));
-        // Obtiene el carrito
-        this.cartService.getCart();
-        this.router.navigate(['/']);
-        this.snackBarService.popup(210);
-      },
-
-      // Lanza snackBar
-      err => {
-        switch (err.status) {
-          case 401:
-            this.snackBarService.popup(301);
-            break;
-          default:
-            this.snackBarService.popup(500);
-            break;
-        }
-      }
+      res => this.resolveRequest(res),
+      err => this.rejectRequest(err)
     );
+  }
+
+  /**
+   * Loguea al usuario con google
+   */
+  authWithGoogle(): void {
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
+      data => {
+        this.userService.loginGoogle(data.idToken).subscribe(
+          res => this.resolveRequest(res),
+          err => this.rejectRequest(err)
+        );
+      }
+    ).catch(
+      () => this.snackBarService.popup(500)
+    );
+  }
+
+  resolveRequest(res: any): void {
+    // Guarda el jwt
+    this.authService.login(res.headers.get('Authorization'));
+    // Obtiene el carrito
+    this.cartService.getCart();
+    this.router.navigate(['/']);
+    this.snackBarService.popup(210);
+  }
+
+  rejectRequest(err: any): void {
+    switch (err.status) {
+      case 500:
+        this.snackBarService.popup(500);
+        break;
+      default:
+        this.snackBarService.popup(301);
+        break;
+    }
   }
 }

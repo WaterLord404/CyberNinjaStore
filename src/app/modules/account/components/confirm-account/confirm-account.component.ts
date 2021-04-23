@@ -22,7 +22,8 @@ export class ConfirmAccountComponent implements OnInit {
     this.userService.confirmAccount(this.route.snapshot.paramMap.get('token')).pipe(finalize(
       () => this.router.navigate(['/account/login'])
     )).subscribe(
-      () => this.snackBarService.popup(212)
+      () => this.snackBarService.popup(212),
+      () => { }
     );
   }
 
