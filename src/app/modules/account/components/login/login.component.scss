@@ -1,0 +1,9 @@
+@import '../../../../../assets/scss/variables';
+@import '../../../../../assets/scss/functions';
+
+.google-container {
+  margin-top: marginX4(3%);
+  img {
+    width: $icon-size;
+  }
+}

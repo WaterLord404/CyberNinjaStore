@@ -74,6 +74,8 @@ export class ItemComponent implements OnInit {
       // Emite el nombre del producto para las migas de pan
       this.breadEvent.emit(this.item.name.toUpperCase());
     }
+
+    this.discountService.getDiscounts().subscribe(res => this.discounts = res);
   }
 
   /**
@@ -135,15 +137,6 @@ export class ItemComponent implements OnInit {
       },
       () => this.snackBarService.popup(500)
     );
-  }
-
-  /**
-   * Carga los descuentos solo al clickar en la etiqueta de descuentos
-   */
-  loadDiscounts(): void {
-    if (this.openDiscount === false) {
-      this.discountService.getDiscounts().subscribe(res => this.discounts = res);
-    }
   }
 
   /**
