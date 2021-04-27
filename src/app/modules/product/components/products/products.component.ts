@@ -1,8 +1,9 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DocumentService } from 'src/app/core/services/document.service';
 import { ProductI } from '../../Interfaces/productI';
+import { BreadCrumbsService } from '../../services/bread-crumbs.service';
 import { ProductService } from '../../services/product.service';
 
 @Component({
@@ -20,36 +21,31 @@ import { ProductService } from '../../services/product.service';
 })
 export class ProductsComponent implements OnInit {
 
-  @Input() products: Array<ProductI>;
-  @Output() breadEvent = new EventEmitter<string>();
-  category: string;
+  products: Array<ProductI> = [];
 
   constructor(
     private productService: ProductService,
     private router: Router,
     protected documentService: DocumentService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private breadCrumbsService: BreadCrumbsService
   ) {
-    this.productService.getProductsFiltered().subscribe(res => this.products = res);
+    this.productService.getProductsList().subscribe(res => this.products = res);
   }
 
   /**
    * Carga todos los productos con la categoria
    */
   ngOnInit(): void {
-    this.category = this.route.snapshot.paramMap.get('category');
+    this.productService.resetPage();
+    const category = this.route.snapshot.paramMap.get('category');
+    this.productService.loadProducts(category);
 
-    this.productService.getProducts(this.category, null).subscribe(
-      res => {
-        this.products = res;
-        if (this.category === null) {
-          this.breadEvent.emit('products');
-        } else {
-          this.breadEvent.emit(this.category);
-        }
-      },
-      () => { }
-    );
+    if (category === null) {
+      this.breadCrumbsService.updateBreadCrumbs('products');
+    } else {
+      this.breadCrumbsService.updateBreadCrumbs(category);
+    }
   }
 
   /**
@@ -59,4 +55,9 @@ export class ProductsComponent implements OnInit {
   navigateToProduct(item: ProductI): void {
     this.router.navigate(['products/p/' + item.id], { state: { item } });
   }
+
+  onScroll(): void {
+    this.productService.onScroll();
+  }
+
 }

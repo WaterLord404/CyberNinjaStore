@@ -14,12 +14,4 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  /**
-   * Envia el evento a la clase bread crumbs
-   * @param EventEmitter<string>
-   */
-  updateBreadCrumbs(event: EventEmitter<string>): void {
-    this.breadCrumbsEvent = event;
-  }
-
 }

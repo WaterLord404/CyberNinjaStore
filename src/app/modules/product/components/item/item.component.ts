@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Location } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { DocumentService } from 'src/app/core/services/document.service';
@@ -14,6 +14,7 @@ import { DiscountI } from '../../Interfaces/discountI';
 import { DiscountService } from 'src/app/modules/purchase/services/discount.service';
 import { OrderDetailsI } from 'src/app/modules/purchase/interfaces/order-details';
 import { finalize } from 'rxjs/operators';
+import { BreadCrumbsService } from '../../services/bread-crumbs.service';
 
 @Component({
   selector: 'app-product',
@@ -31,7 +32,6 @@ import { finalize } from 'rxjs/operators';
 export class ItemComponent implements OnInit {
 
   item: ProductI;
-  @Output() breadEvent = new EventEmitter<string>();
   discountForm: FormGroup;
   discounts: Array<DiscountI>;
   openDiscount = false;
@@ -50,6 +50,7 @@ export class ItemComponent implements OnInit {
     private location: Location,
     protected authService: AuthService,
     private discountService: DiscountService,
+    private breadCrumbsService: BreadCrumbsService
   ) { }
 
   /**
@@ -67,12 +68,12 @@ export class ItemComponent implements OnInit {
       this.productService.getProduct(this.route.snapshot.paramMap.get('id')).subscribe(
         res => {
           this.item = res;
-          this.breadEvent.emit(this.item.name.toUpperCase());
+          this.breadCrumbsService.updateBreadCrumbs(this.item.name.toUpperCase());
         },
         () => this.router.navigate(['not-found']));
     } else {
       // Emite el nombre del producto para las migas de pan
-      this.breadEvent.emit(this.item.name.toUpperCase());
+      this.breadCrumbsService.updateBreadCrumbs(this.item.name.toUpperCase());
     }
 
     this.discountService.getDiscounts().subscribe(res => this.discounts = res);

@@ -1,8 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BreadCrumbsI } from '../../Interfaces/bread-crumbsI';
-import { ProductI } from '../../Interfaces/productI';
 import { BreadCrumbsService } from '../../services/bread-crumbs.service';
 import { ProductService } from '../../services/product.service';
 
@@ -21,21 +20,19 @@ import { ProductService } from '../../services/product.service';
 })
 export class BreadCrumbsComponent implements OnInit {
 
-  @Input() breadCrumbsEvent: EventEmitter<string>;
   breadCrumbs: Array<BreadCrumbsI> = [];
   isSorterIconActive: boolean;
 
   constructor(
     private breadCrumbsService: BreadCrumbsService,
     private productService: ProductService,
-    private route: ActivatedRoute,
-  ) { }
+    private route: ActivatedRoute
+  ) {
+    this.breadCrumbsService.getBread().subscribe(res => this.breadCrumbs = res);
+    this.breadCrumbsService.getSorterState().subscribe(res => this.isSorterIconActive = res);
+  }
 
   ngOnInit(): void {
-    this.breadCrumbsEvent.subscribe(res => {
-      this.breadCrumbs = this.breadCrumbsService.updateBreadCrumbs(res);
-      this.isSorterIconActive = this.breadCrumbsService.getSorterState();
-    });
   }
 
   /**
@@ -43,10 +40,9 @@ export class BreadCrumbsComponent implements OnInit {
    * @param filter
    */
   filterProducts(filter: string): void {
-    const category = this.route.snapshot.paramMap.get('category');
-
-    this.productService.getProducts(category, filter).subscribe(
-      res => this.productService.setProducts(res)
-    );
+    this.productService.resetPage();
+    let category = this.route.snapshot.paramMap.get('category');
+    if (category === undefined) { category = null; }
+    this.productService.loadProducts(category, filter);
   }
 }

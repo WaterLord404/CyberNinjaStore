@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { BreadCrumbsI } from '../Interfaces/bread-crumbsI';
 
 @Injectable({
@@ -8,6 +8,7 @@ import { BreadCrumbsI } from '../Interfaces/bread-crumbsI';
 export class BreadCrumbsService {
 
   breadCrumbs: Array<BreadCrumbsI> = [];
+  breadCrumbsSubject = new BehaviorSubject<Array<BreadCrumbsI>>(null);
   isSorterIconActive = new BehaviorSubject<boolean>(false);
   categoryLocation = false;
   activeCategory: string = undefined;
@@ -18,7 +19,7 @@ export class BreadCrumbsService {
    * Construye un array de BreadCrumbsI para la nueva miga de pan
    * @param string
    */
-  updateBreadCrumbs(res: string): Array<BreadCrumbsI> {
+  updateBreadCrumbs(res: string): void {
 
     this.breadCrumbs = [];
     this.breadCrumbs.push({ location: 'Home/', src: '' });
@@ -52,7 +53,7 @@ export class BreadCrumbsService {
       this.isSorterIconActive.next(false);
     }
 
-    return this.breadCrumbs;
+    this.breadCrumbsSubject.next(this.breadCrumbs);
   }
 
   private generateBreadCategory(): void {
@@ -71,10 +72,12 @@ export class BreadCrumbsService {
   /**
    * obtiene el estado del icono de ordenar por
    */
-  getSorterState(): boolean {
-    let status = false;
-    this.isSorterIconActive.asObservable().subscribe(res => status = res);
-    return status;
+  getSorterState(): Observable<any> {
+    return this.isSorterIconActive.asObservable();
+  }
+
+  getBread(): Observable<any> {
+    return this.breadCrumbsSubject.asObservable();
   }
 
 }

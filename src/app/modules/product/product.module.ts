@@ -15,6 +15,7 @@ import { NewProductComponent } from './components/new-product/new-product.compon
 import { IsAdminGuard } from 'src/app/core/guards/is-admin.guard';
 import { IsLoggedGuard } from 'src/app/core/guards/is-logged.guard';
 import { MatSelectModule } from '@angular/material/select';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 
 const routes: Routes = [
   {
@@ -54,7 +55,11 @@ const routes: Routes = [
     MatMenuModule,
     ReactiveFormsModule,
     NgbRatingModule,
-    MatSelectModule
+    MatSelectModule,
+    InfiniteScrollModule
+  ],
+  providers: [
+    ProductsComponent
   ]
 })
 export class AppProductModule { }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { share } from 'rxjs/operators';
 import { ProductI } from '../Interfaces/productI';
 
 @Injectable({
@@ -9,27 +10,80 @@ import { ProductI } from '../Interfaces/productI';
 export class ProductService {
 
   url = 'product';
-  private products = new BehaviorSubject<Array<ProductI>>(null);
+  private products = new BehaviorSubject<Array<ProductI>>([]);
+  actualPage = 0;
+  category: string;
+  filter: string;
+  load: boolean;
 
   constructor(
     private http: HttpClient,
   ) { }
 
   /**
+   * Resetea los productos y el contador de la pagina
+   */
+  resetPage(): void {
+    this.products.next([]);
+    this.actualPage = 0;
+    this.load = true;
+  }
+
+  loadProducts(category: string, filter?: string): void {
+    this.category = category;
+    if (filter === undefined) {
+      this.filter = null;
+    } else {
+      this.filter = filter;
+    }
+    this.load = false;
+
+
+    // Obtiene los productos
+    this.getProducts(this.category, this.filter, this.actualPage).subscribe(
+      res => {
+        res.forEach(element => {
+          this.products.value.push(element);
+        });
+        this.load = true;
+        this.actualPage++;
+      },
+      () => { this.load = false; }
+    );
+  }
+
+  /**
+   * Actualiza la pagina
+   */
+  onScroll(): void {
+    if (this.load) {
+      // Obtiene los productos
+      this.loadProducts(this.category, this.filter);
+    }
+  }
+
+  /**
+   * Devuelve los productos
+   */
+  getProductsList(): Observable<any> {
+    return this.products.asObservable();
+  }
+
+  /**
    * Obtiene todos los productos dependiendo de la categoria y filtro
    */
-  getProducts(category: string, filter: string): Observable<any> {
+  getProducts(category: string, filter: string, page: number): Observable<any> {
 
-    let params = '';
+    let params = '?page=' + page;
 
     if (category !== null && filter !== null) {
-      params = '?category=' + category + '&filter=' + filter;
+      params += '&category=' + category + '&filter=' + filter;
 
     } else if (category !== null) {
-      params = '?category=' + category;
+      params += '&category=' + category;
 
     } else if (filter !== null) {
-      params = '?filter=' + filter;
+      params += '&filter=' + filter;
     }
 
     return this.http.get(this.url + params);
@@ -98,11 +152,4 @@ export class ProductService {
     return this.http.get(this.url + '/category');
   }
 
-  setProducts(products: Array<ProductI>): void {
-    this.products.next(products);
-  }
-
-  getProductsFiltered(): Observable<any> {
-    return this.products.asObservable();
-  }
 }

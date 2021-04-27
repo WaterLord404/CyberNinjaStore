@@ -1,5 +1,12 @@
-<div class="container-cards" *ngIf="products" @fadeIn>
-  <div class="container-card" *ngFor="let item of products">
+<div class="container-cards"
+    *ngIf="products"
+    infiniteScroll
+    [alwaysCallback]=true
+    [infiniteScrollDistance]="0"
+    (scrolled)="onScroll()"
+    @fadeIn>
+
+  <div class="container-card" *ngFor="let item of products" @fadeIn>
     <div class="container-img">
       <div *ngIf="item.discount" class="tag-custom">
         <span *ngIf="item.discount.type === 'PERCENTAGE'">{{item.discount.value}}%</span>

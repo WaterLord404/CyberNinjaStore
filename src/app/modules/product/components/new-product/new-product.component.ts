@@ -63,6 +63,7 @@ export class NewProductComponent implements OnInit {
       () => {
         this.submitted = false;
         this.ngOnInit();
+        this.filesToUpload = null;
         window.scroll(0, 0);
       }
     )).subscribe(

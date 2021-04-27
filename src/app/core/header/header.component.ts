@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
     protected router: Router,
     protected authService: AuthService,
     private cartBadgeService: CartBadgeService,
-    private cartService: CartService
+    private cartService: CartService,
   ) {
     // Muestra o oculta la barra de loading
     this.loaderService.loading().subscribe(res => this.isLoading = res);
