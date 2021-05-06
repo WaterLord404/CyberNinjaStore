@@ -8,10 +8,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ClickedCheckoutGuard } from 'src/app/core/guards/clicked-checkout.guard';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { PaypalComponent } from './components/paypal/paypal.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   { path: 'cart', component: CartComponent },
-  { path: 'checkout', component: CheckoutComponent, canActivate: [ClickedCheckoutGuard]}
+  { path: 'checkout', component: CheckoutComponent, canActivate: [ClickedCheckoutGuard] }
 ];
 
 @NgModule({
@@ -25,7 +26,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
-    NgxPayPalModule
+    NgxPayPalModule,
+    MatProgressSpinnerModule
   ]
 })
 export class PurchaseModule { }

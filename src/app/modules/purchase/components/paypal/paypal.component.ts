@@ -18,10 +18,12 @@ export class PaypalComponent implements OnInit {
   payPalConfig: any;
 
   @Output() successful = new EventEmitter<any>();
+  @Output() spinnerActive = new EventEmitter<any>();
 
   constructor() { }
 
   ngOnInit() {
+    this.spinnerActive.emit()
 
     this.payPalConfig = {
       currency: 'EUR',

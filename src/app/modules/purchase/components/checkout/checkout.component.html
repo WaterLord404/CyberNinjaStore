@@ -59,14 +59,20 @@
       <p><b>{{finalPrice}}€</b></p>
     </div>
   </div>
+
   <div class="paypal-container">
+    <div *ngIf="activeSpinner" class="spinner-container">
+      <mat-progress-spinner mode="indeterminate" color="warn"></mat-progress-spinner>
+    </div>
+
     <app-paypal
     [finalPrice]="finalPrice"
     [totalPrice]="totalPrice"
     [ordersDetails]="ordersDetails"
     [shipping]="shipping"
     [discount]="discount"
-    (successful)="payment()">
+    (successful)="payment()"
+    (spinnerActive)="activeSpinner = false">
     </app-paypal>
   </div>
 </div>

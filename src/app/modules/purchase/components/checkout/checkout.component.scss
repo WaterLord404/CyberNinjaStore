@@ -45,3 +45,7 @@
     margin-top: marginX4(3%);
   }
 }
+
+.spinner-container {
+  @include flex-row();
+}

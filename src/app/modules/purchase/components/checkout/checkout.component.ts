@@ -24,6 +24,7 @@ export class CheckoutComponent implements OnInit {
   user: UserI;
   finalPrice = 0;
   discount = 0;
+  activeSpinner = true;
 
   constructor(
     private cartBadgeService: CartBadgeService,
