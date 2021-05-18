@@ -1,9 +1,7 @@
 <div class="cart-container">
   <div class="item-container" *ngFor="let item of ordersDetails" @fadeIn>
     <div class="img-container">
-      <img [src]="documentService.dataToImg(item.product.documents[0].picture, item.product.documents[0].fileType)"
-      [alt]="item.product.id"
-      (click)="router.navigate(['/products/p/' + item.product.id])">
+      <img [src]="documentService.dataToImg(item.product.documents[0].picture, item.product.documents[0].fileType)" [alt]="item.product.id" (click)="router.navigate(['/products/p/' + item.product.id])">
     </div>
     <div class="data-container">
       <div class="data">
@@ -27,14 +25,15 @@
     <div class="cart-details-header">
       <p *ngIf="!coupon"><b>AMOUNT: {{calculateTotalPrice()}}€</b></p>
       <p *ngIf="coupon"><b>AMOUNT: </b><s>{{calculateTotalPrice()}}€</s><b> {{calculateTotalPriceWithCoupon()}}€</b></p>
-      <button (click)="couponComponent = true"><p><u>COUPON</u></p></button>
+      <button (click)="couponComponent = true">
+        <p><u>COUPON</u></p>
+      </button>
     </div>
     <button class="relative-big-button" (click)="checkout()">CHECKOUT</button>
   </div>
+
+  <img *ngIf="ordersDetails.length == 0" class="empty-cart" src="../../../../../assets/img/emptyCart.png" alt="emptyCart" @fadeIn>
 </div>
 
-<app-coupon *ngIf="couponComponent"
-(closePopUpEvent)="couponComponent = false"
-(couponEvent)="saveCoupon($event)">
+<app-coupon *ngIf="couponComponent" (closePopUpEvent)="couponComponent = false" (couponEvent)="saveCoupon($event)">
 </app-coupon>
-

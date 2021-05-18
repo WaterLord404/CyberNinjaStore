@@ -3,7 +3,8 @@
 @import "../../../../../assets/scss/functions";
 
 .cart-container {
-  min-height: 90vh;
+  min-height: 85vh;
+  width: 100%
 }
 
 .item-container {
@@ -112,4 +113,12 @@
     opacity: 0.4;
     width: $icon-size / 2.5;
   }
+}
+
+.empty-cart {
+  width: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
 }

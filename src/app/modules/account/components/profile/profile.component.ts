@@ -4,10 +4,10 @@ import { UserI } from '../../interfaces/userI';
 
 @Component({
   selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
 })
-export class UserComponent implements OnInit {
+export class ProfileComponent implements OnInit {
 
   user: UserI;
 

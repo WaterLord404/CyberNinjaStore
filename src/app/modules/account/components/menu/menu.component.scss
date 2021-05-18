@@ -1,0 +1,10 @@
+@import '../../../../../assets/scss/variables';
+@import '../../../../../assets/scss/grid';
+
+.container {
+  @include flex-column();
+
+  button {
+    margin: 3% 0;
+  }
+}

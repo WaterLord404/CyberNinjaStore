@@ -22,6 +22,7 @@ button {
 button,
 a {
   cursor: pointer;
+  text-decoration-line: unset !important;
 }
 
 main {
@@ -68,7 +69,7 @@ main {
 .container {
   display: flex;
   justify-content: center;
-  min-height: 90vh;
+  min-height: 85vh;
 }
 .form-container {
   @include flex-column();
@@ -158,3 +159,4 @@ ngb-rating {
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+

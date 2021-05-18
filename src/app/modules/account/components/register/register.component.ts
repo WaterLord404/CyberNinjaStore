@@ -24,6 +24,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.scroll(0, 0);
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],

@@ -5,24 +5,33 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UserComponent } from './components/user/user.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { IsLoggedGuard } from 'src/app/core/guards/is-logged.guard';
 import { ConfirmAccountComponent } from './components/confirm-account/confirm-account.component';
-import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
+import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
+import { OrdersComponent } from './components/orders/orders.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { OrderDialogComponent } from './components/order-dialog/order-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const routes: Routes = [
-  { path: '', component: UserComponent, canActivate: [IsLoggedGuard] },
+  { path: '', component: MenuComponent, canActivate: [IsLoggedGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [IsLoggedGuard] },
   { path: 'confirm-account/:token', component: ConfirmAccountComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent }
+  { path: 'register', component: RegisterComponent },
+  { path: 'orders', component: OrdersComponent }
 ];
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
-    UserComponent,
-    ConfirmAccountComponent
+    ProfileComponent,
+    ConfirmAccountComponent,
+    OrdersComponent,
+    MenuComponent,
+    OrderDialogComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +39,8 @@ const routes: Routes = [
     MatFormFieldModule,
     ReactiveFormsModule,
     FormsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    MatDialogModule
   ],
   providers: [
     {

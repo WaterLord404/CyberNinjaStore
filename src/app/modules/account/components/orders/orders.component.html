@@ -1,0 +1,19 @@
+<div class="orders-container">
+  <div class="order-container" *ngFor="let order of orders" @fadeIn (click)="openDialog(order)">
+    <div>
+      <p>#{{order.id}}</p>
+    </div>
+    <div>
+      <p>{{order.purchaseDate}}</p>
+    </div>
+    <div>
+      <p *ngIf="order.shipping.status != 'INTRANSIT'">{{order.shipping.status}}</p>
+      <p *ngIf="order.shipping.status == 'INTRANSIT'">IN TRANSIT</p>
+    </div>
+    <div>
+      <p>{{order.totalPrice}}€</p>
+    </div>
+  </div>
+
+  <img *ngIf="orders.length == 0" class="empty-orders" src="../../../../../assets/img/emptyOrders.jpg" alt="emptyOrders" @fadeIn>
+</div>

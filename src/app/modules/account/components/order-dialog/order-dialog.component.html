@@ -1,0 +1,31 @@
+<div class="dialog">
+  <h1 mat-dialog-title>SHIPPING DETAILS</h1>
+  <mat-dialog-content class="mat-typography">
+    <div *ngFor="let item of order.ordersDetails" class="items">
+      <div class="item-name">
+        <p>{{item.product.name.toUpperCase()}}</p>
+      </div>
+      <div class="order-details">
+        <p><i>{{item.size}}, {{item.colour}}, {{item.units}} PIECE</i></p>
+      </div>
+    </div>
+    <hr>
+    <div *ngIf="order.shipping.status == 'ACCEPTED'">
+      <p>Soon you receive shipment data</p>
+    </div>
+    <div *ngIf="order.shipping.status == 'INTRANSIT'">
+      <div class="shipping">
+        <p class="item-name">COUNTRY</p>
+        <p class="shipping-details">{{order.shipping.county.toUpperCase()}}</p>
+      </div>
+      <div class="shipping">
+        <p class="item-name">STATE</p>
+        <p class="shipping-details">{{order.shipping.state.toUpperCase()}}</p>
+      </div>
+      <div class="shipping">
+        <p class="item-name">VILLAGE</p>
+        <p class="shipping-details">{{order.shipping.village.toUpperCase()}}</p>
+      </div>
+    </div>
+  </mat-dialog-content>
+</div>

@@ -1,0 +1,36 @@
+@import "../../../../../assets/scss/grid";
+
+.items {
+  @include flex-row();
+  justify-content: space-between;
+  p {
+    text-align: left;
+    margin: 0%;
+  }
+
+  .order-details {
+    p {
+      text-align: right;
+    }
+  }
+}
+
+.shipping {
+  @include flex-row();
+  justify-content: space-between;
+  p {
+    text-align: left;
+    margin: 0%;
+  }
+  .shipping-details {
+    text-align: right;
+    overflow: hidden;
+    width: 50%;
+  }
+}
+
+.item-name {
+  white-space: nowrap;
+  overflow: hidden;
+  width: 50%;
+}

@@ -29,4 +29,11 @@ export class OrderService {
 
     return this.http.post(this.url + couponCode, ordersDetails);
   }
+
+  /**
+   * Obtiene las orders con su envio
+   */
+  getOrders(): Observable<any> {
+    return this.http.get(this.url);
+  }
 }

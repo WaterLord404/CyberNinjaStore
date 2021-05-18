@@ -4,7 +4,7 @@
 .user-details-container {
   @include font-product();
   @include flex-column();
-  min-height: 90vh;
+  min-height: 85vh;
   margin-top: 0%;
   text-transform: none;
 }

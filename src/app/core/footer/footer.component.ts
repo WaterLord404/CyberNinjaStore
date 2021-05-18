@@ -20,7 +20,17 @@ import { FooterNavI } from '../interfaces/footer-navI';
         animate('200ms ease-in',
           style({ height: 0, opacity: 0 }))]
       )]
-    )
+    ),
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: '0' }),
+        animate('300ms ease-in', style({ opacity: '1' })),
+      ]),
+      transition(':leave', [
+        style({ opacity: '1' }),
+        animate('300ms ease-out', style({ opacity: '0' }))
+      ])
+    ]),
   ]
 })
 export class FooterComponent implements OnInit {

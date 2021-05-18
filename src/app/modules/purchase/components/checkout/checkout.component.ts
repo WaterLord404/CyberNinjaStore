@@ -17,14 +17,14 @@ import { OrderService } from '../../services/order.service';
 })
 export class CheckoutComponent implements OnInit {
 
-  ordersDetails: Array<OrderDetailsI> = [];
+  ordersDetails: Array<OrderDetailsI>;
   coupon: CouponI;
   totalPrice: number;
-  shipping = 5.99;
+  shipping: number;
   user: UserI;
-  finalPrice = 0;
-  discount = 0;
-  activeSpinner = true;
+  finalPrice: number;
+  discount: number;
+  activeSpinner: boolean;
 
   constructor(
     private cartBadgeService: CartBadgeService,
@@ -33,18 +33,23 @@ export class CheckoutComponent implements OnInit {
     private authService: AuthService,
     private checkoutService: CheckoutService,
     private router: Router
-  ) { }
-
-  /**
-   * Obtiene la informacion que es pasada desde cart component
-   */
-  ngOnInit(): void {
+  ) {
+    this.ordersDetails = [];
+    this.shipping = 5.99;
+    this.activeSpinner = true;
+    this.finalPrice = 0;
+    this.discount = 0;
     this.user = this.authService.getUser();
     this.checkoutService.getCoupon().subscribe(res => this.coupon = res);
     this.checkoutService.getTotalPrice().subscribe(res => this.totalPrice = res);
     this.checkoutService.getOrdersDetails().subscribe(res => this.ordersDetails = res);
     this.checkoutService.getDiscount().subscribe(res => this.discount = res);
+  }
 
+  /**
+   * Obtiene la informacion que es pasada desde cart component
+   */
+  ngOnInit(): void {
     this.finalPrice = this.calculateFinalPrice();
   }
 

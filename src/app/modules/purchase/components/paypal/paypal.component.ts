@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ICreateOrderRequest, ITransactionItem } from 'ngx-paypal';
-import { CouponI } from '../../interfaces/coupon';
 import { OrderDetailsI } from '../../interfaces/order-details';
 
 @Component({
@@ -8,13 +7,13 @@ import { OrderDetailsI } from '../../interfaces/order-details';
   templateUrl: './paypal.component.html',
   styleUrls: ['./paypal.component.scss']
 })
-export class PaypalComponent implements OnInit {
+export class PaypalComponent implements OnInit, AfterViewInit {
 
   @Input() ordersDetails: Array<OrderDetailsI>;
   @Input() finalPrice = 0;
   @Input() shipping = 0;
   @Input() discount = 0;
-  @Input() totalPrice = 0;                                                                                                   ;
+  @Input() totalPrice = 0;
   payPalConfig: any;
 
   @Output() successful = new EventEmitter<any>();
@@ -23,8 +22,6 @@ export class PaypalComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.spinnerActive.emit()
-
     this.payPalConfig = {
       currency: 'EUR',
       clientId: 'AdTFRw1qz6oh1Ac8nZVQ1-668Q3vOErq0trFh813f3XHb2gfIsEiheGvQm8dKqtEv8wwU4zD3ej9VwSN',
@@ -100,4 +97,11 @@ export class PaypalComponent implements OnInit {
 
     return items;
   }
+
+    /**
+     * Actualiza el spinner al cargar el componente
+     */
+    ngAfterViewInit(): void {
+      setTimeout(() => this.spinnerActive.emit(), 0);
+    }
 }

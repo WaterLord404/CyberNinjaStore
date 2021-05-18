@@ -1,0 +1,37 @@
+@import "../../../../../assets/scss/variables";
+@import "../../../../../assets/scss/grid";
+
+.orders-container {
+  min-height: 85vh;
+}
+
+.order-container {
+  @include font-product();
+  @include flex-row();
+  margin: 0%;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  height: 50px;
+  align-items: center;
+  p {
+    margin: unset;
+  }
+  div {
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+  }
+}
+
+.order-container:first-child {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.empty-orders {
+  width: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { Router } from '@angular/router';
 import { CartBadgeService } from 'src/app/core/services/cart-badge.service';
@@ -41,6 +42,7 @@ export class HeaderComponent implements OnInit {
     protected authService: AuthService,
     private cartBadgeService: CartBadgeService,
     private cartService: CartService,
+    private dialog: MatDialog
   ) {
     // Muestra o oculta la barra de loading
     this.loaderService.loading().subscribe(res => this.isLoading = res);
@@ -59,5 +61,9 @@ export class HeaderComponent implements OnInit {
     this.cartService.saveCart();
     this.router.navigate(['/']);
     window.scroll(0, 0);
+  }
+
+  closeDialog(): void {
+    this.dialog.closeAll();
   }
 }
