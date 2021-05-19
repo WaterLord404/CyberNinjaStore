@@ -7,7 +7,7 @@ import { OrderDetailsI } from '../../interfaces/order-details';
   templateUrl: './paypal.component.html',
   styleUrls: ['./paypal.component.scss']
 })
-export class PaypalComponent implements OnInit, AfterViewInit {
+export class PaypalComponent implements OnInit {
 
   @Input() ordersDetails: Array<OrderDetailsI>;
   @Input() finalPrice = 0;
@@ -22,6 +22,8 @@ export class PaypalComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngOnInit() {
+    setTimeout(() => this.spinnerActive.emit(), 0);
+
     this.payPalConfig = {
       currency: 'EUR',
       clientId: 'AdTFRw1qz6oh1Ac8nZVQ1-668Q3vOErq0trFh813f3XHb2gfIsEiheGvQm8dKqtEv8wwU4zD3ej9VwSN',
@@ -97,11 +99,4 @@ export class PaypalComponent implements OnInit, AfterViewInit {
 
     return items;
   }
-
-    /**
-     * Actualiza el spinner al cargar el componente
-     */
-    ngAfterViewInit(): void {
-      setTimeout(() => this.spinnerActive.emit(), 0);
-    }
 }

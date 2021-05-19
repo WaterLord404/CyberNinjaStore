@@ -15,6 +15,10 @@
     </div>
     <div *ngIf="order.shipping.status == 'INTRANSIT'">
       <div class="shipping">
+        <p class="item-name">UPDATE DATE</p>
+        <p class="shipping-details">{{order.shipping.updateDate | date: 'yyyy-MM-dd HH:mm'}}</p>
+      </div>
+      <div class="shipping">
         <p class="item-name">COUNTRY</p>
         <p class="shipping-details">{{order.shipping.county.toUpperCase()}}</p>
       </div>

@@ -18,9 +18,9 @@ const routes: Routes = [
   { path: '', component: MenuComponent, canActivate: [IsLoggedGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [IsLoggedGuard] },
   { path: 'confirm-account/:token', component: ConfirmAccountComponent },
+  { path: 'orders', component: OrdersComponent, canActivate: [IsLoggedGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'orders', component: OrdersComponent }
+  { path: 'register', component: RegisterComponent }
 ];
 
 @NgModule({

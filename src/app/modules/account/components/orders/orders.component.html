@@ -15,5 +15,5 @@
     </div>
   </div>
 
-  <img *ngIf="orders.length == 0" class="empty-orders" src="../../../../../assets/img/emptyOrders.jpg" alt="emptyOrders" @fadeIn>
+  <img *ngIf="!isLoading && orders.length == 0" class="empty-orders" src="../../../../../assets/img/emptyOrders.jpg" alt="emptyOrders" @fadeIn>
 </div>

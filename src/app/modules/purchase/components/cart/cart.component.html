@@ -32,7 +32,7 @@
     <button class="relative-big-button" (click)="checkout()">CHECKOUT</button>
   </div>
 
-  <img *ngIf="ordersDetails.length == 0" class="empty-cart" src="../../../../../assets/img/emptyCart.png" alt="emptyCart" @fadeIn>
+  <img *ngIf="!isLoading && ordersDetails.length == 0" class="empty-cart" src="../../../../../assets/img/emptyCart.png" alt="emptyCart" @fadeIn>
 </div>
 
 <app-coupon *ngIf="couponComponent" (closePopUpEvent)="couponComponent = false" (couponEvent)="saveCoupon($event)">

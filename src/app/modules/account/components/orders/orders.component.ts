@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { LoaderService } from 'src/app/core/services/loader.service';
 import { OrderService } from 'src/app/modules/purchase/services/order.service';
 import { OrderI } from '../../interfaces/orderI';
 import { OrderDialogComponent } from '../order-dialog/order-dialog.component';
@@ -25,11 +26,15 @@ import { OrderDialogComponent } from '../order-dialog/order-dialog.component';
 export class OrdersComponent implements OnInit {
 
   orders: Array<OrderI> = [];
+  isLoading = false;
 
   constructor(
     private orderService: OrderService,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    private loaderService: LoaderService
+  ) {
+    this.loaderService.loading().subscribe(res => this.isLoading = res);
+  }
 
   ngOnInit(): void {
     window.scroll(0, 0);

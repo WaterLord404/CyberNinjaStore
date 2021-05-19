@@ -9,6 +9,7 @@ import { CartBadgeService } from 'src/app/core/services/cart-badge.service';
 import { CartService } from 'src/app/modules/purchase/services/cart.service';
 import { CouponI } from '../../interfaces/coupon';
 import { CheckoutService } from '../../services/checkout.service';
+import { LoaderService } from 'src/app/core/services/loader.service';
 
 @Component({
   selector: 'app-cart',
@@ -34,6 +35,7 @@ export class CartComponent implements OnInit {
   coupon: CouponI;
   totalPrice: number;
   discount: number;
+  isLoading = true;
 
   constructor(
     protected router: Router,
@@ -41,8 +43,11 @@ export class CartComponent implements OnInit {
     private cartService: CartService,
     private cartBadgeService: CartBadgeService,
     private snackBarService: SnackBarService,
-    private checkoutService: CheckoutService
-  ) { }
+    private checkoutService: CheckoutService,
+    private loaderService: LoaderService
+  ) {
+    this.loaderService.loading().subscribe(res => this.isLoading = res);
+  }
 
   // Obtiene los productos del carrito
   ngOnInit(): void {
