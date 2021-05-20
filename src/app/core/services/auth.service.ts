@@ -72,7 +72,7 @@ export class AuthService {
     let isAdmin = false;
 
     const jwt: string = localStorage.getItem('token');
-    if (jwt == null) { return; }
+    if (jwt == undefined) { return isAdmin; }
 
     const jwtData = jwt.split('.')[1];
     const decodedJwtJsonData = window.atob(jwtData);
