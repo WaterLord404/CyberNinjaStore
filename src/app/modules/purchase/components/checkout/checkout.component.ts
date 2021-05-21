@@ -24,7 +24,7 @@ export class CheckoutComponent implements OnInit {
   user: UserI;
   finalPrice: number;
   discount: number;
-  activeSpinner: boolean;
+  activeSpinner = true;
 
   constructor(
     private cartBadgeService: CartBadgeService,
@@ -36,7 +36,6 @@ export class CheckoutComponent implements OnInit {
   ) {
     this.ordersDetails = [];
     this.shipping = 5.99;
-    this.activeSpinner = true;
     this.finalPrice = 0;
     this.discount = 0;
     this.user = this.authService.getUser();
