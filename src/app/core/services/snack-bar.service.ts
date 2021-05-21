@@ -61,7 +61,7 @@ export class SnackBarService {
         error = 'Access denied';
         break;
       case 500:
-        error = 'something went wrong';
+        error = 'Something went wrong';
         break;
       case 800:
         error = 'One product in your cart now does not exist';
