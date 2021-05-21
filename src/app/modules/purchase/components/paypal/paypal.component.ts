@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ICreateOrderRequest, ITransactionItem } from 'ngx-paypal';
 import { OrderDetailsI } from '../../interfaces/order-details';
 
@@ -14,17 +14,14 @@ export class PaypalComponent implements OnInit {
   @Input() shipping = 0;
   @Input() discount = 0;
   @Input() totalPrice = 0;
-  payPalConfig: any;
+  paypalConfig: any;
 
   @Output() successful = new EventEmitter<any>();
-  @Output() spinnerActive = new EventEmitter<any>();
 
   constructor() { }
 
-  ngOnInit() {
-    setTimeout(() => this.spinnerActive.emit(), 0);
-
-    this.payPalConfig = {
+  ngOnInit()  {
+    this.paypalConfig = {
       currency: 'EUR',
       clientId: 'AdTFRw1qz6oh1Ac8nZVQ1-668Q3vOErq0trFh813f3XHb2gfIsEiheGvQm8dKqtEv8wwU4zD3ej9VwSN',
       // tslint:disable-next-line: no-angle-bracket-type-assertion
@@ -62,6 +59,7 @@ export class PaypalComponent implements OnInit {
         label: 'paypal',
         layout: 'vertical'
       },
+      
       onApprove: (data, actions) => { },
 
       onClientAuthorization: data => {

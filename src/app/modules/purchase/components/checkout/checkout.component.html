@@ -61,18 +61,13 @@
   </div>
 
   <div class="paypal-container">
-    <div *ngIf="activeSpinner" class="spinner-container">
-      <mat-progress-spinner mode="indeterminate" color="warn"></mat-progress-spinner>
-    </div>
-
-    <app-paypal
+    <app-paypal #paypal
     [finalPrice]="finalPrice"
     [totalPrice]="totalPrice"
     [ordersDetails]="ordersDetails"
     [shipping]="shipping"
     [discount]="discount"
-    (successful)="payment()"
-    (spinnerActive)="activeSpinner = false">
+    (successful)="payment()">
     </app-paypal>
   </div>
 </div>

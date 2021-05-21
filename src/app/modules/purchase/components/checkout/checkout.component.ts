@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -9,6 +9,7 @@ import { CouponI } from '../../interfaces/coupon';
 import { OrderDetailsI } from '../../interfaces/order-details';
 import { CheckoutService } from '../../services/checkout.service';
 import { OrderService } from '../../services/order.service';
+import { PaypalComponent } from '../paypal/paypal.component';
 
 @Component({
   selector: 'app-checkout',
@@ -24,7 +25,7 @@ export class CheckoutComponent implements OnInit {
   user: UserI;
   finalPrice: number;
   discount: number;
-  activeSpinner = true;
+  activeSpinner = false;
 
   constructor(
     private cartBadgeService: CartBadgeService,
@@ -80,5 +81,4 @@ export class CheckoutComponent implements OnInit {
     this.finalPrice = (Math.round((this.totalPrice + this.shipping) * 100) / 100);
     return this.finalPrice;
   }
-
 }
