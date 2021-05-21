@@ -4,11 +4,11 @@
       <p>#{{order.id}}</p>
     </div>
     <div>
-      <p>{{order.purchaseDate}}</p>
-    </div>
-    <div>
       <p *ngIf="order.shipping.status != 'INTRANSIT'">{{order.shipping.status}}</p>
       <p *ngIf="order.shipping.status == 'INTRANSIT'">IN TRANSIT</p>
+    </div>
+    <div>
+      <p>{{order.purchaseDate}}</p>
     </div>
     <div>
       <p>{{order.totalPrice}}€</p>

@@ -9,7 +9,7 @@
   @include font-product();
   @include flex-row();
   margin: 0%;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   height: 50px;
@@ -19,7 +19,6 @@
   }
   div {
     white-space: nowrap;
-    width: 100%;
     overflow: hidden;
   }
 }
