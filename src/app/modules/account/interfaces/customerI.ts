@@ -3,9 +3,9 @@ export interface CustomerI {
   surname: string;
   email: string;
   telephone: string;
-  region: string;
-  province: string;
-  locality: string;
+  county: string;
+  state: string;
+  village: string;
   postalCode: string;
   address: string;
 }

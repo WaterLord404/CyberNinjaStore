@@ -32,9 +32,9 @@ export class RegisterComponent implements OnInit {
       surname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       telephone: ['', Validators.required],
-      region: ['', Validators.required],
-      province: ['', Validators.required],
-      locality: ['', Validators.required],
+      country: ['', Validators.required],
+      state: ['', Validators.required],
+      village: ['', Validators.required],
       postalCode: ['', Validators.required],
       address: ['', Validators.required]
     });
@@ -83,9 +83,9 @@ export class RegisterComponent implements OnInit {
         surname: this.f.surname.value,
         email: this.f.email.value,
         telephone: this.f.telephone.value,
-        region: this.f.region.value,
-        province: this.f.province.value,
-        locality: this.f.locality.value,
+        county: this.f.county.value,
+        state: this.f.state.value,
+        village: this.f.village.value,
         postalCode: this.f.postalCode.value,
         address: this.f.address.value
       }
