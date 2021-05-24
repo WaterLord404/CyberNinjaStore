@@ -1,0 +1,39 @@
+@import "../../../../../assets/scss/grid";
+@import "../../../../../assets/scss/variables";
+
+.items {
+  @include flex-row();
+  justify-content: space-between;
+  p {
+    text-align: left;
+  }
+
+  .order-details {
+    p {
+      text-align: right;
+    }
+    img {
+      width: $icon-size;
+    }
+  }
+}
+
+.item-name {
+  margin-right: 5%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+textarea {
+    width: 100%;
+}
+
+.container-errors {
+  display: flex;
+  justify-content: left;
+  label {
+    @include font-product();
+    margin: 0;
+    color: red !important;
+  }
+}

@@ -1,35 +1,43 @@
-<div class="dialog">
-  <h1 mat-dialog-title>SHIPPING DETAILS</h1>
-  <mat-dialog-content class="mat-typography">
-    <div *ngFor="let item of order.ordersDetails" class="items">
-      <div class="item-name">
+<h1 mat-dialog-title>SHIPPING DETAILS</h1>
+<mat-dialog-content class="mat-typography">
+  <div *ngFor="let item of order.ordersDetails">
+    <div class="items">
+      <div class="item-name-product" *ngIf="order.shipping.status != 'DELIVERED'">
         <p>{{item.product.name.toUpperCase()}}</p>
       </div>
-      <div class="order-details">
-        <p><i>{{item.size}}, {{item.colour}}, {{item.units}} PIECE</i></p>
+      <div class="item-name-product-delivered" *ngIf="order.shipping.status == 'DELIVERED'">
+        <p>{{item.product.name.toUpperCase()}}</p>
+      </div>
+      <div class="order-details" *ngIf="order.shipping.status != 'DELIVERED'">
+        <p>{{item.size}}, {{item.colour}}, {{item.units}} PIECE</p>
+      </div>
+      <div class="order-details" *ngIf="order.shipping.status == 'DELIVERED'">
+        <img src="../../../../../assets/icons/rating.svg" alt="ratingIcon" (click)="rateProduct(item.product)">
       </div>
     </div>
-    <hr>
-    <div *ngIf="order.shipping.status == 'ACCEPTED'">
-      <p>Soon you receive shipment data</p>
+  </div>
+
+  <hr class="hr" *ngIf="order.shipping.status == 'ACCEPTED' || order.shipping.status == 'INTRANSIT'">
+
+  <div *ngIf="order.shipping.status == 'ACCEPTED'">
+    <p>Soon you receive shipment data</p>
+  </div>
+  <div *ngIf="order.shipping.status == 'INTRANSIT'">
+    <div class="shipping">
+      <p class="item-name">UPDATE DATE</p>
+      <p class="shipping-details">{{order.shipping.updateDate | date: 'yyyy-MM-dd HH:mm'}}</p>
     </div>
-    <div *ngIf="order.shipping.status == 'INTRANSIT'">
-      <div class="shipping">
-        <p class="item-name">UPDATE DATE</p>
-        <p class="shipping-details">{{order.shipping.updateDate | date: 'yyyy-MM-dd HH:mm'}}</p>
-      </div>
-      <div class="shipping">
-        <p class="item-name">COUNTRY</p>
-        <p class="shipping-details">{{order.shipping.county}}</p>
-      </div>
-      <div class="shipping">
-        <p class="item-name">STATE</p>
-        <p class="shipping-details">{{order.shipping.state}}</p>
-      </div>
-      <div class="shipping">
-        <p class="item-name">VILLAGE</p>
-        <p class="shipping-details">{{order.shipping.village}}</p>
-      </div>
+    <div class="shipping">
+      <p class="item-name">COUNTRY</p>
+      <p class="shipping-details">{{order.shipping.county}}</p>
     </div>
-  </mat-dialog-content>
-</div>
+    <div class="shipping">
+      <p class="item-name">STATE</p>
+      <p class="shipping-details">{{order.shipping.state}}</p>
+    </div>
+    <div class="shipping">
+      <p class="item-name">VILLAGE</p>
+      <p class="shipping-details">{{order.shipping.village}}</p>
+    </div>
+  </div>
+</mat-dialog-content>

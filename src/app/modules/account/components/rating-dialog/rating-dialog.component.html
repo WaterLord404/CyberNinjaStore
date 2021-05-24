@@ -1,0 +1,28 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h1 mat-dialog-title>RATE OUR PRODUCT</h1>
+    <mat-dialog-content class="mat-typography">
+        <div class="items">
+            <div class="item-name">
+                <p>{{item.name.toUpperCase()}}</p>
+            </div>
+            <div class="order-details">
+                <ngb-rating class="stars" [max]="5" formControlName="value" [readonly]="false"></ngb-rating>
+            </div>
+        </div>
+        <textarea formControlName="details" placeholder="Write a review..."></textarea>
+        <div class="container-errors" *ngIf="f.details.errors">
+            <label *ngIf="f.details.errors.required && submitted == true">
+                Details is required
+            </label>
+            <label *ngIf="f.details.errors.minlength && submitted == true">
+                Details must be at least 6 characters
+            </label>
+            <label *ngIf="f.details.errors.maxlength && submitted == true">
+                Details must be at less 255 characters
+            </label>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button class="relative-big-button">SEND REVIEW</button>
+    </mat-dialog-actions>
+</form>

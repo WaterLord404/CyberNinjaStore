@@ -45,6 +45,9 @@ export class SnackBarService {
       case 213:
         error = 'Check your email to confirm your account';
         break;
+      case 214:
+        error = 'Thanks for rating !';
+        break;
       case 220:
         error = 'Successfully purchase';
         break;

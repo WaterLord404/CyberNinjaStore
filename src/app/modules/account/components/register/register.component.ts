@@ -40,9 +40,6 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  /**
-   * Crea el usuario
-   */
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid

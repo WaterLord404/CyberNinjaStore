@@ -13,6 +13,8 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { OrderDialogComponent } from './components/order-dialog/order-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { RatingDialogComponent } from './components/rating-dialog/rating-dialog.component';
 
 const routes: Routes = [
   { path: '', component: MenuComponent, canActivate: [IsLoggedGuard] },
@@ -31,7 +33,8 @@ const routes: Routes = [
     ConfirmAccountComponent,
     OrdersComponent,
     MenuComponent,
-    OrderDialogComponent
+    OrderDialogComponent,
+    RatingDialogComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +43,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormsModule,
     SocialLoginModule,
-    MatDialogModule
+    MatDialogModule,
+    NgbRatingModule
   ],
   providers: [
     {
