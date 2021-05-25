@@ -63,6 +63,9 @@ export class SnackBarService {
       case 403:
         error = 'Access denied';
         break;
+      case 410:
+        error = 'You already valued this product';
+        break;
       case 500:
         error = 'Something went wrong';
         break;

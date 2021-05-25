@@ -41,7 +41,7 @@ export class RatingDialogComponent implements OnInit {
   /**
    * Crea el usuario
    */
-   onSubmit() {
+  onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
     if (this.form.invalid) {
@@ -56,7 +56,16 @@ export class RatingDialogComponent implements OnInit {
         this.dialog.closeAll();
         this.snackBarService.popup(214);
       },
-      () => this.snackBarService.popup(500)
+      err => {
+        switch (err.status) {
+          case 409:
+            this.snackBarService.popup(410)
+            break;
+          default:
+            this.snackBarService.popup(500)
+            break;
+        }
+      }
     );
   }
 
