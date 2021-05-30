@@ -1,0 +1,12 @@
+@import "../../../../../../assets/scss/grid";
+@import "../../../../../../assets/scss/variables";
+
+.items {
+    @include flex-column();
+    width: 100%;
+    justify-content: flex-start;
+    span {
+        text-align: left;
+        margin: 3% 0;
+    }
+}

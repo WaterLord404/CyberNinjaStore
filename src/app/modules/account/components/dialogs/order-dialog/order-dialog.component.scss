@@ -1,5 +1,5 @@
-@import "../../../../../assets/scss/grid";
-@import "../../../../../assets/scss/variables";
+@import "../../../../../../assets/scss/grid";
+@import "../../../../../../assets/scss/variables";
 
 .items {
   @include flex-row();
@@ -40,12 +40,26 @@
   margin-right: 5%;
 }
 
-.item-name-product-delivered {
-  margin-right: 5%;
+.items-delivered {
+  width: 100%;
+  @include flex-row();
+  text-align: left;
+  overflow: hidden;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   align-self: center;
   p {
-    margin: 0%;
+    margin: 3% 0%;
+    color: $orange;
   }
+  span {
+    align-self: center;
+    color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.border-top {
+  border-top: 1px solid rgba(0, 0, 0, 0.05) !important;
 }
 
 .hr {

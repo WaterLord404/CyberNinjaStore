@@ -11,10 +11,11 @@ import { ConfirmAccountComponent } from './components/confirm-account/confirm-ac
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 import { OrdersComponent } from './components/orders/orders.component';
 import { MenuComponent } from './components/menu/menu.component';
-import { OrderDialogComponent } from './components/order-dialog/order-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
-import { RatingDialogComponent } from './components/rating-dialog/rating-dialog.component';
+import { RatingDialogComponent } from './components/dialogs/rating-dialog/rating-dialog.component';
+import { ProductDialogComponent } from './components/dialogs/product-dialog/product-dialog.component';
+import { OrderDialogComponent } from './components/dialogs/order-dialog/order-dialog.component';
 
 const routes: Routes = [
   { path: '', component: MenuComponent, canActivate: [IsLoggedGuard] },
@@ -34,7 +35,8 @@ const routes: Routes = [
     OrdersComponent,
     MenuComponent,
     OrderDialogComponent,
-    RatingDialogComponent
+    RatingDialogComponent,
+    ProductDialogComponent
   ],
   imports: [
     CommonModule,

@@ -48,6 +48,9 @@ export class SnackBarService {
       case 214:
         error = 'Thanks for rating !';
         break;
+      case 215:
+        error = 'Successfully returned';
+        break;
       case 220:
         error = 'Successfully purchase';
         break;
@@ -62,6 +65,9 @@ export class SnackBarService {
         break;
       case 403:
         error = 'Access denied';
+        break;
+      case 409:
+        error = 'You already returned this product';
         break;
       case 410:
         error = 'You already valued this product';

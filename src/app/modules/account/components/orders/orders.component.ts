@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { OrderService } from 'src/app/modules/purchase/services/order.service';
 import { OrderI } from '../../interfaces/orderI';
-import { OrderDialogComponent } from '../order-dialog/order-dialog.component';
+import { OrderDialogComponent } from '../dialogs/order-dialog/order-dialog.component';
 
 @Component({
   selector: 'app-orders',

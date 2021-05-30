@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ShippingI } from '../../account/interfaces/shippingI';
+import { ProductI } from '../../product/Interfaces/productI';
 import { CouponI } from '../interfaces/coupon';
 import { OrderDetailsI } from '../interfaces/order-details';
 
@@ -35,5 +37,15 @@ export class OrderService {
    */
   getOrders(): Observable<any> {
     return this.http.get(this.url);
+  }
+
+  /**
+   * Devuelve un producto
+   *
+   * @param product
+   * @returns
+   */
+  returnProduct(shippingV: ShippingI, orderDetailsV: OrderDetailsI): Observable<any> {
+    return this.http.put(this.url, { shipping: shippingV, orderDetails: orderDetailsV });
   }
 }

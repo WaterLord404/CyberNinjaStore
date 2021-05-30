@@ -1,0 +1,9 @@
+<h1 mat-dialog-title (click)="router.navigate(['/products/p/' + orderDetail.product.id]); dialog.closeAll()">
+    {{orderDetail.product.name.toUpperCase()}}
+</h1>
+<mat-dialog-content class="mat-typography">
+    <div class="items">
+        <span (click)="goToRatingDialog()">RATE THIS PRODUCT</span>
+        <span *ngIf="checkReturnDate()" (click)="returnProduct()">RETURN THE PRODUCT</span>
+    </div>
+</mat-dialog-content>

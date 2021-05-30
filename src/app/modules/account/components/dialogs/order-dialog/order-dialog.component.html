@@ -1,19 +1,18 @@
 <h1 mat-dialog-title>ORDER DETAILS</h1>
 <mat-dialog-content class="mat-typography">
+  <div class="border-top" *ngIf="order.shipping.status == 'RETURNED' || order.shipping.status == 'DELIVERED'"></div>
   <div *ngFor="let item of order.ordersDetails">
-    <div class="items">
-      <div class="item-name-product" *ngIf="order.shipping.status != 'DELIVERED'">
+    <div class="items" *ngIf="order.shipping.status == 'INTRANSIT' || order.shipping.status == 'ACCEPTED'">
+      <div class="item-name-product" >
         <p>{{item.product.name.toUpperCase()}}</p>
       </div>
-      <div class="item-name-product-delivered" *ngIf="order.shipping.status == 'DELIVERED'">
-        <p>{{item.product.name.toUpperCase()}}</p>
-      </div>
-      <div class="order-details" *ngIf="order.shipping.status != 'DELIVERED'">
+      <div class="order-details">
         <p>{{item.size}}, {{item.colour}}, {{item.units}} PIECE</p>
       </div>
-      <div class="order-details" *ngIf="order.shipping.status == 'DELIVERED'">
-        <img src="../../../../../assets/icons/rating.svg" alt="ratingIcon" (click)="rateProduct(item.product)">
-      </div>
+    </div>
+
+    <div class="items-delivered" *ngIf="order.shipping.status == 'RETURNED' || order.shipping.status == 'DELIVERED'" (click)="goToProductDialog(item)">
+      <p>{{item.product.name.toUpperCase()}}</p>
     </div>
   </div>
 
