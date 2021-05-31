@@ -1,8 +1,11 @@
 <div class="user-details-container" *ngIf="user">
-  <p>Name: {{user.customer.name}} {{user.customer.surname}}</p>
-  <p>Email: {{user.customer.email}}</p>
-  <p>Telephone: {{user.customer.telephone}}</p>
-  <p>State: {{user.customer.state}}</p>
-  <p>County: {{user.customer.county}}</p>
-  <p>Village: {{user.customer.village}}</p>
+  <div>
+    <p>Name: {{user.customer.name}} {{user.customer.surname}}</p>
+    <p>Email: {{user.customer.email}}</p>
+    <p>Telephone: {{user.customer.telephone}}</p>
+    <p>State: {{user.customer.state}}</p>
+    <p>County: {{user.customer.county}}</p>
+    <p>Village: {{user.customer.village}}</p>
+    <p>Address: {{user.customer.address}}</p>
+  </div>
 </div>

@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
       surname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       telephone: ['', Validators.required],
-      country: ['', Validators.required],
+      county: ['', Validators.required],
       state: ['', Validators.required],
       village: ['', Validators.required],
       postalCode: ['', Validators.required],

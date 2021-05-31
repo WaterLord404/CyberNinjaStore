@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { UserI } from 'src/app/modules/account/interfaces/userI';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -28,12 +29,10 @@ export class AuthService {
     let user: UserI = null;
 
     const jwt: string = localStorage.getItem('token');
-    if (jwt == null) { return; }
+    if (jwt === null) { return; }
 
-    const jwtData = jwt.split('.')[1];
-    const decodedJwtJsonData = window.atob(jwtData);
-    const decodedJwtData = JSON.parse(decodedJwtJsonData);
-    user = decodedJwtData.user;
+    const jwtData: any = jwt_decode(jwt);
+    user = jwtData.user;
 
     return user;
   }
@@ -72,12 +71,10 @@ export class AuthService {
     let isAdmin = false;
 
     const jwt: string = localStorage.getItem('token');
-    if (jwt == undefined) { return isAdmin; }
+    if (jwt === null) { return isAdmin; }
 
-    const jwtData = jwt.split('.')[1];
-    const decodedJwtJsonData = window.atob(jwtData);
-    const decodedJwtData = JSON.parse(decodedJwtJsonData);
-    const role = decodedJwtData.role;
+    const jwtData: any = jwt_decode(jwt);
+    const role = jwtData.role;
 
     role.forEach(element => {
       if (element === 'ADMIN') {
