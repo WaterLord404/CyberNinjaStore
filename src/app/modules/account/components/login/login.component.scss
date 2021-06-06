@@ -3,7 +3,13 @@
 
 .google-container {
   margin-top: 6%;
+  position: relative;
+
   img {
     width: $icon-size;
   }
+}
+
+.form-container {
+  margin-top: 20%;
 }

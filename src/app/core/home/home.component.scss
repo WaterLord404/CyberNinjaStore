@@ -24,25 +24,48 @@ img {
 }
 
 .banner-small {
-  height: 194.66px;
+  height: 200px;
   margin-bottom: 2px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1366px) {
+  .main {
+    padding-top: 0%;
+  }
+
+  .banner-big {
+    height: 900px;
+  }
+
+  .banner-big,
+  .banner-medium,
+  .banner-small {
+    margin-bottom: 6px;
+  }
+
   .banner-medium-container {
     @include flex-row();
     .banner-medium:first-child {
-      margin-right: 2px;
+      margin-right: 6px;
     }
   }
 
   .banner-small-container {
     @include flex-row();
     .banner-small {
-      margin-right: 2px;
+      margin-right: 6px;
     }
     .banner-small:last-child {
       margin: 0;
     }
+  }
+
+  .banner-medium {
+    height: 500px;
+  }
+  
+  .banner-small {
+    height: 350px;
+    margin-bottom: 2px;
   }
 }

@@ -73,11 +73,10 @@ export class CartService {
         this.cartBadgeService.clear();
         this.cartBadgeService.update();
         this.authService.logout();
+        this.snackBarService.popup(211);
       }
     )).subscribe(
-      () => {
-        this.snackBarService.popup(211);
-      },
+      () => { },
       () => { }
     );
   }

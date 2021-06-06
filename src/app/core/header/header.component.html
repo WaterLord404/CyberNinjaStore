@@ -1,14 +1,15 @@
 <header (pointerleave)="closeDialog()">
 
   <button (click)="isMenuActive = !isMenuActive">
-    <img class="hamburger" src="../../../assets/icons/hamburger.svg" alt="menu">
+    <img *ngIf="isMenuActive" class="hamburger" src="../../../assets/icons/cross.svg" alt="crossIcon" [@rotatedState]>
+    <img *ngIf="!isMenuActive" class="hamburger" src="../../../assets/icons/hamburger.svg" alt="hamburgerIcon" [@rotatedState]>
   </button>
 
-  <a href="http://localhost:4200" class="logo">
+  <a [routerLink]="'/'" class="logo" (click)="isMenuActive = false">
     <img src="../../../assets/icons/logo.png" alt="logo">
   </a>
 
-  <a href="cart" [matBadge]="cartBadgeCount" matBadgeSize="small" matBadgeColor="warn">
+  <a [routerLink]="'/cart'" (click)="isMenuActive = false" [matBadge]="cartBadgeCount" matBadgeSize="small" matBadgeColor="warn">
     <img class="shopping-cart" src="../../../assets/icons/shopping_cart.svg" alt="cart">
   </a>
 
@@ -17,6 +18,7 @@
 </header>
 
 <div *ngIf="isMenuActive" class="menu" [@inOutAnimation]>
+  <div class="dark-container"></div>
   <nav class="menu-nav">
     <button (click)="router.navigate(['/products']); isMenuActive = false" class="menu-section">
       <li>

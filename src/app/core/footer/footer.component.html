@@ -6,86 +6,131 @@
   </nav>
 
   <nav class="footer-nav">
-    <ul>
+    <button class="footer-section" (click)="openFooterNav('buyers')">
+      <div class="footer-section-header">
+        <span>BUYERS</span>
+        <span *ngIf="!footerNav[0].value">+</span>
+        <span *ngIf="footerNav[0].value">—</span>
+      </div>
 
-      <button class="footer-section" (click)="openFooterNav('buyers')">
-        <li>
-          <div class="footer-section-header">
-            <span>BUYERS</span>
-            <span *ngIf="!footerNav[0].value">+</span>
-            <span *ngIf="footerNav[0].value">—</span>
-          </div>
+      <nav class="footer-section-content" [@inOutAnimation] *ngIf="footerNav[0].value">
+        <ul>
+          <li><a href="#"><span>Personal Area</span></a></li>
+          <li><a href="#"><span>Reviews</span></a></li>
+          <li><a href="#"><span>Questions and answers</span></a></li>
+          <li><a href="#"><span>Terms of use</span></a></li>
+          <li><a href="#"><span>Personal data processing</span></a></li>
+        </ul>
+      </nav>
+    </button>
 
-          <nav class="footer-section-content" [@inOutAnimation] *ngIf="footerNav[0].value">
-            <ul>
-              <li><a href="#"><span>Personal Area</span></a></li>
-              <li><a href="#"><span>Reviews</span></a></li>
-              <li><a href="#"><span>Questions and answers</span></a></li>
-              <li><a href="#"><span>Terms of use</span></a></li>
-              <li><a href="#"><span>Personal data processing</span></a></li>
-            </ul>
-          </nav>
-        </li>
-      </button>
+    <nav class="footer-section-content-hidden hidden" [@inOutAnimation]>
+      <div class="tittle">
+        <span>BUYERS</span>
+      </div>
+      <div>
+        <ul>
+          <li><a href="#"><span>Personal Area</span></a></li>
+          <li><a href="#"><span>Reviews</span></a></li>
+          <li><a href="#"><span>Questions and answers</span></a></li>
+          <li><a href="#"><span>Terms of use</span></a></li>
+          <li><a href="#"><span>Personal data processing</span></a></li>
+        </ul>
+      </div>
+    </nav>
 
+    <button class="footer-section" (click)="openFooterNav('aboutUs')">
+      <div class="footer-section-header">
+        <span>ABOUT US</span>
+        <span *ngIf="!footerNav[1].value">+</span>
+        <span *ngIf="footerNav[1].value">—</span>
+      </div>
 
-      <button class="footer-section" (click)="openFooterNav('aboutUs')">
-        <li>
-          <div class="footer-section-header">
-            <span>ABOUT US</span>
-            <span *ngIf="!footerNav[1].value">+</span>
-            <span *ngIf="footerNav[1].value">—</span>
-          </div>
+      <nav class="footer-section-content" [@inOutAnimation] *ngIf="footerNav[1].value">
+        <ul>
+          <li><a href="#"><span>For wholesalers </span></a></li>
+          <li><a href="#"><span>For webmasters </span></a></li>
+          <li><a href="#"><span>Vacancies</span></a></li>
+          <li><a href="#"><span>Contacts</span></a></li>
+        </ul>
+      </nav>
+    </button>
 
-          <nav class="footer-section-content" [@inOutAnimation] *ngIf="footerNav[1].value">
-            <ul>
-              <li><a href="#"><span>For wholesalers </span></a></li>
-              <li><a href="#"><span>For webmasters </span></a></li>
-              <li><a href="#"><span>Vacancies</span></a></li>
-              <li><a href="#"><span>Contacts</span></a></li>
-            </ul>
-          </nav>
-        </li>
-      </button>
+    <nav class="footer-section-content-hidden hidden" [@inOutAnimation]>
+      <div class="tittle">
+        <span>ABOUT US</span>
+      </div>
+      <div>
+        <ul>
+          <li><a href="#"><span>For wholesalers </span></a></li>
+          <li><a href="#"><span>For webmasters </span></a></li>
+          <li><a href="#"><span>Vacancies</span></a></li>
+          <li><a href="#"><span>Contacts</span></a></li>
+        </ul>
+      </div>
+    </nav>
 
-      <button class="footer-section" (click)="openFooterNav('information')">
-        <li>
-          <div class="footer-section-header">
-            <span>INFORMATION</span>
-            <span *ngIf="!footerNav[2].value">+</span>
-            <span *ngIf="footerNav[2].value">—</span>
-          </div>
+    <button class="footer-section" (click)="openFooterNav('information')">
+      <div class="footer-section-header">
+        <span>INFORMATION</span>
+        <span *ngIf="!footerNav[2].value">+</span>
+        <span *ngIf="footerNav[2].value">—</span>
+      </div>
 
-          <nav class="footer-section-content" [@inOutAnimation] *ngIf="footerNav[2].value">
-            <ul>
-              <li><a href="#"><span>Store addresses</span></a></li>
-              <li><a href="#"><span>Delivery</span></a></li>
-              <li><a href="#"><span>Payment</span></a></li>
-              <li><a href="#"><span>Return</span></a></li>
-            </ul>
-          </nav>
-        </li>
-      </button>
+      <nav class="footer-section-content" [@inOutAnimation] *ngIf="footerNav[2].value">
+        <ul>
+          <li><a href="#"><span>Store addresses</span></a></li>
+          <li><a href="#"><span>Delivery</span></a></li>
+          <li><a href="#"><span>Payment</span></a></li>
+          <li><a href="#"><span>Return</span></a></li>
+        </ul>
+      </nav>
+    </button>
 
-      <button class="footer-section" (click)="openFooterNav('contacts')">
-        <li>
-          <div class="footer-section-header">
-            <span>CONTACTS</span>
-            <span *ngIf="!footerNav[3].value">+</span>
-            <span *ngIf="footerNav[3].value">—</span>
-          </div>
+    <nav class="footer-section-content-hidden hidden" [@inOutAnimation]>
+      <div class="tittle">
+        <span>INFORMATION</span>
+      </div>
+      <div>
+        <ul>
+          <li><a href="#"><span>Store addresses</span></a></li>
+          <li><a href="#"><span>Delivery</span></a></li>
+          <li><a href="#"><span>Payment</span></a></li>
+          <li><a href="#"><span>Return</span></a></li>
+        </ul>
+      </div>
+    </nav>
 
-          <nav class="footer-section-content" [@inOutAnimation] *ngIf="footerNav[3].value">
-            <ul>
-              <li><a href="#"><span>+34 666 66 66 66</span></a></li>
-              <li><a href="#"><span>E-MAIL ADDRESS: INFO@CIBERNINJA.ES</span></a></li>
-              <li><a href="#"><span>Street Diamantino García, 40, 41310 Brenes, Sevilla</span></a></li>
-              <li><a href="#"><span>IES JACARANDA</span></a></li>
-            </ul>
-          </nav>
-        </li>
-      </button>
+    <button class="footer-section" (click)="openFooterNav('contacts')">
+      <div class="footer-section-header">
+        <span>CONTACTS</span>
+        <span *ngIf="!footerNav[3].value">+</span>
+        <span *ngIf="footerNav[3].value">—</span>
+      </div>
 
-    </ul>
+      <nav class="footer-section-content" [@inOutAnimation] *ngIf="footerNav[3].value">
+        <ul>
+          <li><a href="#"><span>+34 666 66 66 66</span></a></li>
+          <li><a href="#"><span>cyberninjaes@gmail.com</span></a></li>
+          <li><a href="#"><span>Street Diamantino García, 40, 41310 Brenes, Sevilla</span></a></li>
+          <li><a href="#"><span>IES JACARANDA</span></a></li>
+        </ul>
+      </nav>
+    </button>
+
+    <nav class="footer-section-content-hidden hidden" [@inOutAnimation]>
+      <div class="tittle">
+        <span>CONTACTS</span>
+      </div>
+      <div>
+        <ul>
+          <li><a href="#"><span>+34 666 66 66 66</span></a></li>
+          <li><a href="#"><span>cyberninjaes@gmail.com</span></a></li>
+          <li><a href="#"><span>Street Diamantino García, 40, 41310 Brenes, Sevilla</span></a></li>
+          <li><a href="#"><span>IES JACARANDA</span></a></li>
+        </ul>
+      </div>
+    </nav>
   </nav>
+  <div style="height: 50px;"></div>
 </footer>

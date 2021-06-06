@@ -4,7 +4,7 @@
 
 .checkout-container {
   @include font-product();
-
+  margin: 0% 4%;
   p {
     font-size: 500;
     margin: 0;
@@ -43,6 +43,8 @@
 
   .paypal-container {
     margin-top: marginX4(3%);
+    width: 100%;
+    height: 100%;
   }
 }
 

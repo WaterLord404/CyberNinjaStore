@@ -1,3 +1,9 @@
-img {
-  width: 100%;
+@import '../../../assets/scss/grid';
+
+div {
+  min-height: 85vh;
+  @include flex-column();
+  img {
+    width: 100%;
+  }
 }

@@ -26,8 +26,7 @@ a {
   text-decoration-line: unset !important;
 }
 
-main {
-  @include flex-column();
+.main {
   padding-top: 50px;
 }
 
@@ -156,6 +155,10 @@ main {
 ngb-rating {
   font-size: 25px;
   outline: none;
+}
+
+.hidden {
+  display: none;
 }
 
 /* Importing Bootstrap SCSS file. */

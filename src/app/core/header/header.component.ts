@@ -1,4 +1,4 @@
-import { animate, style, transition, trigger } from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -23,7 +23,16 @@ import { LoaderService } from '../services/loader.service';
       transition(':leave', [
         animate('250ms ease-out', style({ transform: 'translateY(-100%)' }))
       ])]
-    )
+    ),
+    trigger('rotatedState', [
+      transition(':enter', [
+        style({ display: 'none' }),
+        animate('200ms ease-in')
+      ]),
+      transition(':leave', [
+        animate('200ms ease-out', style({ transform: 'rotate(180deg)', opacity: '0.8' }))
+      ]),
+    ])
   ]
 })
 

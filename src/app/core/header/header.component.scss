@@ -10,7 +10,7 @@ header {
   @include flex-row();
   justify-content: space-between;
 
-  z-index: 100000;
+  z-index: 15;
 
   button,
   a {
@@ -22,7 +22,12 @@ header {
   }
 
   .logo {
-    width: 0;
+    position: absolute;
+    transform: translateX(-50%);
+    left: 50%;
+    width: auto;
+    height: 100%;
+    margin: 0%;
   }
 
   .shopping-cart,
@@ -46,7 +51,7 @@ header {
   background-color: white;
   height: 100%;
   width: 100%;
-  z-index: 10000;
+  z-index: 9;
   display: flex;
   align-items: flex-start;
 }
@@ -58,10 +63,8 @@ header {
   margin-left: 3%;
   margin-right: 3%;
   width: 100%;
-  font-size: larger;
   span {
-
-    font-size: larger;
+    font-size: medium;
     color: rgba(0, 0, 0, 0.5);
   }
 }
@@ -88,4 +91,46 @@ header {
   position: absolute;
   bottom: 0;
   left: 0;
+}
+
+@media (min-width: 1366px) {
+  header {
+    background: rgba(88, 88, 88, 0.5);
+  }
+
+  img {
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
+  }
+
+  .loading-bar {
+    top: 0;
+    position: fixed;
+  }
+
+  .menu {
+    width: 17%;
+    z-index: 9;
+    background: rgba(0, 0, 0, 0.8);
+    span {
+      color: white;
+    }
+  }
+
+  .menu-section:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.40);
+  }
+  .menu-section {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.40);
+  }
+
+  .dark-container {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: $header-height;
+    background: black;
+    z-index: -1;
+  }
 }
