@@ -1,5 +1,6 @@
 import { AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CartBadgeService } from 'src/app/core/services/cart-badge.service';
@@ -25,7 +26,6 @@ export class CheckoutComponent implements OnInit {
   user: UserI;
   finalPrice: number;
   discount: number;
-  activeSpinner = false;
 
   constructor(
     private cartBadgeService: CartBadgeService,

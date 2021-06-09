@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ICreateOrderRequest, ITransactionItem } from 'ngx-paypal';
 import { OrderDetailsI } from '../../interfaces/order-details';
 
@@ -17,8 +17,9 @@ export class PaypalComponent implements OnInit {
   paypalConfig: any;
 
   @Output() successful = new EventEmitter<any>();
+  activeSpinner = true;
 
-  constructor() { }
+  constructor(private cdref: ChangeDetectorRef) { }
 
   ngOnInit()  {
     this.paypalConfig = {
@@ -59,7 +60,7 @@ export class PaypalComponent implements OnInit {
         label: 'paypal',
         layout: 'vertical'
       },
-      
+
       onApprove: (data, actions) => { },
 
       onClientAuthorization: data => {
@@ -96,5 +97,9 @@ export class PaypalComponent implements OnInit {
     });
 
     return items;
+  }
+
+  ngAfterContentChecked() {
+    this.cdref.detectChanges();
   }
 }

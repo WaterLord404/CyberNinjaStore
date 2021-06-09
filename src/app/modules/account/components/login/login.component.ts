@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
         );
       }
     ).catch(
-      () => this.snackBarService.popup(500)
+      () => { }
     );
   }
 
@@ -80,11 +80,14 @@ export class LoginComponent implements OnInit {
 
   rejectRequest(err: any): void {
     switch (err.status) {
-      case 500:
-        this.snackBarService.popup(500);
+      case 401:
+        this.snackBarService.popup(301);
+        break;
+      case 403:
+        this.snackBarService.popup(301);
         break;
       default:
-        this.snackBarService.popup(301);
+        this.snackBarService.popup(500);
         break;
     }
   }

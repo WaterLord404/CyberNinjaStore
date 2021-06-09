@@ -1,1 +1,4 @@
-<ngx-paypal [config]="paypalConfig"></ngx-paypal>
+<div *ngIf="activeSpinner" class="spinner-container">
+    <mat-progress-spinner mode="indeterminate" color="warn"></mat-progress-spinner>
+</div>
+<ngx-paypal  (scriptLoaded)="activeSpinner = false" [config]="paypalConfig"></ngx-paypal>

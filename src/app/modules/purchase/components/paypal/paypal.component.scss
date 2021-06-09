@@ -1,0 +1,7 @@
+@import "../../../../../assets/scss/grid";
+@import "../../../../../assets/scss/variables";
+@import "../../../../../assets/scss/functions";
+
+.spinner-container {
+    @include flex-row();
+}
