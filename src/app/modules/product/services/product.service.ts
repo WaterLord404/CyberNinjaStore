@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { share } from 'rxjs/operators';
 import { ProductI } from '../Interfaces/productI';
 
 @Injectable({
@@ -14,7 +13,7 @@ export class ProductService {
   actualPage = 0;
   category: string;
   filter: string;
-  load: boolean;
+  isLoaded: boolean;
 
   constructor(
     private http: HttpClient,
@@ -26,7 +25,7 @@ export class ProductService {
   resetPage(): void {
     this.products.next([]);
     this.actualPage = 0;
-    this.load = true;
+    this.isLoaded = true;
   }
 
   loadProducts(category: string, filter?: string): void {
@@ -36,7 +35,7 @@ export class ProductService {
     } else {
       this.filter = filter;
     }
-    this.load = false;
+    this.isLoaded = false;
 
 
     // Obtiene los productos
@@ -45,10 +44,10 @@ export class ProductService {
         res.forEach(element => {
           this.products.value.push(element);
         });
-        this.load = true;
+        this.isLoaded = true;
         this.actualPage++;
       },
-      () => { this.load = false; }
+      () => { this.isLoaded = false; }
     );
   }
 
@@ -56,7 +55,7 @@ export class ProductService {
    * Actualiza la pagina
    */
   onScroll(): void {
-    if (this.load) {
+    if (this.isLoaded) {
       // Obtiene los productos
       this.loadProducts(this.category, this.filter);
     }
