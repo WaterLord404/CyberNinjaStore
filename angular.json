@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "CiberNinjaStore-FE": {
+    "CyberNinjaStore-FE": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/CiberNinjaStore-FE",
+            "outputPath": "dist/CyberNinjaStore-FE",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -68,18 +68,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "CiberNinjaStore-FE:build"
+            "browserTarget": "CyberNinjaStore-FE:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "CiberNinjaStore-FE:build:production"
+              "browserTarget": "CyberNinjaStore-FE:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "CiberNinjaStore-FE:build"
+            "browserTarget": "CyberNinjaStore-FE:build"
           }
         },
         "test": {
@@ -117,16 +117,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "CiberNinjaStore-FE:serve"
+            "devServerTarget": "CyberNinjaStore-FE:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "CiberNinjaStore-FE:serve:production"
+              "devServerTarget": "CyberNinjaStore-FE:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "CiberNinjaStore-FE"
+  "defaultProject": "CyberNinjaStore-FE"
 }
