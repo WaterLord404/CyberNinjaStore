@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  domain: 'http://192.168.0.157:8080/'
+  domain: 'http://192.168.0.157:8080/',
+  googleClientID: '899814992698-rfm638ehb7fb39t7t52c6j44du35fg8h.apps.googleusercontent.com'
 };
 
 /*

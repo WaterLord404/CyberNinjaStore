@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './components/profile/profile.component';
 import { IsLoggedGuard } from 'src/app/core/guards/is-logged.guard';
 import { ConfirmAccountComponent } from './components/confirm-account/confirm-account.component';
+
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 import { OrdersComponent } from './components/orders/orders.component';
 import { MenuComponent } from './components/menu/menu.component';
@@ -16,6 +17,7 @@ import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { RatingDialogComponent } from './components/dialogs/rating-dialog/rating-dialog.component';
 import { ProductDialogComponent } from './components/dialogs/product-dialog/product-dialog.component';
 import { OrderDialogComponent } from './components/dialogs/order-dialog/order-dialog.component';
+import { environment } from 'src/environments/environment';
 
 const routes: Routes = [
   { path: '', component: MenuComponent, canActivate: [IsLoggedGuard] },
@@ -56,7 +58,7 @@ const routes: Routes = [
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('899814992698-rfm638ehb7fb39t7t52c6j44du35fg8h.apps.googleusercontent.com'),
+            provider: new GoogleLoginProvider(environment.googleClientID),
           }
         ],
       } as SocialAuthServiceConfig,
