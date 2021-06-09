@@ -10,7 +10,7 @@ header {
   @include flex-row();
   justify-content: space-between;
 
-  z-index: 15;
+  z-index: 1001;
 
   button,
   a {
@@ -51,7 +51,7 @@ header {
   background-color: white;
   height: 100%;
   width: 100%;
-  z-index: 9;
+  z-index: 1000;
   display: flex;
   align-items: flex-start;
 }
@@ -110,7 +110,6 @@ header {
 
   .menu {
     width: 17%;
-    z-index: 9;
     background: rgba(0, 0, 0, 0.8);
     span {
       color: white;
