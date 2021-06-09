@@ -13,6 +13,8 @@ export class ProductService {
   actualPage = 0;
   category: string;
   filter: string;
+
+  // Comprueba si han cargado los productos
   isLoaded: boolean;
 
   constructor(
@@ -35,8 +37,8 @@ export class ProductService {
     } else {
       this.filter = filter;
     }
-    this.isLoaded = false;
 
+    this.isLoaded = false;
 
     // Obtiene los productos
     this.getProducts(this.category, this.filter, this.actualPage).subscribe(
@@ -47,7 +49,7 @@ export class ProductService {
         this.isLoaded = true;
         this.actualPage++;
       },
-      () => { this.isLoaded = false; }
+      () => { }
     );
   }
 
