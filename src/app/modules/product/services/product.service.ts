@@ -135,7 +135,7 @@ export class ProductService {
    * Obtiene los colores
    */
   getColours(): Observable<any> {
-    return this.http.get(this.url + '/color');
+    return this.http.get(this.url + '/colour');
   }
 
 
