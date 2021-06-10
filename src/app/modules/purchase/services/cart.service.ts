@@ -24,7 +24,7 @@ export class CartService {
     private snackBarService: SnackBarService
   ) { }
 
-  /*
+  /**
   * Obtiene los productos con las imagenes que se encuentran en localstorage
   * @param ProductI
   */

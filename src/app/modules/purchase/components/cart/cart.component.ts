@@ -63,7 +63,7 @@ export class CartComponent implements OnInit {
     this.cartService.getCartProduct(ordersDetailsLocal)
       .subscribe(
         res => {
-          this.ordersDetails = this.clearInactiveProducts(res, ordersDetailsLocal);
+          this.ordersDetails = res;
           localStorage.setItem('cart', JSON.stringify(this.cartService.clearOrderDetailsDocuments(this.ordersDetails)));
           this.cartBadgeService.update();
         },
@@ -73,25 +73,6 @@ export class CartComponent implements OnInit {
           this.snackBarService.popup(500);
         }
       );
-  }
-
-  /**
-   * Elimina los productos que no estan activos-> si se han desactivado de la BD y el
-   * usuario lo mantiene en el localstorage
-   * @param orderDetailsCleared
-   */
-  private clearInactiveProducts(res: Array<OrderDetailsI>, ordersDetailsLocal: Array<OrderDetailsI>): Array<OrderDetailsI> {
-    const ordersDetailsCleared: Array<OrderDetailsI> = [];
-    // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < res.length; i++) {
-      if (res[i].product.active) {
-        ordersDetailsCleared.push(res[i]);
-      } else {
-        ordersDetailsLocal.splice(i, 1);
-      }
-    }
-
-    return ordersDetailsCleared;
   }
 
   /**

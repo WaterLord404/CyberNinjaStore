@@ -1,5 +1,6 @@
 import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ICreateOrderRequest, ITransactionItem } from 'ngx-paypal';
+import { environment } from 'src/environments/environment';
 import { OrderDetailsI } from '../../interfaces/order-details';
 
 @Component({
@@ -14,17 +15,19 @@ export class PaypalComponent implements OnInit {
   @Input() shipping = 0;
   @Input() discount = 0;
   @Input() totalPrice = 0;
-  paypalConfig: any;
+
 
   @Output() successful = new EventEmitter<any>();
   activeSpinner = true;
 
   constructor(private cdref: ChangeDetectorRef) { }
 
-  ngOnInit()  {
+  paypalConfig: any;
+
+  ngOnInit() {
     this.paypalConfig = {
       currency: 'EUR',
-      clientId: 'AdTFRw1qz6oh1Ac8nZVQ1-668Q3vOErq0trFh813f3XHb2gfIsEiheGvQm8dKqtEv8wwU4zD3ej9VwSN',
+      clientId: environment.paypalClientID,
       // tslint:disable-next-line: no-angle-bracket-type-assertion
       createOrderOnClient: (data) => <ICreateOrderRequest>
         {
@@ -62,15 +65,9 @@ export class PaypalComponent implements OnInit {
       },
 
       onApprove: (data, actions) => { },
-
-      onClientAuthorization: data => {
-        this.successful.emit();
-      },
-
+      onClientAuthorization: data => { this.successful.emit(); },
       onCancel: (data, actions) => { },
-
       onError: err => { console.log('OnError', err); },
-
       onClick: (data, actions) => { }
     };
   }
