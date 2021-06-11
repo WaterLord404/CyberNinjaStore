@@ -5,7 +5,6 @@
 .container-card,
 .product-container {
   @include flex-column();
-  min-height: 85vh;
 }
 
 .product-container {

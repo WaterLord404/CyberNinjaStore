@@ -76,7 +76,9 @@ export class ItemComponent implements OnInit {
       this.breadCrumbsService.updateBreadCrumbs(this.item.name.toUpperCase());
     }
 
-    this.discountService.getDiscounts().subscribe(res => this.discounts = res);
+    if(this.authService.isAdmin()) {
+      this.discountService.getDiscounts().subscribe(res => this.discounts = res);
+    }
   }
 
   /**
