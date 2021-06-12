@@ -63,6 +63,9 @@ export class SnackBarService {
       case 302:
         error = 'Username not available';
         break;
+      case 303:
+        error = 'Email not available';
+        break;
       case 403:
         error = 'Access denied';
         break;

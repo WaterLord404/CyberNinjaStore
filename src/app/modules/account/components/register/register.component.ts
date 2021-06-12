@@ -60,6 +60,9 @@ export class RegisterComponent implements OnInit {
           case 409:
             this.snackBarService.popup(302);
             break;
+          case 226:
+            this.snackBarService.popup(303);
+            break;
           default:
             this.snackBarService.popup(500);
             break;
