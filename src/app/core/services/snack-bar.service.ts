@@ -12,8 +12,10 @@ export class SnackBarService {
    * Crea un SnakBar con un mensaje
    * @param msg
    */
-  popup(option: number): void {
-    const msg = this.getError(option);
+  popup(option: number, message?: string): void {
+    let msg = this.getError(option);
+    if (message !== undefined) { msg = message; }
+
     this.snackBar.open(msg, '', {
       duration: 3500,
       horizontalPosition: 'center',

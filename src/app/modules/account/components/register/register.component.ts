@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -58,10 +59,7 @@ export class RegisterComponent implements OnInit {
       err => {
         switch (err.status) {
           case 409:
-            this.snackBarService.popup(302);
-            break;
-          case 226:
-            this.snackBarService.popup(303);
+            this.snackBarService.popup(0, err.error.message);
             break;
           default:
             this.snackBarService.popup(500);
