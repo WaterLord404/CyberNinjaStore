@@ -3,7 +3,8 @@
 
 .container {
   @include flex-column();
-
+  padding-right: 20%;
+  padding-left: 20%;
   button {
     margin: 3% 0;
   }

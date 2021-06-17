@@ -28,8 +28,12 @@ img {
   margin-bottom: 2px;
 }
 
+.home-container {
+  padding-top: 50px;
+}
+
 @media (min-width: 1366px) {
-  .main {
+  .home-container {
     padding-top: 0%;
   }
 

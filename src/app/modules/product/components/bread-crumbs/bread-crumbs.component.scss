@@ -6,7 +6,6 @@
   align-items: center;
   justify-content: space-between;
   min-height: 36px;
-  margin: $small-margin-horizontal;
   font-size: small;
   span {
     color: rgba(0,0,0,.25);
@@ -22,6 +21,7 @@
   width: 100%;
   text-align: left;
   overflow: hidden;
+  margin-left: 8px;
 }
 
 

@@ -26,10 +26,6 @@ a {
   text-decoration-line: unset !important;
 }
 
-.main {
-  padding-top: 50px;
-}
-
 .button-custom {
   @include button-custom();
 }
@@ -59,7 +55,6 @@ a {
 
 // SorterProducts
 .cdk-overlay-connected-position-bounding-box {
-  right: 0 !important;
   .mat-menu-panel {
     overflow: hidden !important;
   }
@@ -162,5 +157,33 @@ ngb-rating {
 }
 
 /* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 
+.main {
+  padding-top: 50px;
+}
+
+@media (min-width: 1366px) {
+  .main {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    padding-top: 70px;
+  }
+
+  .tag-custom {
+    width: 40px*1.5;
+    height: 20px*1.5;
+    top: 16px*1.5;
+    left: 26px*1.5;
+  }
+
+  span {
+    font-size: 14px;
+  }
+  
+  .container {
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+}

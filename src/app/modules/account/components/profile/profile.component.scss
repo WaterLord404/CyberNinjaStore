@@ -2,19 +2,28 @@
 @import "../../../../../assets/scss/grid";
 
 .user-details-container {
-  @include font-product();
   @include flex-column();
   div {
+    width: 90%;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
     background-color: $orange;
     color: white;
-    padding: 1%;
+    border-radius: 1%;
     box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
     p {
       margin: 12px 0%;
-      font-size: larger;
+      font-size: small;
     }
   }
   min-height: 85vh;
   margin-top: 0%;
   text-transform: none;
+}
+
+@media (min-width: 1366px) {
+  div {
+    width: 30%;
+  }
 }
