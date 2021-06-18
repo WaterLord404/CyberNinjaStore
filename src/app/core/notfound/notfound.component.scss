@@ -7,3 +7,10 @@ div {
     width: 100%;
   }
 }
+@media (min-width: 1366px) {
+  div {
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+}
+
