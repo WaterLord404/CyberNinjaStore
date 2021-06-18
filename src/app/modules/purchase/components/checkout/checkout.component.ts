@@ -73,6 +73,15 @@ export class CheckoutComponent implements OnInit {
   }
 
   /**
+   * Calcula el precio total de cada producto redondeando 2 decimales
+   * @param price
+   * @param units
+   */
+   calculatePrice(price: number, units: number): number {
+    return Math.round((price * units) * 100) / 100;
+  }
+
+  /**
    * Calcula el precio + gastos de envio
    */
   calculateFinalPrice(): number {

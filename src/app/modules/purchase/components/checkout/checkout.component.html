@@ -33,7 +33,7 @@
           <p class="soft">{{item.size}}, {{item.colour}}, {{item.units}} PIECE</p>
         </div>
         <div>
-          <p>{{item.product.totalPrice * item.units}}€</p>
+          <p>{{calculatePrice(item.product.totalPrice, item.units)}}€</p>
         </div>
       </div>
     </div>
