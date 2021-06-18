@@ -4,6 +4,8 @@
 .user-details-container {
   @include flex-column();
   div {
+    @include font-product();
+    text-align: center;
     width: 90%;
     justify-content: center;
     margin-left: auto;

@@ -2,23 +2,23 @@
   <div class="customer-details">
     <h4>YOUR ADDRESS</h4>
     <div class="details-container">
-      <p>POSTAL CODE</p>
+      <p class="details-container-header">POSTAL CODE</p>
       <p>{{user.customer.postalCode}}</p>
     </div>
     <div class="details-container">
-      <p>STATE</p>
+      <p class="details-container-header">STATE</p>
       <p>{{user.customer.state}}</p>
     </div>
     <div class="details-container">
-      <p>COUNTY</p>
+      <p class="details-container-header">COUNTY</p>
       <p>{{user.customer.county}}</p>
     </div>
     <div class="details-container">
-      <p>VILLAGE</p>
+      <p class="details-container-header">VILLAGE</p>
       <p>{{user.customer.village}}</p>
     </div>
     <div class="details-container">
-      <p>FULL ADDRESS</p>
+      <p class="details-container-header">FULL ADDRESS</p>
       <p>{{user.customer.address}}</p>
     </div>
   </div>
@@ -28,7 +28,7 @@
 
     <div class="products">
       <div class="details-container-products" *ngFor="let item of ordersDetails">
-        <div>
+        <div class="details-container-products-item">
           <p>{{item.product.name}}</p>
           <p class="soft">{{item.size}}, {{item.colour}}, {{item.units}} PIECE</p>
         </div>

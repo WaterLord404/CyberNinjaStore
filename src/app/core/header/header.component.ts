@@ -1,4 +1,4 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private loaderService: LoaderService,
-    protected router: Router,
+    public router: Router,
     protected authService: AuthService,
     private cartBadgeService: CartBadgeService,
     private cartService: CartService,
@@ -56,6 +56,7 @@ export class HeaderComponent implements OnInit {
     // Muestra o oculta la barra de loading
     this.loaderService.loading().subscribe(res => this.isLoading = res);
     this.cartBadgeService.getCartBadgeCount().subscribe(res => this.cartBadgeCount = res);
+    this.router.events.subscribe(() => this.isMenuActive = false);
   }
 
   ngOnInit(): void {
@@ -66,7 +67,6 @@ export class HeaderComponent implements OnInit {
    * Guarda el carrito y cierra la sesión
    */
   logout(): void {
-    this.isMenuActive = false;
     this.cartService.saveCart();
     this.router.navigate(['/']);
     window.scroll(0, 0);

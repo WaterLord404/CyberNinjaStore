@@ -4,7 +4,6 @@
 footer {
   background-color: white;
   width: 100%;
-
   .social {
     @include flex-row();
     margin: $big-margin-vertical;
@@ -56,6 +55,10 @@ footer {
 
 @media (min-width: 1366px) {
   .footer-section {
+    display: none;
+  }
+
+  .mobile {
     display: none;
   }
 

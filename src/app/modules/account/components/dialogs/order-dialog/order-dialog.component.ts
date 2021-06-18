@@ -34,6 +34,7 @@ export class OrderDialogComponent implements OnInit {
     this.dialog.closeAll();
     this.dialog.open(ProductDialogComponent, {
       width: '100%',
+      maxWidth: '60vh',
       height: 'auto',
       data: { order: this.order, orderDetail: inputOrderDetail }
     });

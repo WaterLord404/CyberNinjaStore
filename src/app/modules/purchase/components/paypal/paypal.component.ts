@@ -40,7 +40,7 @@ export class PaypalComponent implements OnInit {
                 breakdown: {
                   item_total: {
                     currency_code: 'EUR',
-                    value: (this.totalPrice + this.discount).toString(),
+                    value: (Math.round((this.totalPrice + this.discount) * 100) / 100).toString(),
                   },
                   shipping: {
                     currency_code: 'EUR',

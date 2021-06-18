@@ -1,6 +1,5 @@
-import { AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CartBadgeService } from 'src/app/core/services/cart-badge.service';
@@ -10,7 +9,6 @@ import { CouponI } from '../../interfaces/coupon';
 import { OrderDetailsI } from '../../interfaces/order-details';
 import { CheckoutService } from '../../services/checkout.service';
 import { OrderService } from '../../services/order.service';
-import { PaypalComponent } from '../paypal/paypal.component';
 
 @Component({
   selector: 'app-checkout',

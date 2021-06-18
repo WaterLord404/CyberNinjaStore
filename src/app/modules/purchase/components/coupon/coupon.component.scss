@@ -19,7 +19,7 @@
 .leave-popup {
   position: fixed;
   width: 100%;
-  height: 70%;
+  height: 100%;
 }
 
 .form-group {
@@ -39,5 +39,14 @@
   button {
     margin-top: marginX4(3%);
     border: unset;
+  }
+}
+
+@media (min-width: 1366px) {
+  .popup {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20%;
+    height: 20%;
   }
 }

@@ -93,6 +93,24 @@ header {
   left: 0;
 }
 
+.white-header {
+  background: white;
+  img {
+    filter: none;
+    -webkit-filter: none;
+  }
+}
+
+.footer-section-header-text {
+  margin-left: 3%;
+}
+
+.footer-section-header:hover {
+  span {
+    color: $orange;
+  }
+}
+
 @media (min-width: 1366px) {
   header {
     background: rgba(88, 88, 88, 0.5);
@@ -109,7 +127,7 @@ header {
   }
 
   .menu {
-    width: 17%;
+    width: 15%;
     background: rgba(0, 0, 0, 0.8);
     span {
       color: white;
@@ -117,10 +135,10 @@ header {
   }
 
   .menu-section:first-child {
-    border-top: 1px solid rgba(255, 255, 255, 0.40);
+    border-top: 0px;
   }
   .menu-section {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.40);
+    border-bottom: 0px;
   }
 
   .dark-container {
@@ -131,5 +149,15 @@ header {
     height: $header-height;
     background: black;
     z-index: -1;
+  }
+
+  .white-menu {
+    background: white;
+    span {
+      color: rgba(0, 0, 0, 0.5);
+    }
+    border-left: 3px solid;
+    border-left-width: thick;
+    border-color: $orange;
   }
 }

@@ -25,6 +25,7 @@
 
 .order-container:first-child {
   border-top: 1px solid rgba(0, 0, 0, 0.05);
+  cursor: pointer;
 }
 
 .empty-orders {
@@ -38,5 +39,10 @@
 @media (min-width: 1366px) {
   .empty-orders {
     width: 15%;
+  }
+
+  .orders-container {
+    padding-right: 10%;
+    padding-left: 10%;
   }
 }

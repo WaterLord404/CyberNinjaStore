@@ -163,12 +163,12 @@ ngb-rating {
   padding-top: 50px;
 }
 
+
 @media (min-width: 1366px) {
   .main {
     margin-left: auto;
     margin-right: auto;
-    width: 70%;
-    padding-top: 70px;
+    width: 67%;
   }
 
   .tag-custom {
@@ -183,7 +183,13 @@ ngb-rating {
   }
   
   .container {
-    padding-left: 15%;
-    padding-right: 15%;
+    padding-left: 20%;
+    padding-right: 20%;
   }
+
+  ngb-rating {
+    span {
+      font-size: 25px;
+    }
+  } 
 }

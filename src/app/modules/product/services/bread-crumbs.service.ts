@@ -23,7 +23,7 @@ export class BreadCrumbsService {
 
     this.breadCrumbs = [];
     this.breadCrumbs.push({ location: 'Home/', src: '' });
-
+ 
     // TODOS LOS PRODUCTOS
     if (res === 'products') {
       this.activeCategory = undefined;
@@ -31,7 +31,7 @@ export class BreadCrumbsService {
 
     }
     // POR CATEGORIA
-    else if (res === 'new' || res === 'women' || res === 'pants' || res === 'jackets' || res === 'accessories') {
+    else if (res === 'shirts' || res === 'new' || res === 'women' || res === 'pants' || res === 'jackets' || res === 'accessories') {
       this.activeCategory = res[0].toUpperCase() + res.substr(1);
       this.generateBreadCategory();
 

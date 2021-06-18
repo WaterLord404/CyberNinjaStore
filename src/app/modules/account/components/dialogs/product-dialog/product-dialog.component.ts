@@ -34,6 +34,7 @@ export class ProductDialogComponent implements OnInit {
     this.dialog.closeAll();
     this.dialog.open(RatingDialogComponent, {
       width: '100%',
+      maxWidth: '60vh',
       height: 'auto',
       data: this.orderDetail.product
     });

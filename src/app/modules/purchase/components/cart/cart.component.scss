@@ -4,7 +4,6 @@
 
 .cart-container {
   min-height: 85vh;
-  width: 100%
 }
 
 .item-container {
@@ -126,5 +125,18 @@
 @media (min-width: 1366px) {
   .empty-cart {
     width: 25%;
+  }
+
+  .cart-container {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+
+  .item-container {
+    height: 130px;
+  }
+
+  * {
+    font-size: 14px;
   }
 }

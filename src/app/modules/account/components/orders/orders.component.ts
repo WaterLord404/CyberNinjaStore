@@ -48,6 +48,7 @@ export class OrdersComponent implements OnInit {
   openDialog(order: OrderI): void {
     this.dialog.open(OrderDialogComponent, {
       width: '100%',
+      maxWidth: '60vh',
       height: 'auto',
       data: order
     });
