@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>Buttons / trash Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M13,5 L13,6 L17,6 L17,5 L13,5 Z M12,4 L18,4 L18,6 L12,6 L12,4 Z M7,7 L7,9 L23,9 L23,7 L7,7 Z M6,6 L24,6 L24,10 L6,10 L6,6 Z M8,10 L8,25 L22,25 L22,10 L8,10 Z M7,10 L23,10 L23,26 L7,26 L7,10 Z M13,12 L14,12 L14,23 L13,23 L13,12 Z M10,12 L11,12 L11,23 L10,23 L10,12 Z M16,12 L17,12 L17,23 L16,23 L16,12 Z M19,12 L20,12 L20,23 L19,23 L19,12 Z" id="path-1"></path>
+    </defs>
+    <g id="Buttons-/-trash-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Combined-Shape" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="COLOR" mask="url(#mask-2)" fill-rule="nonzero">
+            <g transform="translate(0.000000, 1.000000)" id="Color-/-Basic-Gray">
+                <g>
+                    <rect id="Rectangle" fill="#7F7F7F" x="0" y="0" width="30" height="30"></rect>
+                </g>
+            </g>
+        </g>
+        <rect id="Rectangle-11" fill-rule="nonzero" mask="url(#mask-2)" x="0" y="0" width="30" height="30"></rect>
+    </g>
+</svg>
