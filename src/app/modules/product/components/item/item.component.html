@@ -11,7 +11,7 @@
     <div class="product-price">
       <s *ngIf="item.discount">{{item.priceWoutDiscount}}€</s>
       <p> {{item.totalPrice}}€</p>
-      <img *ngIf="authService.isAdmin() && discounts" (click)="openDiscount = !openDiscount" src="../../../../../assets/icons/offer-icon.svg" alt="offer-icon">
+      <img *ngIf="authService.isAdmin() && discounts" (click)="openDiscount = !openDiscount" src="assets/icons/offer-icon.svg" alt="offer-icon">
     </div>
 
     <div *ngIf="openDiscount" class="discountForm" @fadeIn>

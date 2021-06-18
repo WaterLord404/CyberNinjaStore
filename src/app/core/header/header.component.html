@@ -1,16 +1,16 @@
 <header [ngClass]="{'white-header': this.router.url !== '/'}" (pointerleave)="closeDialog()">
 
   <button (click)="isMenuActive = !isMenuActive">
-    <img *ngIf="isMenuActive" class="hamburger" src="../../../assets/icons/cross.svg" alt="crossIcon" [@rotatedState]>
-    <img *ngIf="!isMenuActive" class="hamburger" src="../../../assets/icons/hamburger.svg" alt="hamburgerIcon" [@rotatedState]>
+    <img *ngIf="isMenuActive" class="hamburger" src="assets/icons/cross.svg" alt="crossIcon" [@rotatedState]>
+    <img *ngIf="!isMenuActive" class="hamburger" src="assets/icons/hamburger.svg" alt="hamburgerIcon" [@rotatedState]>
   </button>
 
   <a [routerLink]="'/'" class="logo">
-    <img src="../../../assets/icons/logo.png" alt="logo">
+    <img src="assets/icons/logo.png" alt="logo">
   </a>
 
   <a [routerLink]="'/cart'" [matBadge]="cartBadgeCount" matBadgeSize="small" matBadgeColor="warn">
-    <img class="shopping-cart" src="../../../assets/icons/shopping_cart.svg" alt="cart">
+    <img class="shopping-cart" src="assets/icons/shopping_cart.svg" alt="cart">
   </a>
 
   <mat-progress-bar class="loading-bar" [color]="color" [mode]="mode" *ngIf="isLoading">
