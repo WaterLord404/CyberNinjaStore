@@ -96,6 +96,7 @@
 
 .cart-offer-details {
   @include flex-row();
+  cursor: pointer;
   justify-content: flex-start;
 
   img {
